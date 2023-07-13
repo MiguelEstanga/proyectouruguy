@@ -1,0 +1,110 @@
+.dashboard {
+  display: flex;
+  min-height: 50vh;
+  &__sidebar {
+    min-width: 200px;
+    display: flex;
+    padding-right: 1.5rem;
+    flex-direction: column;
+    &__user {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 0;
+      padding-top: 0;
+      text-transform: uppercase;
+    }
+    &__nav {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      &__list {
+        display: flex;
+        flex-direction: column;
+        &__item {
+          &:not(:last-of-type) {
+            border-bottom: 1px solid #47d4ff;
+          }
+          &__link {
+            text-transform: uppercase;
+            padding: 5px;
+            display: block;
+          }
+        }
+      }
+      &__link-config {
+        text-transform: uppercase;
+      }
+    }
+  }
+  &__data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1;
+    border-left: 1px solid #FFF;
+    position: relative;
+    padding-left: 1.5rem;
+    &__header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &__site-title {
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+      &__site-logo {
+        width: 50px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        img {
+          width: 100%;
+        }
+      }
+    }
+    &__content {
+      flex-grow: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      &__welcome-msg {
+        font-size: 40px;
+        text-align: center;
+      }
+      &__section-title {
+        font-size: 20px;
+        text-align: center;
+      }
+      &__users {
+        border-collapse: collapse;
+        width: 100%;
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        tr:nth-child(even) {
+          background-color: #0e2b44;
+        }
+      }
+      &__add-user-btn {
+        width: 100%;
+        padding: 10px;
+        display: block;
+        text-align: center;
+        background-color: #295e29;
+        transition: .5s;
+        &:hover {
+          background-color: #388e38;
+        }
+      }
+    }
+    &__footer {
+      align-self: flex-end;
+    }
+  }
+}
