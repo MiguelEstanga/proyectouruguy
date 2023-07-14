@@ -20,12 +20,27 @@
   <div class="dashboard__data__content__links">
     <a href="#" class="dashboard__data__content__links__link">
       Ver informe descriptivo
+      <img
+        class="dashboard__data__content__links__link__icon"
+        src="{{ asset('images/file.svg') }}"
+        alt="usuario"
+      >
     </a>
     <a href="#" class="dashboard__data__content__links__link">
       Ver boletín
+      <img
+        class="dashboard__data__content__links__link__icon"
+        src="{{ asset('images/book.svg') }}"
+        alt="usuario"
+      >
     </a>
     <a href="#" class="dashboard__data__content__links__link">
       Ver constancia
+      <img
+        class="dashboard__data__content__links__link__icon"
+        src="{{ asset('images/clipboard.svg') }}"
+        alt="usuario"
+      >
     </a>
   </div>
   <div class="dashboard__data__content__current-project">

@@ -11,19 +11,24 @@ $links_director = [
     'active' => false
   ],
   [
-    'url' => '/director/representantes',
-    'title' => 'Representantes',
+    'url' => '/director/estudiantes',
+    'title' => 'Estudiantes',
     'active' => false
   ],
   [
-    'url' => '/director/estudiantes',
-    'title' => 'Estudiantes',
+    'url' => '/director/administradores',
+    'title' => 'Desempeño',
     'active' => false
   ],
   [
     'url' => '/director/usuarios',
     'title' => 'Usuarios',
     'active' => true
+  ],
+  [
+    'url' => '/director/administradores',
+    'title' => 'Reportes',
+    'active' => false
   ]
 ];
 
@@ -83,16 +88,11 @@ $links_representante = [
     'url' => '/representante/configuracion',
     'title' => 'Configuración',
     'active' => false
-  ],
-  [
-    'url' => '/representante/salir',
-    'title' => 'Salir',
-    'active' => false
   ]
 ];
 
 $link_config = [
-  'title' =>  'información del lapso',
+  'title' =>  'Configuración',
   'url' => '/informacion-lapso'
 ];
 @endphp
@@ -137,21 +137,21 @@ $link_config = [
                 <aside class="dashboard__sidebar">
                   <div class="dashboard__sidebar__user">
                     <span class="dashboard__sidebar__user__name">
-                      Ana Brito
+                      Juan Pérez
                     </span>
                     <span class="dashboard__sidebar__user__icon">
                       <img
-                        src="{{ asset('images/user.svg') }}"
+                        src="{{ asset('images/user-graduate.svg') }}"
                         alt="usuario"
                       >
                     </span>
                     <span class="dashboard__sidebar__user__role">
-                      Representante
+                      Docente
                     </span>
                   </div>
                   <nav class="dashboard__sidebar__nav">
                     <ul class="dashboard__sidebar__nav__list">
-                      @foreach($links_representante as $link)
+                      @foreach($links_docente as $link)
                       <li class="dashboard__sidebar__nav__list__item">
                         @if (isset($link['submenu']))
                           <div class="dashboard__sidebar__nav__list__item__link">
@@ -177,18 +177,28 @@ $link_config = [
                             href="{{ $link['url'] }}"
                           >
                             {{ $link['title'] }}
-
                           </a>
                         @endif
                       </li>
                       @endforeach
                     </ul>
-                    <a
-                      class="dashboard__sidebar__nav__link-config"
-                      href="{{ $link_config['url'] }}"
-                    >
-                      {{ $link_config['title'] }}
-                    </a>
+                    <div class="dashboard__sidebar__nav__footer-links">
+                      <a
+                        class="dashboard__sidebar__nav__footer-links__config"
+                        href="{{ $link_config['url'] }}"
+                      >
+                        {{ $link_config['title'] }}
+                      </a>
+                      <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+
+                        <a href="route('logout')"
+                            onclick="event.preventDefault();
+                                  this.closest('form').submit();">
+                          {{ __('Cerrar sesión') }}
+                        </a>
+                      </form>
+                    </div>
                   </nav>
                 </aside>
                 <section class="dashboard__data">

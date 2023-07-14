@@ -1,4 +1,4 @@
-$primary: #47d4ff;
+$primary: #cdf2fd;
 $secondary: #0e2b44;
 
 .dashboard {
@@ -66,8 +66,11 @@ $secondary: #0e2b44;
           }
         }
       }
-      &__link-config {
+      &__footer-links {
         text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
     }
   }
@@ -112,7 +115,7 @@ $secondary: #0e2b44;
         display: flex;
         justify-content: center;
         &__content {
-          padding: 10px 20px;
+          padding: 20px 40px;
           border-radius: 5px;
           background-color: $primary;
           display: flex;
@@ -231,8 +234,8 @@ $secondary: #0e2b44;
         }
       }
       &__links {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0,1fr));
         gap: 10px;
         &__link {
           padding: 10px;
@@ -240,6 +243,62 @@ $secondary: #0e2b44;
           background-color: $secondary;
           color: #FFF;
           border-radius: 5px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 50px 20px;
+          justify-content: center;
+          text-align: center;
+          gap: 20px;
+          transition: .5s;
+          &__icon {
+            width: 50px;
+            filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7497%) hue-rotate(154deg) brightness(118%) contrast(95%);
+          }
+          &:hover {
+            background-color: #071d2f;
+          }
+        }
+      }
+      &__actions {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        &__action {
+          padding: 50px 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          border-radius: 5px;
+          transition: .5s;
+          &__icon {
+            width: 30px;
+          }
+          &--add-user {
+            background-color: #90d090;
+            &:hover {
+              background-color: #65be65;
+            }
+          }
+          &--view-users {
+            background-color: aliceblue;
+            &:hover {
+              background-color: #b1cae0;
+            }
+          }
+          &--delete-user {
+            background-color: #ffcece;
+            &:hover {
+              background-color: #ffaeae;
+            }
+          }
+          &--enable-user {
+            background-color: #ffe6b8;
+            &:hover {
+              background-color: #ffd280;
+            }
+          }
         }
       }
     }

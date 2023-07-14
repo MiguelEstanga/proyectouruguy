@@ -38,42 +38,48 @@
     <p class="dashboard__data__content__section-title">
       Gestionar administradores
     </p>
-    <div class="dashboard__data__content__search">
-      <input
-        type="search"
-        class="dashboard__data__content__search__input"
-        placeholder="Buscar por nombre"
-      />
-      <button class="dashboard__data__content__search__button">Buscar</button>
+    <div class="dashboard__data__content__actions">
+      <button class="dashboard__data__content__actions__action dashboard__data__content__actions__action--add-user">
+        Agregar administrador
+        <img
+          class="dashboard__data__content__actions__action__icon"
+          src="{{ asset('images/user-plus.svg') }}"
+          alt="usuario"
+        >
+      </button>
+      <button class="dashboard__data__content__actions__action dashboard__data__content__actions__action--view-users">
+        Ver listado actual
+        <img
+          class="dashboard__data__content__actions__action__icon"
+          src="{{ asset('images/list.svg') }}"
+          alt="usuario"
+        >
+      </button>
+      <button class="dashboard__data__content__actions__action dashboard__data__content__actions__action--delete-user">
+        Eliminar administrador
+        <img
+          class="dashboard__data__content__actions__action__icon"
+          src="{{ asset('images/user-minus.svg') }}"
+          alt="usuario"
+        >
+      </button>
+      <button class="dashboard__data__content__actions__action dashboard__data__content__actions__action--enable-user">
+        Habilitar/inhabilitar administrador
+        <img
+          class="dashboard__data__content__actions__action__icon"
+          src="{{ asset('images/wand-magic-sparkles.svg') }}"
+          alt="usuario"
+        >
+      </button>
     </div>
-    <table class="dashboard__data__content__users">
-      <tr class="dashboard__data__content__users__headers">
-        <th class="dashboard__data__content__users__headers__header">Nombre</th>
-        <th class="dashboard__data__content__users__headers__header">Cedula</th>
-        <th class="dashboard__data__content__users__headers__header">Fecha de nacimiento</th>
-        <th class="dashboard__data__content__users__headers__header">Habilitado</th>
-        <th class="dashboard__data__content__users__headers__header">Acción</th>
-      </tr>
-      @foreach($users as $user)
-      <tr class="dashboard__data__content__users__row">
-        <td class="dashboard__data__content__users__row__data">{{ $user['name'] }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $user['id'] }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $user['birthdate'] }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $user['active'] ? 'Si' : 'No' }}</td>
-        <td class="dashboard__data__content__users__row__data"><button class="dashboard__data__content__users__row__data__delete">Eliminar</button></td>
-      </tr>
-      @endforeach
-    </table>
-    <button class="dashboard__data__content__add-user-btn">
-      Agregar administrador
-    </button>
+      
     <div class="dashboard__data__content__user-stats">
       <div class="dashboard__data__content__user-stats__total">
         <span class="dashboard__data__content__user-stats__total__label">Administradores actuales:</span>
         <span class="dashboard__data__content__user-stats__total__value">27</span>
       </div>
       <div class="dashboard__data__content__user-stats__total">
-        <span class="dashboard__data__content__user-stats__total__label">Administradores sin seccion:</span>
+        <span class="dashboard__data__content__user-stats__total__label">Administradores inhabilitados:</span>
         <span class="dashboard__data__content__user-stats__total__value">3</span>
       </div>
     </div>
