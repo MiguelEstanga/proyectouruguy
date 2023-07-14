@@ -1,24 +1,93 @@
 @php
-$links = [
+$links_director = [
   [
     'url' => '/director/docentes',
-    'title' => 'Docentes'
+    'title' => 'Docentes',
+    'active' => false
   ],
   [
     'url' => '/director/administradores',
-    'title' => 'Administradores'
+    'title' => 'Administradores',
+    'active' => false
   ],
   [
     'url' => '/director/representantes',
-    'title' => 'Representantes'
+    'title' => 'Representantes',
+    'active' => false
   ],
   [
     'url' => '/director/estudiantes',
-    'title' => 'Estudiantes'
+    'title' => 'Estudiantes',
+    'active' => false
   ],
   [
     'url' => '/director/usuarios',
-    'title' => 'Usuarios'
+    'title' => 'Usuarios',
+    'active' => true
+  ]
+];
+
+$links_docente = [
+  [
+    'url' => '/docente',
+    'title' => 'Desempeño',
+    'active' => false
+  ],
+  [
+    'url' => '/docente/evaluar',
+    'title' => 'Evaluar',
+    'active' => true
+  ],
+  [
+    'url' => '/docente/mi-seccion',
+    'title' => 'Mi sección',
+    'active' => false
+  ],
+  [
+    'url' => '/docente/reportes',
+    'title' => 'Reportes',
+    'active' => false
+  ],
+  [
+    'url' => '/docente/salir',
+    'title' => 'Salir',
+    'active' => false
+  ]
+];
+
+
+$links_representante = [
+  [
+    'url' => '/representante',
+    'title' => 'Representados',
+    'active' => false,
+    'submenu' => [
+      [
+        'name' => 'Felipe León',
+        'active' => true,
+        'url' => '/representante/1'
+      ],
+      [
+        'name' => 'Rosa León',
+        'active' => false,
+        'url' => '/representante/1'
+      ]
+    ]
+  ],
+  [
+    'url' => '/representante/rendimiento',
+    'title' => 'Desempeño',
+    'active' => false
+  ],
+  [
+    'url' => '/representante/configuracion',
+    'title' => 'Configuración',
+    'active' => false
+  ],
+  [
+    'url' => '/representante/salir',
+    'title' => 'Salir',
+    'active' => false
   ]
 ];
 
@@ -68,24 +137,49 @@ $link_config = [
                 <aside class="dashboard__sidebar">
                   <div class="dashboard__sidebar__user">
                     <span class="dashboard__sidebar__user__name">
-                      {{ Auth::user()->name }}
+                      Ana Brito
                     </span>
                     <span class="dashboard__sidebar__user__icon">
+                      <img
+                        src="{{ asset('images/user.svg') }}"
+                        alt="usuario"
+                      >
                     </span>
                     <span class="dashboard__sidebar__user__role">
-                      Director
+                      Representante
                     </span>
                   </div>
                   <nav class="dashboard__sidebar__nav">
                     <ul class="dashboard__sidebar__nav__list">
-                      @foreach($links as $link)
+                      @foreach($links_representante as $link)
                       <li class="dashboard__sidebar__nav__list__item">
-                        <a
-                          class="dashboard__sidebar__nav__list__item__link"
-                          href="{{ $link['url'] }}"
-                        >
-                          {{ $link['title'] }}
-                        </a>
+                        @if (isset($link['submenu']))
+                          <div class="dashboard__sidebar__nav__list__item__link">
+                            {{ $link['title'] }}
+                            <div class="dashboard__sidebar__nav__list__item__link__submenu">
+                              @foreach($link['submenu'] as $submenu)
+                              <a
+                                class="
+                                  dashboard__sidebar__nav__list__item__link__submenu__link
+                                  {{ $submenu['active'] ? 'dashboard__sidebar__nav__list__item__link__submenu__link--active' : '' }}"
+                                href="{{ $submenu['url'] }}"
+                              >
+                                {{ $submenu['name'] }}
+                              </a>
+                              @endforeach
+                            </div>
+                          </div>
+                        @else
+                          <a
+                            class="
+                              dashboard__sidebar__nav__list__item__link
+                              {{ $link['active'] ? 'dashboard__sidebar__nav__list__item__link--active' : '' }}"
+                            href="{{ $link['url'] }}"
+                          >
+                            {{ $link['title'] }}
+
+                          </a>
+                        @endif
                       </li>
                       @endforeach
                     </ul>

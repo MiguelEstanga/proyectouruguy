@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::get('/director/usuarios', function () {
@@ -43,7 +43,7 @@ Route::get('/director', function () {
 })->middleware(['auth', 'verified'])->name('director');
 
 Route::get('/docente', function () {
-  return view('docente');
+  return view('docente.index');
 })->middleware(['auth', 'verified'])->name('docente');
 
 Route::get('/administrador', function () {
@@ -51,8 +51,8 @@ Route::get('/administrador', function () {
 })->middleware(['auth', 'verified'])->name('administrador');
 
 Route::get('/representante', function () {
-    return view('representante');
-})->middleware(['auth', 'verified'])->name('representante');
+    return view('representante.index');
+})->middleware(['auth', 'verified'])->name('representante-index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
