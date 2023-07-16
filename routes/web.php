@@ -42,6 +42,10 @@ Route::get('/director', function () {
   return view('director.index');
 })->middleware(['auth', 'verified'])->name('director');
 
+Route::get('/docente/evaluar', function () {
+  return view('docente.evaluar');
+})->middleware(['auth', 'verified'])->name('docente-evaluar');
+
 Route::get('/docente', function () {
   return view('docente.index');
 })->middleware(['auth', 'verified'])->name('docente');

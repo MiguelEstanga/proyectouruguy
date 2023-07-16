@@ -13,7 +13,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @vite(['resources/sass/app.scss'])
+    @vite(['resources/sass/index.scss'])
   </head>
   <body class="font-sans text-gray-900 antialiased">
     <div

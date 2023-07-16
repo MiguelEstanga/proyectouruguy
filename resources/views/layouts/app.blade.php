@@ -1,6 +1,11 @@
 @php
 $links_director = [
   [
+    'url' => '/director',
+    'title' => 'Inicio',
+    'active' => true
+  ],
+  [
     'url' => '/director/docentes',
     'title' => 'Docentes',
     'active' => false
@@ -23,7 +28,7 @@ $links_director = [
   [
     'url' => '/director/usuarios',
     'title' => 'Usuarios',
-    'active' => true
+    'active' => false
   ],
   [
     'url' => '/director/administradores',
@@ -36,12 +41,12 @@ $links_docente = [
   [
     'url' => '/docente',
     'title' => 'Desempeño',
-    'active' => false
+    'active' => true
   ],
   [
     'url' => '/docente/evaluar',
     'title' => 'Evaluar',
-    'active' => true
+    'active' => false
   ],
   [
     'url' => '/docente/mi-seccion',
@@ -112,7 +117,7 @@ $link_config = [
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @vite(['resources/sass/app.scss'])
+    @vite(['resources/sass/index.scss'])
   </head>
   <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -137,21 +142,21 @@ $link_config = [
                 <aside class="dashboard__sidebar">
                   <div class="dashboard__sidebar__user">
                     <span class="dashboard__sidebar__user__name">
-                      Juan Pérez
+                      Felipe Hurtado
                     </span>
                     <span class="dashboard__sidebar__user__icon">
                       <img
-                        src="{{ asset('images/user-graduate.svg') }}"
+                        src="{{ asset('images/user-tie.svg') }}"
                         alt="usuario"
                       >
                     </span>
                     <span class="dashboard__sidebar__user__role">
-                      Docente
+                      Director
                     </span>
                   </div>
                   <nav class="dashboard__sidebar__nav">
                     <ul class="dashboard__sidebar__nav__list">
-                      @foreach($links_docente as $link)
+                      @foreach($links_director as $link)
                       <li class="dashboard__sidebar__nav__list__item">
                         @if (isset($link['submenu']))
                           <div class="dashboard__sidebar__nav__list__item__link">
