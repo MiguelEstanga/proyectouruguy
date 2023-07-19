@@ -1,37 +1,4 @@
-@php
-  $users = [
-    [
-      'name' => 'Juan Perez',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984',
-      'active' => true
-    ],
-    [
-      'name' => 'Juan Perez',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984',
-      'active' => true
-    ],
-    [
-      'name' => 'Juan Perez',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984',
-      'active' => true
-    ],
-    [
-      'name' => 'Juan Perez',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984',
-      'active' => false
-    ],
-    [
-      'name' => 'Juan Perez',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984',
-      'active' => true
-    ],
-  ];
-@endphp
+
 
 <x-app-layout>
   <div class="dashboard__data__content">
@@ -39,30 +6,37 @@
       Gestionar administradores
     </p>
     <div class="dashboard__data__content__actions">
-      <button class="dashboard__data__content__actions__action dashboard__data__content__actions__action--add-user">
+      <a
+        href="{{ route('administradores.create') }}" 
+        class="dashboard__data__content__actions__action dashboard__data__content__actions__action--add-user">
         Agregar administrador
         <img
           class="dashboard__data__content__actions__action__icon"
           src="{{ asset('images/user-plus.svg') }}"
           alt="usuario"
         >
-      </button>
-      <button class="dashboard__data__content__actions__action dashboard__data__content__actions__action--view-users">
+      </a>
+      <a
+        href="{{ route('administrador.ver') }}" 
+        class="dashboard__data__content__actions__action dashboard__data__content__actions__action--view-users">
         Ver listado actual
         <img
           class="dashboard__data__content__actions__action__icon"
           src="{{ asset('images/list.svg') }}"
           alt="usuario"
         >
-      </button>
-      <button class="dashboard__data__content__actions__action dashboard__data__content__actions__action--delete-user">
+      </a>
+      <a 
+
+      href="{{ route('administrador.ver') }}" 
+      class="dashboard__data__content__actions__action dashboard__data__content__actions__action--delete-user">
         Eliminar administrador
         <img
           class="dashboard__data__content__actions__action__icon"
           src="{{ asset('images/user-minus.svg') }}"
           alt="usuario"
         >
-      </button>
+      </a>
       <button class="dashboard__data__content__actions__action dashboard__data__content__actions__action--enable-user">
         Habilitar/inhabilitar administrador
         <img

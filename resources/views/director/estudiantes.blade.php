@@ -1,42 +1,4 @@
-@php
-  $users = [
-    [
-      'name' => 'Juan Perez',
-      'grade' => 'Primero',
-      'section' => 'A',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984'
-    ],
-    [
-      'name' => 'Juan Perez',
-      'grade' => 'Primero',
-      'section' => 'A',
-      'id' => '',
-      'birthdate' => '19/junio/1984'
-    ],
-    [
-      'name' => 'Juan Perez',
-      'grade' => 'Primero',
-      'section' => 'A',
-      'id' => '',
-      'birthdate' => '19/junio/1984'
-    ],
-    [
-      'name' => 'Juan Perez',
-      'grade' => 'Primero',
-      'section' => 'A',
-      'id' => '',
-      'birthdate' => '19/junio/1984'
-    ],
-    [
-      'name' => 'Juan Perez',
-      'grade' => 'Primero',
-      'section' => 'A',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984'
-    ],
-  ];
-@endphp
+
 
 
 <x-app-layout>
@@ -45,12 +7,15 @@
       Gestionar estudiantes
     </p>
     <div class="dashboard__data__content__search">
+      <form action="{{ route('director.busqueda') }}">
       <input
         type="search"
+        name="nombre"
         class="dashboard__data__content__search__input"
         placeholder="Buscar por nombre"
       />
       <button class="dashboard__data__content__search__button">Buscar</button>
+      </form>
     </div>
     <table class="dashboard__data__content__users">
       <tr class="dashboard__data__content__users__headers">
@@ -61,24 +26,35 @@
         <th class="dashboard__data__content__users__headers__header">Seccion</th>
         <th class="dashboard__data__content__users__headers__header">Acción</th>
       </tr>
-      @foreach($users as $user)
-      <tr class="dashboard__data__content__users__row">
-        <td class="dashboard__data__content__users__row__data">{{ $user['name'] }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $user['id'] }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $user['birthdate'] }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $user['grade'] }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $user['section'] }}</td>
-        <td class="dashboard__data__content__users__row__data"><button class="dashboard__data__content__users__row__data__delete">Eliminar</button></td>
-      </tr>
-      @endforeach
+      @if($estudiantes != 'null')
+            @foreach($estudiantes as $estudiante)
+            <tr class="dashboard__data__content__users__row">
+              <td class="dashboard__data__content__users__row__data"> {{ $estudiante->nombre }} </td>
+              <td class="dashboard__data__content__users__row__data">{{ $estudiante->cedula }}</td>
+              <td class="dashboard__data__content__users__row__data">{{ $estudiante->fecha_nacimiento }}</td>
+              <td class="dashboard__data__content__users__row__data">1</td>
+              <td class="dashboard__data__content__users__row__data">{{ $estudiante->seccion->seccion  }}</td>
+              <td class="dashboard__data__content__users__row__data">
+                  <form 
+                    method="post" 
+                    action="{{ route('director_estudiante.destroy' , $estudiante->id) }}">
+                    @method('delete')
+                    @csrf
+
+                  <button class="dashboard__data__content__users__row__data__delete">Eliminar</button>
+                </form>
+            </tr>
+         @endforeach
+      @endif
+  
     </table>
-    <button class="dashboard__data__content__add-user-btn">
+    <a  href="{{ route('director_estudiante.create') }}" class="dashboard__data__content__add-user-btn">
       Agregar estudiante
-    </button>
+    </a>
     <div class="dashboard__data__content__user-stats">
       <div class="dashboard__data__content__user-stats__total">
         <span class="dashboard__data__content__user-stats__total__label">Estudiantes actuales:</span>
-        <span class="dashboard__data__content__user-stats__total__value">27</span>
+        <span class="dashboard__data__content__user-stats__total__value">{{ count($estudiantes) }}</span>
       </div>
       <div class="dashboard__data__content__user-stats__total">
         <span class="dashboard__data__content__user-stats__total__label">Estudiantes sin seccion:</span>
@@ -86,4 +62,9 @@
       </div>
     </div>
   </div>
+  <style>
+    .menu{
+      font-family: ;
+    }
+  </style>
 </x-app-layout>

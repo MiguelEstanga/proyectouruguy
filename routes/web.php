@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Miguel\ProfesorController;
+use App\Http\Controllers\Miguel\AdminController;
+use App\Http\Controllers\Miguel\estudianteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,29 +17,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//rutas del drector
+Route::group(['middleware' => 'auth' ] , function(){
+
+Route::resource('director/docentes' , ProfesorController::class )->middleware('auth')->names('director');
+Route::resource('director/administradores' , AdminController::class )->names('administradores');
+Route::resource('director/estudiantes' , estudianteController::class )->names('director_estudiante');
+Route::get('director/administradoresAll' , [AdminController::class , 'ver'])->name('administrador.ver');
+
+
+//busquedas
+Route::get('director/administradores_busqueda' , [AdminController::class , 'busqueda'])->name('administradores.busqueda');
+
+Route::get('director/docente_busqueda' , [ProfesorController::class , 'busqueda'])->name('director.busqueda');
+
+} );
+
+//fin de las rutas del drector
+
 Route::get('/', function () {
   return view('welcome');
 });
 
-Route::get('/director/usuarios', function () {
-  return view('director.usuarios');
-})->middleware(['auth', 'verified'])->name('director-usuarios');
+//Route::get('/director/usuarios', function () {
+  //return view('director.usuarios');
+//})->name('director-usuarios');
 
 Route::get('/director/representantes', function () {
   return view('director.representantes');
 })->middleware(['auth', 'verified'])->name('director-representantes');
 
-Route::get('/director/estudiantes', function () {
-  return view('director.estudiantes');
-})->middleware(['auth', 'verified'])->name('director-estudiantes');
+//Route::get('/director/estudiantes', function () {
+  //return view('director.estudiantes');
+//})->middleware(['auth', 'verified'])->name('director-estudiantes');
 
-Route::get('/director/administradores', function () {
-  return view('director.administradores');
-})->middleware(['auth', 'verified'])->name('director-administradores');
+//Route::get('/director/administradores', function () {
+//  return view('director.administradores');
+//})->middleware(['auth', 'verified'])->name('director-administradores');
 
-Route::get('/director/docentes', function () {
-  return view('director.docentes');
-})->middleware(['auth', 'verified'])->name('director-docentes');
+//Route::get('/director/docentes', function () {
+//   return view('director.docentes');
+//})->middleware(['auth', 'verified'])->name('director-docentes');
 
 Route::get('/director', function () {
   return view('director.index');

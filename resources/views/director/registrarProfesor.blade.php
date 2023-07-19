@@ -1,62 +1,14 @@
-@php
-  $users = [
-    [
-      'name' => 'Juan Perez',
-      'grade' => '',
-      'section' => '',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984',
-      'active' => true,
-      'role' => 'Administrador'
-    ],
-    [
-      'name' => 'Juan Perez',
-      'grade' => 'Primero',
-      'section' => 'A',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984',
-      'active' => true,
-      'role' => 'Docente'
-    ],
-    [
-      'name' => 'Juan Perez',
-      'grade' => 'Primero',
-      'section' => 'A',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984',
-      'active' => true,
-      'role' => 'Docente'
-    ],
-    [
-      'name' => 'Juan Perez',
-      'grade' => 'Primero',
-      'section' => 'A',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984',
-      'active' => false,
-      'role' => 'Docente'
-    ],
-    [
-      'name' => 'Juan Perez',
-      'grade' => '',
-      'section' => '',
-      'id' => '19205441',
-      'birthdate' => '19/junio/1984',
-      'active' => true,
-      'role' => 'Representante'
-    ]
-  ];
-@endphp
+
 
 <x-app-layout>
   <div class="dashboard__data__content">
     <p class="dashboard__data__content__section-title">
-      Gestionar usuarios
+      Registrar Profesor
     </p>
     <div class="dashboard__data__content__details">
       <div class="dashboard__data__content__details__content">
         <p class="dashboard__data__content__details__content__text">
-          Registrar usuario
+          Registrar Profesor
         </p>
       </div>
     </div>
@@ -102,14 +54,7 @@
           class="dashboard__data__content__form__label__input"
         />
       </label>
-      <label class="dashboard__data__content__form__label">
-        Rol:
-        <select name="role">
-          @foreach($roles as $role)
-            <option value="{{ $role->name }}">{{ $role->name }}</option>
-          @endforeach
-        </select>
-      </label>
+     
       <label class="dashboard__data__content__form__label">
         Contraseña:
         <input
@@ -118,6 +63,15 @@
           class="dashboard__data__content__form__label__input"
         />
       </label>
+      <label class="dashboard__data__content__form__label">
+        Seccion
+            <select name="id_seccion">
+          @foreach($secciones as $seccion)
+            <option value="{{ $seccion->id }}">{{ $seccion->seccion }}</option>
+          @endforeach
+        </select>
+      </label>
+    
       <button class="dashboard__data__content__form__btn">
         Registrar usuario
       </button>
