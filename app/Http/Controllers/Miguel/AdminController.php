@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Miguel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Administrador;
 class AdminController extends Controller
 {
     /**
@@ -28,19 +29,30 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-          $data = User::create(
-            [
-                'nombre' => $request->nombre,
-                'apellido'=> $request->apellido,
-                'email' => $request->email,
-                'password' => $request->password,
-                'fecha_nacimiento' => $request->fecha_nacimiento,
-                'id_seccion' => 1,
-                'cedula' => $request->cedula
-             ]
-        )->assignRole('Administrador');
 
-        $data->save();
+             $user = User::create([
+                'email' =>  $request->email,
+                'password' => $request->password,
+                'tipo' => 'Administrador',
+                 'fecha_nacimiento' => $request->fecha_nacimiento,
+                'cedula' => $request->cedula
+            ])->assignRole("Administrador");           
+
+
+            $administrador = Administrador::create(
+                [
+
+                    'nombre1' => $request->nombre,
+                    'nombre2' => $request->nombre,
+                    'apellido'=> $request->apellido,
+                   
+                    'id_usuario' => $user->id
+                ]
+            );
+
+
+        
+
         return redirect()->route('administradores.index');
     }
 
@@ -49,9 +61,9 @@ class AdminController extends Controller
      */
     public function ver()
     {
-         $admin = User::whereHas('roles' , function ($query) {
-            $query->whereIn('name' , ['Administrador']);
-        } )->get();
+         $admin = Administrador::all();
+            
+
         return view('director.administradoresVer', ['admin' => $admin]);
     }
     public function show(string $id)
@@ -86,7 +98,10 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        User::find($id)->delete();
-        return redirect()->route('director.ver');
+         $user = Administrador::find($id);
+         $user->usuario->delete();
+         $user->delete();
+         
+         return redirect()->route('director.ver');
     }
 }

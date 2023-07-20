@@ -4,29 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Permission\Traits\HasRoles;
-class Profesor extends Model
+
+class Reprecentnte extends Model
 {
     use HasFactory;
-     use HasRoles;
     protected $fillable = [
         'nombre1',
         'nombre2',
-        'apellido2',
+        'domicilio',
+        'fecha_nacimiento',
+        'localidad',
         'id_usuario',
-        'id_seccion'
+        'apellido'
     ];
 
-   
 
     public function usuario()
     {
-        return $this->belongsTo(User::class , 'id_usuario');
+        return $this->hasMany(User::class , 'id_usuario');
     }
 
-    public function  seccion()
+    public function estudiante()
     {
-        return $this->belongsTo(Seccion::class , 'id_seccion');
+        return $this->hasMany(Reprecentnte::class , 'id_reprecentante');
     }
-   
+
+
+
 }

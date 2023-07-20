@@ -19,13 +19,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nombre',
-        'apellido',
+     
         'email',
         'password',
         'cedula',
         'fecha_nacimiento',
-        'id_seccion'
+        'tipo'
     ];
 
     /**
@@ -43,6 +42,28 @@ class User extends Authenticatable
         return $this->belongsTo( Seccion::class , 'id_seccion');
     }
 
+    public function administradores()
+    {
+        return $this->hasMany( Administrador::class , 'id');
+    }
+
+
+    public function profesor()
+    {
+        return $this->hasMany(Profesor::class , 'id');
+    }
+
+
+    public function reprecentante()
+    {
+        return $this->hasMany(Reprecentnte::class , 'id');
+    }
+
+
+    public function estudiante()
+    {
+        return $this->hasMany(Estudiante::class , 'id');
+    }
     /**
      * The attributes that should be cast.
      *

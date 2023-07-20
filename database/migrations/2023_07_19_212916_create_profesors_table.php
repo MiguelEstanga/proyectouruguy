@@ -13,10 +13,17 @@ return new class extends Migration
     {
         Schema::create('profesors', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->string('cedula');
-            $table->string('fecha_nacimiento');
+            $table->string('nombre1');
+            $table->string('nombre2');
+            $table->string('apellido2');
+           
+           
+
+            $table->foreignId('id_usuario')
+            ->nullable()
+            ->constrained('users')
+            ->cascadeOnUpdate()
+            ->nullOnDelete(); 
 
              $table->foreignId('id_seccion')
             ->nullable()

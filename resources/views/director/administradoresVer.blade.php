@@ -28,18 +28,18 @@
   
       
       </tr>
-      @if($admin != 'null')
+    @if(count($admin) > 0)
 
 
 
       @foreach($admin as $administrador)
       <tr class="dashboard__data__content__users__row">
-        <td class="dashboard__data__content__users__row__data">{{ $administrador->nombre }}</td>
+        <td class="dashboard__data__content__users__row__data">{{ $administrador->nombre1 }}</td>
         <td class="dashboard__data__content__users__row__data">{{ $administrador->apellido }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $administrador->email }}</td>
+        <td class="dashboard__data__content__users__row__data">{{ $administrador->usuario->email }}</td>
 
 
-        <td class="dashboard__data__content__users__row__data">{{ $administrador->cedula}}</td>
+        <td class="dashboard__data__content__users__row__data">{{ $administrador->usuario->cedula}}</td>
         <td class="dashboard__data__content__users__row__data">{{ $administrador->fecha_nacimiento }}</td>
         
        
@@ -47,11 +47,12 @@
         <td class="dashboard__data__content__users__row__data">
           <form 
             method="post" 
-            action="{{ route('director.destroy' , $administrador->id) }}">
+            action="{{ route('administradores.destroy' , $administrador->id) 
+          }}">
             @method('delete')
             @csrf
 
-          <button class="dashboard__data__content__users__row__data__delete">Eliminar</button>
+          <button class="dashboard__data__content__users__row__data__delete">Eliminar </button>
           </form>
         </td>
       </tr>

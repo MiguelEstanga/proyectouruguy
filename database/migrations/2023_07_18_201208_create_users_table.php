@@ -16,18 +16,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nombre');
-            $table->string("email");
-            $table->string('apellido');
-            $table->string('password');
             $table->string('cedula');
+            $table->string("email");
+            $table->string('password');
             $table->string('fecha_nacimiento');
-
-              $table->foreignId('id_seccion')
-            ->nullable()
-            ->constrained('seccions')
-            ->cascadeOnUpdate()
-            ->nullOnDelete(); 
+            $table->string('tipo');
+          
+          
             
             $table->rememberToken();
             $table->timestamps();

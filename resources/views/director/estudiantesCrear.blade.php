@@ -71,6 +71,77 @@
           @endforeach
         </select>
       </label>
+
+
+
+         <label class="dashboard__data__content__form__label">
+        Nombre Reprecentante:
+        <input
+          type="text"
+          name="nombre_reprecentante"
+          class="dashboard__data__content__form__label__input"
+        />
+      </label>
+      <label class="dashboard__data__content__form__label">
+        Apellido Reprecentante:
+        <input
+          name="apellido_reprecentante"
+          type="text"
+          class="dashboard__data__content__form__label__input"
+        />
+      </label>
+      <label class="dashboard__data__content__form__label">
+        Fecha de nacimiento Del Reprecentante:
+        <input
+          name="fecha_nacimiento_Reprecentante"
+          type="text"
+          class="dashboard__data__content__form__label__input"
+        />
+      </label>
+      <label class="dashboard__data__content__form__label">
+        Cédula Reprecentante:
+        <input
+        name="cedula_reprecentante"
+          type="text"
+          class="dashboard__data__content__form__label__input"
+        />
+      </label>
+      <label class="dashboard__data__content__form__label">
+        Email Reprecentante :
+        <input
+        name="email_reprecentante"
+          type="text"
+          class="dashboard__data__content__form__label__input"
+        />
+      </label>
+     
+      <label class="dashboard__data__content__form__label">
+        Contraseña Rprecentante:
+        <input
+        name="password"
+          type="password"
+          class="dashboard__data__content__form__label__input"
+        />
+      </label>
+
+      <label class="dashboard__data__content__form__label">
+        Domicilio:
+        <input
+        name="domicilio"
+          type="text"
+          class="dashboard__data__content__form__label__input"
+        />
+      </label>
+
+      <label class="dashboard__data__content__form__label">
+        localidad:
+        <input
+        name="localidad"
+          type="text"
+          class="dashboard__data__content__form__label__input"
+        />
+      </label>
+
     
       <button class="dashboard__data__content__form__btn">
         Registrar usuario

@@ -15,11 +15,16 @@ class Seccion extends Model
     ];
     public  function profesor()
     {
-       return $this->hasMany(User::class , 'id_seccion');
+       return $this->hasMany(Profesor::class , 'id_seccion');
     }
 
      public function habilitada()
     {
         return $this->belongsTo(Habilitado::class , 'id_habilitado');
+    }
+
+    public function estudiante()
+    {
+        return $this->hasMany(Estudiante::class , 'id' );
     }
 }

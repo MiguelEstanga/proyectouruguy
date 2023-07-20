@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Seccion;
 use App\Models\Habilitado;
 use App\Models\User;
-
+use App\Models\Director;
 class InicializarSeeder extends Seeder
 {
     /**
@@ -38,17 +38,28 @@ class InicializarSeeder extends Seeder
             Seccion::create($seccion);
         }
 
-        User::create(
+     $user =   User::create(
             [
 
-                'nombre' =>'miguel',
-                'apellido'=> 'estanga',
+            
                 'email' => 'm@gmail.com',
                 'cedula' => '26101877',
-                'fecha_nacimiento' => '22/01/1998',
-                'id_seccion' => '1',
-                'password' => bcrypt('12345')
+                'password' => bcrypt('12345'),
+                'tipo' => 'Director',
+                'fecha_nacimiento'=>'22/01/1998'
+
             ]
         )->assignRole('Director');
+
+        Director::create(
+            [
+            'nombre1' => 'miguel',
+            'nombre2' => 'alejandro',
+            'apellido' => 'estanga',
+            
+            'id_usuario' => $user->id
+            ]
+        );
+
     }
 }

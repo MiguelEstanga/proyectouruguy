@@ -31,9 +31,9 @@
 
       @foreach($profesores as $profesor)
       <tr class="dashboard__data__content__users__row">
-        <td class="dashboard__data__content__users__row__data">{{ $profesor->nombre }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $profesor->cedula}}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $profesor->fecha_nacimiento }}</td>
+        <td class="dashboard__data__content__users__row__data">{{ $profesor->nombre1 }}</td>
+        <td class="dashboard__data__content__users__row__data">{{ $profesor->usuario->cedula}}</td>
+        <td class="dashboard__data__content__users__row__data">{{ $profesor->usuario->fecha_nacimiento }}</td>
         <td class="dashboard__data__content__users__row__data">1</td>
         <td class="dashboard__data__content__users__row__data">{{ $profesor->seccion->seccion }}</td>
         <td class="dashboard__data__content__users__row__data">

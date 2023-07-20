@@ -29,15 +29,15 @@
       @if($estudiantes != 'null')
             @foreach($estudiantes as $estudiante)
             <tr class="dashboard__data__content__users__row">
-              <td class="dashboard__data__content__users__row__data"> {{ $estudiante->nombre }} </td>
-              <td class="dashboard__data__content__users__row__data">{{ $estudiante->cedula }}</td>
-              <td class="dashboard__data__content__users__row__data">{{ $estudiante->fecha_nacimiento }}</td>
+              <td class="dashboard__data__content__users__row__data"> {{ $estudiante->nombre1 }} </td>
+              <td class="dashboard__data__content__users__row__data">{{ $estudiante->usuario->cedula }}</td>
+              <td class="dashboard__data__content__users__row__data">{{ $estudiante->usuario->fecha_nacimiento }}</td>
               <td class="dashboard__data__content__users__row__data">1</td>
-              <td class="dashboard__data__content__users__row__data">{{ $estudiante->seccion->seccion  }}</td>
+              <td class="dashboard__data__content__users__row__data">{{ $estudiante->id  }}</td>
               <td class="dashboard__data__content__users__row__data">
                   <form 
                     method="post" 
-                    action="{{ route('director_estudiante.destroy' , $estudiante->id) }}">
+                    action="{{ route('director_estudiante.destroy' , $estudiante) }}">
                     @method('delete')
                     @csrf
 

@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-           
-        Schema::create('seccions', function (Blueprint $table) {
+        Schema::create('directors', function (Blueprint $table) {
             $table->id();
-            $table->string('seccion');
-
+            $table->string('nombre1');
+            $table->string('nombre2');
+            $table->string("apellido");
            
 
-             $table->foreignId('id_habilitado')
-            ->nullable()
-            ->constrained('habilitados')
-            ->cascadeOnUpdate()
-            ->nullOnDelete(); 
+            $table->foreignId('id_usuario')
+                ->nullable()
+                ->constrained('users')
+                ->cascadeOnUpdate()
+                ->nullOnDelete()
+                ;
 
             $table->timestamps();
-
         });
     }
 
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('seccions');
+        Schema::dropIfExists('directors');
     }
 };

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Seccion;
+use App\Models\Estudiante;
+use App\Models\Reprecentnte;
+
 class estudianteController extends Controller
 {
     /**
@@ -13,10 +16,7 @@ class estudianteController extends Controller
      */
     public function index()
     {
-        $estudiante = User::whereHas('roles' , function ($query) {
-            $query->whereIn('name' , ['Estudiante']);
-        } )->get();
-
+        $estudiante = Estudiante::all();
        return view('director.estudiantes' , ['estudiantes' => $estudiante] );
     }
 
@@ -33,19 +33,56 @@ class estudianteController extends Controller
      */
     public function store(Request $request)
     {
-      $data = User::create(
+
+    // return $request;
+      //creando el reprecnetante
+
+      $reprecentante_user = User::create([
+            'email' => $request->email_reprecentante,
+            'password' => 'R_CLAVE',
+            'fecha_nacimiento' => $request->fecha_nacimiento_Reprecentante,
+            'cedula' => $request->cedula,
+              'tipo' => 'Reprecentnte'      
+
+      ])->assignRole('Reprecentante');
+
+     $reprecentante = Reprecentnte::create(
+        [
+        'nombre1' => $request->nombre_reprecentante,
+        'nombre2' => $request->nombre_reprecentante,
+        'apellido' => $request->apellido_reprecentante,
+        'domicilio' => $request->domicilio,
+        'localidad' => $request->localidad,
+        'id_usuario'=> $reprecentante_user->id ,
+        ]
+      );
+
+      //guardando estudiante 
+      $estudiante = User::create(
             [
-                'nombre' => $request->nombre,
-                'apellido'=> $request->apellido,
+                
                 'email' => $request->email,
                 'password' => $request->password,
                 'fecha_nacimiento' => $request->fecha_nacimiento,
-                'id_seccion' => $request->id_seccion,
+                'tipo' => 'Estudiante',
                 'cedula' => $request->cedula
              ]
         )->assignRole('Estudiante');
 
-        $data->save();
+
+        Estudiante::create([
+            'nombre1' =>$request->nombre,
+            'nombre2' =>$request->nombre,
+            'apellido' =>$request->apellido,
+            'cedulaescolar' => '202020',
+            'genero' => 'masculino' ,
+            'id_usuario' => $estudiante->id,
+            'id_seccion' => $request->id_seccion,
+            'id_reprecentante'=>  $reprecentante->id
+        ]);
+
+
+        
         return redirect()->route('director_estudiante.index');
     }
 

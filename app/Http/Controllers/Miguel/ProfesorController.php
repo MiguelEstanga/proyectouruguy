@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use App\Models\Seccion;
-
+use App\Models\Profesor;
 class ProfesorController extends Controller
 {
     /**
@@ -15,9 +15,7 @@ class ProfesorController extends Controller
      */
     public function index()
     {
-       $profesores = User::whereHas('roles' , function ($query) {
-            $query->whereIn('name' , ['Profesor']);
-        } )->get();
+       $profesores = Profesor::all();
 
     
        return view('director.docentes' , ['profesores' => $profesores]);
@@ -46,17 +44,26 @@ class ProfesorController extends Controller
        
         $data = User::create(
             [
-                'nombre' => $request->nombre,
-                'apellido'=> $request->apellido,
+                
                 'email' => $request->email,
                 'password' => $request->password,
                 'fecha_nacimiento' => $request->fecha_nacimiento,
-                'id_seccion' => $request->id_seccion,
+                'tipo' => 'Profesor',
                 'cedula' => $request->cedula
              ]
         )->assignRole('Profesor');
 
-        $data->save();
+        Profesor::create([
+            'nombre1' => $request->nombre,
+            'nombre2'=> $request->nombre,
+            'apellido2' => $request->apellido,
+            'id_seccion' => $request->id_seccion,
+            'id_usuario' => $data->id
+
+        ]);
+      
+
+
         return redirect()->route('director.index');
     }
 
