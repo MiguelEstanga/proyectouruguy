@@ -6,32 +6,27 @@ $links_director = [
     'active' => true
   ],
   [
-    'url' => '/director/docentes',
+    'url' => '/director/docentes/menu',
     'title' => 'Docentes',
     'active' => false
   ],
   [
-    'url' => '/director/administradores',
+    'url' => '/director/administradores/menu',
     'title' => 'Administradores',
     'active' => false
   ],
   [
-    'url' => '/director/estudiantes',
+    'url' => '/director/estudiantes/menu',
     'title' => 'Estudiantes',
     'active' => false
   ],
   [
-    'url' => '/director/administradores',
-    'title' => 'Desempeño',
+    'url' => '/director/representantes/menu',
+    'title' => 'Representantes',
     'active' => false
   ],
   [
-    'url' => '/director/usuarios',
-    'title' => 'Usuarios',
-    'active' => false
-  ],
-  [
-    'url' => '/director/administradores',
+    'url' => '/director/reportes',
     'title' => 'Reportes',
     'active' => false
   ]
@@ -98,7 +93,7 @@ $links_representante = [
 
 $link_config = [
   'title' =>  'Configuración',
-  'url' => '/informacion-lapso'
+  'url' => '/director/informacion-lapso'
 ];
 @endphp
 
@@ -114,6 +109,7 @@ $link_config = [
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -121,16 +117,6 @@ $link_config = [
   </head>
   <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-      @include('layouts.navigation')
-
-      <!-- Page Heading -->
-      <header class="bg-white dark:bg-gray-800 shadow">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Sistema de información Escuela Uruguay
-          </h2>
-        </div>
-      </header>
 
       <!-- Page Content -->
       <main>
@@ -206,35 +192,35 @@ $link_config = [
                     </div>
                   </nav>
                 </aside>
-                <section class="dashboard__data">
-                  <header class="dashboard__data__header">
-                    <h3 class="dashboard__data__header__site-title">
+                <section class="dashboard__main">
+                  <header class="dashboard__main__header">
+                    <h3 class="dashboard__main__header__site-title">
                       Sistema de información Escuela Uruguay
                     </h3>
-                    <span class="dashboard__data__header__site-logo">
+                    <span class="dashboard__main__header__site-logo">
                       <img
                         src="{{ asset('images/escuela_logo.jpg') }}"
                         alt="Logo Escuela Uruguay"
                       >
                     </span>
                   </header>
-                  <div class="dashboard__data__content">
+                  <div class="dashboard__main__content">
                     {{ $slot }}
                   </div>
-                  <footer class="dashboard__data__footer">
-                    <div class="dashboard__data__footer__details">
-                      <span class="dashboard__data__footer__details__key">
+                  <footer class="dashboard__main__footer">
+                    <div class="dashboard__main__footer__details">
+                      <span class="dashboard__main__footer__details__key">
                         Periodo escolar:
                       </span>
-                      <span class="dashboard__data__footer__details__value">
+                      <span class="dashboard__main__footer__details__value">
                         2023/2024
                       </span>
                     </div>
-                    <div class="dashboard__data__footer__details">
-                      <span class="dashboard__data__footer__details__key">
+                    <div class="dashboard__main__footer__details">
+                      <span class="dashboard__main__footer__details__key">
                         Lapso:
                       </span>
-                      <span class="dashboard__data__footer__details__value">
+                      <span class="dashboard__main__footer__details__value">
                         1/3
                       </span>
                     </div>

@@ -1,0 +1,13 @@
+.student-links {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  &__link {
+    background-color: aliceblue;
+    color: $secondary;
+    flex: 1;
+    display: block;
+    text-align: center;
+    padding: 10px;
+  }
+}

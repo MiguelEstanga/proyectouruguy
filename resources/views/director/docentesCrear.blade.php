@@ -1,19 +1,9 @@
-@php
-  $grados = [
-    ['label' => 'Primero', 'id' => 1],
-    ['label' => 'Segundo', 'id' => 2],
-    ['label' => 'Tercero', 'id' => 3],
-    ['label' => 'Cuarto', 'id' => 4],
-    ['label' => 'Quinto', 'id' => 5],
-    ['label' => 'Sexto', 'id' => 6]
-  ];
-@endphp
 
 <x-app-layout>
   <p class="dashboard__main__content__section-title">
-    Registrar Estudiante
+    Registrar Docente
   </p>
-  <form  action="{{ route('director_estudiante.store') }}"  method="post" class="dashboard__main__content__form">
+  <form  action="{{ route('director_docente.store') }}"  method="post" class="dashboard__main__content__form">
     @csrf
     <label class="dashboard__main__content__form__label">
       Nombre:
@@ -32,19 +22,19 @@
       />
     </label>
     <label class="dashboard__main__content__form__label">
+      Email:
+      <input
+        name="email"
+        type="email"
+        class="dashboard__main__content__form__label__input"
+      />
+    </label>
+    <label class="dashboard__main__content__form__label">
       Fecha de nacimiento:
       <input
         name="fecha_nacimiento"
         id="fecha_nacimiento_input"
         type="date"
-        class="dashboard__main__content__form__label__input"
-      />
-    </label>
-    <label class="dashboard__main__content__form__label">
-      Lugar de nacimiento:
-      <input
-        name="lugar_nacimiento"
-        type="text"
         class="dashboard__main__content__form__label__input"
       />
     </label>
@@ -57,13 +47,22 @@
       />
     </label>
     <label class="dashboard__main__content__form__label">
-      Cédula escolar:
+      Cédula:
       <input
-        name="cedula_escolar"
+        name="cedula"
         type="text"
-        id="cedula_escolar_input"
+        id="cedula"
         class="dashboard__main__content__form__label__input"
-        disabled
+      />
+    </label>
+
+    <label class="dashboard__main__content__form__label">
+      Contraseña:
+      <input
+        name="password"
+        type="text"
+        id="password"
+        class="dashboard__main__content__form__label__input"
       />
     </label>
 
@@ -85,17 +84,8 @@
       </select>
     </label>
 
-    <label class="dashboard__main__content__form__label">
-      Cédula Representante:
-      <input
-        id="cedula_representante_input"
-        name="cedula_reprecentante"
-        type="text"
-        class="dashboard__main__content__form__label__input"
-      />
-    </label>
     <button class="dashboard__main__content__form__btn">
-      Registrar estudiante
+      Registrar docente
     </button>
   </form>
 </x-app-layout>

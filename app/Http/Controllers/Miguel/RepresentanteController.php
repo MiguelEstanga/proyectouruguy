@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Miguel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use App\Models\Seccion;
-use App\Models\Estudiante;
 use App\Models\Reprecentnte;
 
-class estudianteController extends Controller
+class RepresentanteController extends Controller
 {
   const grados = [
     ['label' => 'Primero', 'id' => 1],
@@ -20,53 +20,56 @@ class estudianteController extends Controller
     ['label' => 'Sexto', 'id' => 6]
   ];
 
+  public function menu()
+  {
+    return view('director.representantesMenu');
+  }
 
-    /**
-     * Display student data example.
-     */
-    public function single()
-    {
-        // $estudiante = buscar estudiante con el id recibido;
+/**
+   * Display admin data example.
+   */
+  public function single()
+  {
+      // $representante = buscar admin con el id recibido;
 
-      $estudiante = [
-        'nombre' => 'Sergio Mauricio',
-        'apellido' => 'Perez Correa',
-        'fecha_nacimiento' => '1999-06-19',
-        'lugar_nacimiento' => 'Maturin',
-        'direccion' => 'La llovizna',
-        'cedula_escolar' => '1-99-24758632',
-        'grado' => ['label' => 'Cuarto', 'id' => 4],
-        'seccion' => ['seccion' => 'A', 'id' => 2],
-        'cedula_representante' => '24758632',
-        'nombre_representante' => 'Jacinta Correa'
-      ];
-      return view('director.estudianteEditar', [
-        'estudiante' => $estudiante,
-        'secciones' => Seccion::all(),
-        'grados' => self::grados
-      ] );
-    }
-
-    /**
-     * Display a listing of the different options resource.
-     */
-    public function menu()
-    {
-        $estudiante = Estudiante::all();
-      return view('director.estudiantesMenu', ['estudiantes' => $estudiante] );
-    }
+    $representante = [
+      'nombre' => 'Sergio Mauricio',
+      'apellido' => 'Perez Correa',
+      'fecha_nacimiento' => '1999-06-19',
+      'direccion' => 'La llovizna',
+      'cedula' => '25578951',
+      'email' => 'smpc@gmail.com',
+      'password' => 'Pas5w0rd',
+      'representados' => [
+        [
+          'nombre' => 'Sergio Mauricio',
+          'apellido' => 'Perez Correa',
+          'cedula_escolar' => '1-99-24758632',
+          'fecha_nacimiento' => '1999-06-19',
+          'direccion' => 'La llovizna',
+          'lugar_nacimiento' => 'La llovizna',
+          'grado' => ['label' => 'Cuarto', 'id' => 4],
+          'seccion' => ['seccion' => 'A', 'id' => 2]
+        ]
+      ]
+    ];
+    return view('director.representantesEditar', [
+      'representante' => $representante,
+      'secciones' => Seccion::all(),
+      'grados' => self::grados
+    ] );
+  }
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $estudiante = Estudiante::all();
-       return view('director.estudiantes' , [
-        'estudiantes' => $estudiante,
-        'secciones' => Seccion::all(),
-        'grados' => self::grados
-      ] );
+       $representantes = Reprecentnte::all();
+    
+       return view('director.representantes' , [
+        'representantes' => $representantes
+      ]);
     }
 
     /**
@@ -74,7 +77,10 @@ class estudianteController extends Controller
      */
     public function create()
     {
-         return view('director.estudiantesCrear' , ['secciones' => Seccion::all()] );
+        return view('director.representantesCreate', [
+          'secciones' => Seccion::all(),
+          'grados' => self::grados
+        ]);
     }
 
     /**
@@ -167,16 +173,4 @@ class estudianteController extends Controller
         User::find($id)->delete();
         return redirect()->route('director_estudiante.index');
     }
-
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function verRendimiento()
-    {
-        $estudiante = Estudiante::all();
-       return view('director.rendimiento', ['estudiantes' => $estudiante] );
-    }
-
-
 }

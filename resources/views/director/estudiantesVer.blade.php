@@ -15,10 +15,8 @@
     </form>
   </div>
   <div class="dashboard__main__content__filtros">
-    <form action="/filtrarlistado" class="filtros">
-      <label
-        class="dashboard__main__content__form__label filtros__label"
-      >
+    <form action="{{ route('estudiante.busqueda') }}">
+      <label class="dashboard__main__content__form__label">
         Grado
         <select name="id_grado">
           @foreach($grados as $grado)
@@ -26,19 +24,15 @@
           @endforeach
         </select>
       </label>
-      <label
-        class="dashboard__main__content__form__label filtros__label"
-      >
+      <label class="dashboard__main__content__form__label">
         Sección
-        <select name="id_seccion">
+        <select name="id_seccion"m>
           @foreach($secciones as $seccion)
             <option value="{{ $seccion['id'] }}">{{ $seccion['seccion'] }}</option>
           @endforeach
         </select>
       </label>
-      <div class="filtros__submit-div">
-        <button class="dashboard__main__content__search__button">Filtrar por seccion</button>
-      </div>
+      <button class="dashboard__main__content__search__button">Filtrar por seccion</button>
     </form>
   </div>
   <table class="dashboard__main__content__users">
@@ -82,7 +76,7 @@
     </div>
     <div class="dashboard__main__content__user-stats__total">
       <span class="dashboard__main__content__user-stats__total__label">Estudiantes sin seccion:</span>
-      <span class="dashboard__main__content__user-stats__total__value">0</span>
+      <span class="dashboard__main__content__user-stats__total__value">3</span>
     </div>
   </div>
   <style>

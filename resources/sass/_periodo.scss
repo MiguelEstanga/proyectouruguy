@@ -1,0 +1,35 @@
+.informacion-periodo {
+  &__lapsos {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    &__lapso {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 10px;
+      border: 1px solid $secondary;
+      padding: 10px 0;
+      border-radius: 10px;
+      &__titulo {
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      &__action {
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+    }
+  }
+  &__actions {
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+    &__action {
+      flex: 1;
+      padding: 30px 0;
+      border-radius: 10px;
+    }
+  }
+}

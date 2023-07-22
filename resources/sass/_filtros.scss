@@ -1,0 +1,11 @@
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  &__label {
+    width: calc(50% - 5px);
+  }
+  &__submit-div {
+    width: 100%;
+  }
+}

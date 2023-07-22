@@ -10,6 +10,46 @@ use App\Models\Seccion;
 use App\Models\Profesor;
 class ProfesorController extends Controller
 {
+
+  const grados = [
+    ['label' => 'Primero', 'id' => 1],
+    ['label' => 'Segundo', 'id' => 2],
+    ['label' => 'Tercero', 'id' => 3],
+    ['label' => 'Cuarto', 'id' => 4],
+    ['label' => 'Quinto', 'id' => 5],
+    ['label' => 'Sexto', 'id' => 6]
+  ];
+
+    public function menu()
+    {
+      return view('director.docentesMenu');
+    }
+
+  /**
+     * Display profesor data example.
+     */
+    public function single()
+    {
+        // $docente = buscar docente con el id recibido;
+
+      $docente = [
+        'nombre' => 'Sergio Mauricio',
+        'apellido' => 'Perez Correa',
+        'fecha_nacimiento' => '1999-06-19',
+        'direccion' => 'La llovizna',
+        'cedula' => '25578951',
+        'grado' => ['label' => 'Cuarto', 'id' => 4],
+        'seccion' => ['seccion' => 'A', 'id' => 2],
+        'contraseña' => 'Pas5w0rd',
+        'habilitado' => true
+      ];
+      return view('director.docenteEditar', [
+        'docente' => $docente,
+        'secciones' => Seccion::all(),
+        'grados' => self::grados
+      ] );
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -18,7 +58,11 @@ class ProfesorController extends Controller
        $profesores = Profesor::all();
 
     
-       return view('director.docentes' , ['profesores' => $profesores]);
+       return view('director.docentes' , [
+        'docentes' => $profesores,
+        'secciones' => Seccion::all(),
+        'grados' => self::grados
+      ]);
     }
 
     /**
@@ -27,7 +71,7 @@ class ProfesorController extends Controller
     public function create(Request $request)
     {
 
-       return view('director.registrarProfesor' , ['secciones' => Seccion::all() ]);
+       return view('director.docentesCrear' , ['secciones' => Seccion::all(), 'grados' => self::grados ]);
     }
 
       public function  busqueda(Request $request)

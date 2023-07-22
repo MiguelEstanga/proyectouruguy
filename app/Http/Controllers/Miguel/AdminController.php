@@ -8,12 +8,44 @@ use App\Models\User;
 use App\Models\Administrador;
 class AdminController extends Controller
 {
+
+  public function menu()
+  {
+    return view('director.administradoresMenu');
+  }
+
+/**
+   * Display admin data example.
+   */
+  public function single()
+  {
+      // $administrador = buscar admin con el id recibido;
+
+    $administrador = [
+      'nombre' => 'Sergio Mauricio',
+      'apellido' => 'Perez Correa',
+      'fecha_nacimiento' => '1999-06-19',
+      'direccion' => 'La llovizna',
+      'cedula' => '25578951',
+      'email' => 'smpc@gmail.com',
+      'password' => 'Pas5w0rd',
+      'habilitado' => true
+    ];
+    return view('director.administradoresEditar', [
+      'administrador' => $administrador
+    ] );
+  }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       return view('director.administradores');
+       $administradores = Administrador::all();
+    
+       return view('director.administradores' , [
+        'administradores' => $administradores
+      ]);
     }
 
     /**

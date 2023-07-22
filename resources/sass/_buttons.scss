@@ -1,0 +1,8 @@
+button {
+  background-color: $secondary;
+  color: #FFF;
+  padding: 0 20px;
+  &[disabled] {
+    opacity: 0.5;
+  }
+}

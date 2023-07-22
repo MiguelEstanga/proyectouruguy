@@ -1,7 +1,7 @@
 
 <x-app-layout>
   <p class="dashboard__main__content__section-title">
-    Gestionar estudiantes
+    Ver rendimiento de estudiantes
   </p>
   <div class="dashboard__main__content__search">
     <form action="{{ route('director.busqueda') }}">
@@ -12,33 +12,6 @@
       placeholder="Buscar por nombre"
     />
     <button class="dashboard__main__content__search__button">Buscar</button>
-    </form>
-  </div>
-  <div class="dashboard__main__content__filtros">
-    <form action="/filtrarlistado" class="filtros">
-      <label
-        class="dashboard__main__content__form__label filtros__label"
-      >
-        Grado
-        <select name="id_grado">
-          @foreach($grados as $grado)
-            <option value="{{ $grado['id'] }}">{{ $grado['label'] }}</option>
-          @endforeach
-        </select>
-      </label>
-      <label
-        class="dashboard__main__content__form__label filtros__label"
-      >
-        Sección
-        <select name="id_seccion">
-          @foreach($secciones as $seccion)
-            <option value="{{ $seccion['id'] }}">{{ $seccion['seccion'] }}</option>
-          @endforeach
-        </select>
-      </label>
-      <div class="filtros__submit-div">
-        <button class="dashboard__main__content__search__button">Filtrar por seccion</button>
-      </div>
     </form>
   </div>
   <table class="dashboard__main__content__users">
@@ -59,22 +32,15 @@
             <td class="dashboard__main__content__users__row__data">1</td>
             <td class="dashboard__main__content__users__row__data">{{ $estudiante->id  }}</td>
             <td class="dashboard__main__content__users__row__data">
-                <form 
-                  method="post" 
-                  action="{{ route('director_estudiante.destroy' , $estudiante) }}">
-                  @method('delete')
-                  @csrf
-
-                <button class="dashboard__main__content__users__row__data__delete">Eliminar</button>
-              </form>
+              <a href="{{ route('estudiante.rendimiento', ) }}" class="">
+                Ver
+              </a>
+            </form>
           </tr>
         @endforeach
     @endif
 
   </table>
-  <a  href="{{ route('director_estudiante.create') }}" class="dashboard__main__content__add-user-btn">
-    Agregar estudiante
-  </a>
   <div class="dashboard__main__content__user-stats">
     <div class="dashboard__main__content__user-stats__total">
       <span class="dashboard__main__content__user-stats__total__label">Estudiantes actuales:</span>
@@ -82,7 +48,7 @@
     </div>
     <div class="dashboard__main__content__user-stats__total">
       <span class="dashboard__main__content__user-stats__total__label">Estudiantes sin seccion:</span>
-      <span class="dashboard__main__content__user-stats__total__value">0</span>
+      <span class="dashboard__main__content__user-stats__total__value">3</span>
     </div>
   </div>
   <style>

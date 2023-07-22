@@ -6,9 +6,12 @@ import {
   Ripple,
   initTE,
 } from "tw-elements";
+import forms from "./forms";
 
 window.Alpine = Alpine;
 
 Alpine.start();
 
 initTE({ Dropdown, Ripple });
+
+forms.init();
