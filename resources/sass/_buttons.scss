@@ -1,8 +1,14 @@
-button {
+button, .button {
   background-color: $secondary;
   color: #FFF;
   padding: 0 20px;
   &[disabled] {
     opacity: 0.5;
+  }
+
+  &--big {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 20px;
   }
 }

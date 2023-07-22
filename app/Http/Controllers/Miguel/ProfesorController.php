@@ -25,6 +25,38 @@ class ProfesorController extends Controller
       return view('director.docentesMenu');
     }
 
+    public function proyectosList() {
+      return view('docente.proyectos');
+    }
+
+    public function proyectoSingle() {
+      return view('docente.proyecto');
+    }
+
+    public function evaluar() {
+      // $estudiante = buscar estudiante con el id recibido;
+
+      $estudiante = [
+        'nombre' => 'Sergio Mauricio',
+        'apellido' => 'Perez Correa',
+        'fecha_nacimiento' => '1999-06-19',
+        'lugar_nacimiento' => 'Maturin',
+        'direccion' => 'La llovizna',
+        'cedula_escolar' => '1-99-24758632',
+        'grado' => ['label' => 'Cuarto', 'id' => 4],
+        'seccion' => ['seccion' => 'A', 'id' => 2],
+        'cedula_representante' => '24758632',
+        'nombre_representante' => 'Jacinta Correa'
+      ];
+      return view('docente.estudiante', [
+        'estudiante' => $estudiante
+      ]);
+    }
+
+    public function inicio() {
+      return view('docente.index');
+    }
+
   /**
      * Display profesor data example.
      */

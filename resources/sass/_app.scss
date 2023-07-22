@@ -165,6 +165,10 @@ input {
           padding: 20px;
           flex-grow: 1;
           position: relative;
+          &__text {
+            margin-bottom: 60px;
+            width: 100%;
+          }
           &__button {
             position: absolute;
             bottom: 2px;

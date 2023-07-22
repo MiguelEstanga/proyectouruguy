@@ -45,6 +45,12 @@ Route::group(['middleware' => 'auth' ] , function(){
 
   // configuracion periodo escolar
   Route::get('director/informacion-lapso' , [PeriodoController::class , 'config'])->name('director_periodo.config');
+
+  // vistas docente
+  Route::get('docente' , [ProfesorController::class , 'inicio'])->name('docente.inicio');
+  Route::get('docente/proyectos' , [ProfesorController::class , 'proyectosList'])->name('docente.proyectos');
+  Route::get('docente/proyectos/proyecto' , [ProfesorController::class , 'proyectoSingle'])->name('docente.proyecto');
+  Route::get('docente/estudiante' , [ProfesorController::class , 'evaluar'])->name('docente.evaluar');
 } );
 
 //fin de las rutas del drector
