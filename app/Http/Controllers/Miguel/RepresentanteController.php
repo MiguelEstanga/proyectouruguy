@@ -25,6 +25,31 @@ class RepresentanteController extends Controller
     return view('director.representantesMenu');
   }
 
+  public function inicio() {
+    $representado = [
+      'nombre' => 'Felipe Leon',
+      'fecha_nacimiento' => '1999-06-19',
+      'lugar_nacimiento' => 'Maturin',
+      'direccion' => 'La llovizna',
+      'cedula_escolar' => '1-99-24758632',
+      'grado' => ['label' => 'Cuarto', 'id' => 4],
+      'seccion' => ['seccion' => 'A', 'id' => 2],
+      'docente' => 'Jose Jimenez',
+      'nombre_representante' => 'Jacinta Correa'
+    ];
+    $lapso = [
+      'nombre' => 'primero'
+    ];
+    $proyecto = [
+      'descripcion' => 'Reforzando valores de integridad y disciplina como mejora'
+    ];
+    return view('representante.index', [
+      'representado' => $representado,
+      'lapso' => $lapso,
+      'proyecto' => $proyecto
+    ]);
+  }
+
 /**
    * Display admin data example.
    */

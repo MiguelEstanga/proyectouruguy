@@ -51,6 +51,9 @@ Route::group(['middleware' => 'auth' ] , function(){
   Route::get('docente/proyectos' , [ProfesorController::class , 'proyectosList'])->name('docente.proyectos');
   Route::get('docente/proyectos/proyecto' , [ProfesorController::class , 'proyectoSingle'])->name('docente.proyecto');
   Route::get('docente/estudiante' , [ProfesorController::class , 'evaluar'])->name('docente.evaluar');
+
+  // vistas representante
+  Route::get('representante' , [RepresentanteController::class , 'inicio'])->name('representante.inicio');
 } );
 
 //fin de las rutas del drector
