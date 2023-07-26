@@ -15,4 +15,9 @@ class Director extends Model
         'apellido',
         'fecha_nacimiento',
     ];
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class , 'id_usuario');
+    }
 }

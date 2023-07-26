@@ -10,12 +10,11 @@ class Boletin extends Model
     use HasFactory;
 
 
-    protected = $fillable = [
+    protected $fillable = [ 
         'id_informe',
         'id_profesor',
         'id_estudiante',
         'literal'
-
     ];
  
     public   function estudiante()
@@ -23,13 +22,18 @@ class Boletin extends Model
         return $this->belongsTo(Estudiante::class , 'id_estudiante');
     }
 
-       public   function informe()
+    public  function informe()
     {
         return $this->belongsTo(Informe::class , 'id_informe');
     }
 
-    public   function docente()
+    public  function docente()
     {
         return $this->belongsTo(Profesor::class , 'id_profesor');
+    }
+
+    public function reporteboletin()
+    {
+        return $this->hasMany(Estudiante::class , 'id_estudiante');
     }
 }

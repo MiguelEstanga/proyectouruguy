@@ -13,6 +13,9 @@
         name="nombre"
         class="dashboard__main__content__form__label__input"
       />
+     @error('nombre')
+      <p style="color:red;" > campo requerido </p>
+     @enderror 
     </label>
     <label class="dashboard__main__content__form__label">
       Apellido:
@@ -21,6 +24,9 @@
         type="text"
         class="dashboard__main__content__form__label__input"
       />
+         @error('apellido')
+      <p style="color:red;" > campo requerido </p>
+     @enderror 
     </label>
     <label class="dashboard__main__content__form__label">
       Fecha de nacimiento:
@@ -29,6 +35,9 @@
         type="text"
         class="dashboard__main__content__form__label__input"
       />
+         @error('fecha_nacimiento')
+      <p style="color:red;" > campo requerido </p>
+     @enderror 
     </label>
 
     <label class="dashboard__main__content__form__label">
@@ -39,7 +48,9 @@
         class="dashboard__main__content__form__label__input"
       />
     </label>
-
+       @error('direccion')
+      <p style="color:red;" > campo requerido </p>
+     @enderror 
     <label class="dashboard__main__content__form__label">
       Cédula:
       <input
@@ -47,6 +58,9 @@
         type="text"
         class="dashboard__main__content__form__label__input"
       />
+         @error('cedula')
+      <p style="color:red;" > campo requerido </p>
+     @enderror 
     </label>
     <label class="dashboard__main__content__form__label">
       Email:
@@ -56,6 +70,9 @@
         class="dashboard__main__content__form__label__input"
         autocomplete="off"
       />
+         @error('email')
+      <p style="color:red;" > campo requerido </p>
+     @enderror 
     </label>
     
     <label class="dashboard__main__content__form__label">
@@ -66,6 +83,10 @@
         class="dashboard__main__content__form__label__input"
         autocomplete="off"
       />
+
+         @error('password')
+      <p style="color:red;" > campo requerido </p>
+     @enderror 
     </label>
     <label class="dashboard__main__content__form__label">
       

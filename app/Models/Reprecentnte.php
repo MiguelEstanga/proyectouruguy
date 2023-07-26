@@ -21,12 +21,12 @@ class Reprecentnte extends Model
 
     public function usuario()
     {
-        return $this->hasMany(User::class , 'id_usuario');
+        return $this->belongsTo(User::class , 'id_usuario');
     }
 
     public function estudiante()
     {
-        return $this->hasMany(Reprecentnte::class , 'id_reprecentante');
+        return $this->hasMany( Estudiante::class , 'id');
     }
 
 

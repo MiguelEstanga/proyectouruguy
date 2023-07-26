@@ -4,14 +4,18 @@
     Registrar Docente
   </p>
   <form  action="{{ route('director_docente.store') }}"  method="post" class="dashboard__main__content__form">
-    @csrf
+    @csrf 
     <label class="dashboard__main__content__form__label">
-      Nombre:
+      Nombre: 
+      
       <input
         type="text"
         name="nombre"
         class="dashboard__main__content__form__label__input"
       />
+      @error('nombre')
+        <p style="color:red" >El nombre es requerido</p>
+      @enderror
     </label>
     <label class="dashboard__main__content__form__label">
       Apellido:
@@ -20,6 +24,10 @@
         type="text"
         class="dashboard__main__content__form__label__input"
       />
+
+      @error('apellido')
+        <p style="color:red" >El apellido es requerido</p>
+      @enderror
     </label>
     <label class="dashboard__main__content__form__label">
       Email:
@@ -28,6 +36,9 @@
         type="email"
         class="dashboard__main__content__form__label__input"
       />
+      @error('email')
+        <p style="color:red" >El email es requerido</p>
+      @enderror
     </label>
     <label class="dashboard__main__content__form__label">
       Fecha de nacimiento:
@@ -37,6 +48,9 @@
         type="date"
         class="dashboard__main__content__form__label__input"
       />
+      @error('fecha_nacimiento')
+        <p style="color:red" >La fecha de nacimiento es requerida</p>
+      @enderror
     </label>
     <label class="dashboard__main__content__form__label">
       Dirección:
@@ -45,6 +59,10 @@
         type="text"
         class="dashboard__main__content__form__label__input"
       />
+
+      @error('direccion')
+        <p style="color:red" >La direccion es requerido</p>
+      @enderror
     </label>
     <label class="dashboard__main__content__form__label">
       Cédula:
@@ -54,6 +72,9 @@
         id="cedula"
         class="dashboard__main__content__form__label__input"
       />
+      @error('cedula')
+        <p style="color:red" >El cedula es requerido</p>
+      @enderror
     </label>
 
     <label class="dashboard__main__content__form__label">
@@ -64,20 +85,29 @@
         id="password"
         class="dashboard__main__content__form__label__input"
       />
+      @error('password')
+        <p style="color:red" >El password es requerido</p>
+      @enderror
     </label>
 
     <label class="dashboard__main__content__form__label">
       Grado
-      <select name="id_grado">
+      @error('grado')
+        <p style="color:red" >El garado es requerido</p>
+      @enderror
+      <select name="grado">  
         @foreach($grados as $grado)
-          <option value="{{ $grado['id'] }}">{{ $grado['label'] }}</option>
+          <option value="{{ $grado['label'] }}">{{ $grado['label'] }}</option>
         @endforeach
       </select>
     </label>
 
     <label class="dashboard__main__content__form__label">
       Sección
-      <select name="id_seccion"m>
+      @error('id_seccion')
+        <p style="color:red" >Es necesario que elija una seccion </p>
+      @enderror
+      <select name="id_seccion">
         @foreach($secciones as $seccion)
           <option value="{{ $seccion['id'] }}">{{ $seccion['seccion'] }}</option>
         @endforeach

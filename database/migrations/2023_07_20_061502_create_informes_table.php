@@ -25,7 +25,17 @@ return new class extends Migration
             ->cascadeOnUpdate()
             ->nullOnDelete();
 
+            $table->foreignId('id_estudiante')
+            ->nullable()
+            ->constrained('estudiantes')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
 
+            $table->foreignId('id_profesor')
+            ->nullable()
+            ->constrained('profesors')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
 
             $table->foreignId('id_proyectos')
             ->nullable()

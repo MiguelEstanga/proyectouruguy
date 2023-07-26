@@ -10,7 +10,7 @@ class Periodo extends Model
     use HasFactory;
 
     protected $fillable = [
-        "año_escolar",
+        "añoescolar",
         'fecha_inicio',
         'fecha_fin',
         'id_administrador',
@@ -24,6 +24,6 @@ class Periodo extends Model
 
     public function lapso()
     {
-        return $this->belongsTo(Lapso::class , 'id');
+        return $this->hasMany(Lapso::class , 'id_periodo');
     }
 }

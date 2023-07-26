@@ -88,7 +88,7 @@ class estudianteController extends Controller
 
       $reprecentante_user = User::create([
             'email' => $request->email_reprecentante,
-            'password' => 'R_CLAVE',
+            'password' => bcrypt('R_CLAVE'),
             'fecha_nacimiento' => $request->fecha_nacimiento_Reprecentante,
             'cedula' => $request->cedula,
               'tipo' => 'Reprecentnte'      

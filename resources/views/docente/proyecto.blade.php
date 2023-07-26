@@ -9,7 +9,12 @@
   <div class="dashboard__main__content__details">
     <div class="dashboard__main__content__details__content">
       <p class="dashboard__main__content__details__content__text">
-        4to grado - Sección: A
+        
+        {{  Auth::user()->profesor[0]->grado->grado }} Grado -
+
+      Seccion  {{ Auth::user()->profesor[0]->seccion->seccion }} 
+      
+        
       </p>
     </div>
   </div>
@@ -19,14 +24,17 @@
         Proyecto actual
       </span>
       <span class="dashboard__main__content__current-project__details__value">
-        1er Lapso
+        {{ $proyecto->lapso->nombre }}
       </span>
     </div>
-    <form class="dashboard__main__content__current-project__value" action="/proyecto" method="post">
-      <textarea class="dashboard__main__content__current-project__value__text">
-        Reforzando valores de integridad y disciplina como mejora
+    <form class="dashboard__main__content__current-project__value" 
+    action="{{ route('proyecto.update' , $proyecto->id ) }}" method="post">
+    @csrf
+    @method('put')
+      <textarea name="descripcion" class="dashboard__main__content__current-project__value__text">
+        {{ $proyecto->descripcion }}
       </textarea>
-      <button class="dashboard__main__content__current-project__value__button">Modificar</button>
+      <button  class="dashboard__main__content__current-project__value__button">Modificar</button>
     </form>
   </div>
 </x-app-layout>

@@ -47,10 +47,20 @@ class User extends Authenticatable
         return $this->hasMany( Administrador::class , 'id');
     }
 
+    public function director()
+    {
+        return $this->belongsTo( Director::class , 'id');
+    }
+
 
     public function profesor()
     {
-        return $this->hasMany(Profesor::class , 'id');
+        return $this->hasMany(Profesor::class , 'id_usuario');
+    }
+
+      public function un_profesor()
+    {
+        return $this->belongsTo(Profesor::class , 'id');
     }
 
 

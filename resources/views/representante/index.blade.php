@@ -6,33 +6,42 @@
   <h2 class="dashboard__main__content__welcome-msg">
     Ver representado
   </h2>
+  <h2>
+  
+  </h2>
   <div class="dashboard__main__content__details">
     <div class="dashboard__main__content__details__content">
       <p class="dashboard__main__content__details__content__text">
-        {{ $representado['nombre'] }}
+        {{  $user->estudiante[0]->nombre1 }}
+        {{ $user->estudiante[0]->apellido }}
       </p>
       <div class="dashboard__main__content__details__content__info">
         <p class="dashboard__main__content__details__content__info__text">
-          Grado: {{ $representado['grado']['label'] }}
+          Grado: {{ $user->estudiante[0]->grado }}
         </p>
         <p class="dashboard__main__content__details__content__info__text">
-          Seccion: {{ $representado['seccion']['seccion'] }}
+          Seccion:{{ $user->estudiante[0]->seccion }}
         </p>
         <p class="dashboard__main__content__details__content__info__text">
-          Maestro: {{ $representado['docente'] }}
-        </p>
+          Maestro: {{ $lastInforme->profesor->nombre1 }} {{ $lastInforme->profesor->apellido2 }} 
+                  </p>
       </div>
     </div>
   </div>
   <div class="dashboard__main__content__links">
-    <a href="#" class="dashboard__main__content__links__link">
+
+    <a 
+      target="_black" 
+      href="{{ route('informe.show' , $user->estudiante[0]->id) }}" class="dashboard__main__content__links__link">
       Ver informe descriptivo
       <img
         class="dashboard__main__content__links__link__icon"
         src="{{ asset('images/file.svg') }}"
         alt="usuario"
       >
+      
     </a>
+
     <a href="#" class="dashboard__main__content__links__link">
       Ver boletín
       <img
@@ -41,6 +50,7 @@
         alt="usuario"
       >
     </a>
+
     <a href="#" class="dashboard__main__content__links__link">
       Ver constancia
       <img
@@ -50,13 +60,14 @@
       >
     </a>
   </div>
+
   <div class="dashboard__main__content__current-project">
     <div class="dashboard__main__content__current-project__details">
       <span class="dashboard__main__content__current-project__details__title">
         Proyecto actual
       </span>
       <span class="dashboard__main__content__current-project__details__value">
-        Lapso: {{ $lapso['nombre'] }}
+       
       </span>
     </div>
     <div class="dashboard__main__content__current-project__value">

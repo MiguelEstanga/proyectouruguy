@@ -25,6 +25,8 @@ return new class extends Migration
             ->cascadeOnUpdate()
             ->nullOnDelete(); 
 
+
+
              $table->foreignId('id_seccion')
             ->nullable()
             ->constrained('seccions')
@@ -32,6 +34,13 @@ return new class extends Migration
             ->nullOnDelete(); 
 
             
+             $table->foreignId('id_grado')
+            ->nullable()
+            ->constrained('grados')
+            
+            ->nullOnDelete()
+            ->cascadeOnUpdate();
+                
             $table->timestamps();
         });
     }

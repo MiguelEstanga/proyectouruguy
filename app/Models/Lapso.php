@@ -19,6 +19,21 @@ class Lapso extends Model
     
     public function periodo()
     {
-        return $this->hasMany(Lapso::class , 'id');
+        return $this->belongsTo(Lapso::class , 'id_periodo');
+    }
+
+    public function proyecto()
+    {
+        return $this->belongsTo( Proyecto::class , 'id');
+    }
+
+    public function informe()
+    {
+        return $this->belongsTo(Informe::class , 'id');
+    }
+
+    public function informes()
+    {
+        return $this->hasMany(Informe::class , 'id');
     }
 }

@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers\Miguel;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use App\Models\Seccion;
 use App\Models\Reprecentnte;
-
+use App\Models\Estudiante;
+use App\Models\Proyecto; 
 class RepresentanteController extends Controller
 {
-  const grados = [
-    ['label' => 'Primero', 'id' => 1],
-    ['label' => 'Segundo', 'id' => 2],
-    ['label' => 'Tercero', 'id' => 3],
-    ['label' => 'Cuarto', 'id' => 4],
-    ['label' => 'Quinto', 'id' => 5],
-    ['label' => 'Sexto', 'id' => 6]
-  ];
+  
+
+
+     public function index()
+    {
+       $representantes = Reprecentnte::all();
+    
+       return view('director.representantes' , [
+        'representantes' => $representantes
+      ]);
+    }
 
   public function menu()
   {
@@ -26,27 +32,25 @@ class RepresentanteController extends Controller
   }
 
   public function inicio() {
-    $representado = [
-      'nombre' => 'Felipe Leon',
-      'fecha_nacimiento' => '1999-06-19',
-      'lugar_nacimiento' => 'Maturin',
-      'direccion' => 'La llovizna',
-      'cedula_escolar' => '1-99-24758632',
-      'grado' => ['label' => 'Cuarto', 'id' => 4],
-      'seccion' => ['seccion' => 'A', 'id' => 2],
-      'docente' => 'Jose Jimenez',
-      'nombre_representante' => 'Jacinta Correa'
-    ];
-    $lapso = [
-      'nombre' => 'primero'
-    ];
-    $proyecto = [
-      'descripcion' => 'Reforzando valores de integridad y disciplina como mejora'
-    ];
+  
+   
+
+    $proyecto = Proyecto::latest('created_at')->first();
+
+    $reprecentante = Reprecentnte::where('id_usuario' , Auth::user()->id )->first();
+    $contandor =  $reprecentante->estudiante[0]->informe->count();
+   
+   $informe = $reprecentante->estudiante[0]->informe[$contandor-1];
+
+   
+    
+
     return view('representante.index', [
-      'representado' => $representado,
-      'lapso' => $lapso,
-      'proyecto' => $proyecto
+      'representado' => $reprecentante,
+      
+      'proyecto' => $proyecto,
+      'user' => $reprecentante ,
+      'lastInforme' => $informe
     ]);
   }
 
@@ -88,14 +92,7 @@ class RepresentanteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-       $representantes = Reprecentnte::all();
-    
-       return view('director.representantes' , [
-        'representantes' => $representantes
-      ]);
-    }
+ 
 
     /**
      * Show the form for creating a new resource.
@@ -104,7 +101,7 @@ class RepresentanteController extends Controller
     {
         return view('director.representantesCreate', [
           'secciones' => Seccion::all(),
-          'grados' => self::grados
+          
         ]);
     }
 
@@ -113,16 +110,24 @@ class RepresentanteController extends Controller
      */
     public function store(Request $request)
     {
+     // return $request;
 
-    // return $request;
-      //creando el reprecnetante
+      $request->validate([
+        'email_reprecentante' => 'required',
+        'fecha_nacimiento_reprecentante' => 'required',
+        'apellido_reprecentante' => 'required',
+        'direccion_reprecentante' => 'required',
 
+       
+       
+
+      ]);
       $reprecentante_user = User::create([
             'email' => $request->email_reprecentante,
             'password' => 'R_CLAVE',
-            'fecha_nacimiento' => $request->fecha_nacimiento_Reprecentante,
-            'cedula' => $request->cedula,
-              'tipo' => 'Reprecentnte'      
+            'fecha_nacimiento' => $request->fecha_nacimiento_reprecentante,
+            'cedula' => $request->cedula_reprecentante,
+            'tipo' => 'Reprecentnte'      
 
       ])->assignRole('Reprecentante');
 
@@ -131,44 +136,45 @@ class RepresentanteController extends Controller
         'nombre1' => $request->nombre_reprecentante,
         'nombre2' => $request->nombre_reprecentante,
         'apellido' => $request->apellido_reprecentante,
-        'domicilio' => $request->domicilio,
-        'localidad' => $request->localidad,
+        'domicilio' => $request->direccion_reprecentante,
+        'localidad' => $request->direccion_reprecentante,
         'id_usuario'=> $reprecentante_user->id ,
+        
         ]
       );
 
       //guardando estudiante 
-      $estudiante = User::create(
+
+     foreach($request->representado as $estudiante)
+      {
+          $estudiante_data = User::create(
             [
                 
-                'email' => $request->email,
-                'password' => $request->password,
-                'fecha_nacimiento' => $request->fecha_nacimiento,
+                'email' => $request->email_reprecentante,
+                'password' => 'R_CLAVE',
+                'fecha_nacimiento' => $estudiante['fecha_nacimiento'],
                 'tipo' => 'Estudiante',
-                'cedula' => $request->cedula
+                'cedula' => $estudiante['cedula']
              ]
-        )->assignRole('Estudiante');
+          )->assignRole('Estudiante');
 
-
-        Estudiante::create([
-            'nombre1' =>$request->nombre,
-            'nombre2' =>$request->nombre,
-            'apellido' =>$request->apellido,
-            'cedulaescolar' => '202020',
+          Estudiante::create([
+            'nombre1' =>$estudiante['name'],
+            'nombre2' =>$estudiante['name'], 
+            'apellido' =>$estudiante['apellido'],
+            'cedulaescolar' => $estudiante['cedula'],
             'genero' => 'masculino' ,
-            'id_usuario' => $estudiante->id,
-            'id_seccion' => $request->id_seccion,
-            'id_reprecentante'=>  $reprecentante->id
+            'id_usuario' => $estudiante_data->id,
+            'seccion' => $estudiante['id_seccion'],
+            'id_reprecentante'=>  $reprecentante->id,
+            'grado' => $estudiante['grado'] 
         ]);
 
+      }
+      return redirect()->route('director_estudiante.index');
+  }
 
-        
-        return redirect()->route('director_estudiante.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
+  
     public function show(string $id)
     {
         //

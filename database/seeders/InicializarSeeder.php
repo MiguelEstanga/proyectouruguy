@@ -8,6 +8,7 @@ use App\Models\Seccion;
 use App\Models\Habilitado;
 use App\Models\User;
 use App\Models\Director;
+use App\Models\grado;
 class InicializarSeeder extends Seeder
 {
     /**
@@ -15,7 +16,7 @@ class InicializarSeeder extends Seeder
      */
     public function run(): void
     {
-          $estados = [
+        $estados = [
             ['habilitado' => 'si'   ],
             ['habilitado' => 'no'],
             ['habilitado' => 'chequeando']
@@ -27,6 +28,7 @@ class InicializarSeeder extends Seeder
             ['seccion' => 'B'  , 'id_habilitado'=> '3']
         ];
 
+        
 
         foreach($estados as $habilitado)
         {

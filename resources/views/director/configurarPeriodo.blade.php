@@ -4,54 +4,89 @@
     Información del periodo
   </p>
 
+  @if(session('error'))
+    <h2 class="alert alert-success" >
+      {{ session('error') }}
+    </h2>
+  @endif
+
   <div class="informacion-periodo">
     <h2 class="informacion-periodo__titulo">
-      Periodo actual: {{ $data['periodo_actual'] }}
+      Periodo actual: {{  $data->añoescolar ?? 'Sin año escolar'; }}
     </h2>
     <h2 class="informacion-periodo__titulo-lapsos">Lapsos:</h2>
     <div class="informacion-periodo__lapsos">
-      @foreach($data['lapsos'] as $lapso)
+      @if($data->lapso ?? false)
+      @foreach($data->lapso as $lapso)
       <div class="informacion-periodo__lapsos__lapso">
         <h3 class="informacion-periodo__lapsos__lapso__titulo">{{ $lapso['nombre'] }}</h3>
-        @if (isset($lapso['fecha_inicio']))
-        <span>Fecha de inicio: {{ $lapso['fecha_inicio'] }}</span>
+        @if (isset($lapso['inicio']))
+        <span>Fecha de inicio: {{ $lapso['inicio'] }}</span>
         @endif
-        @if (isset($lapso['fecha_fin']))
-        <span>Fecha de fin: {{ $lapso['fecha_fin'] }}</span>
+        @if (isset($lapso['fin']))
+        <span>Fecha de fin: {{ $lapso['fin'] }}</span>
         @endif
-        @if (isset($lapso['actual']) && $lapso['actual'])
+        
         <span>lapso actual</span>
-        <button
-          class="informacion-periodo__lapsos__lapso__action"
-        >finalizar lapso</button>
-        @else
-        <button
-          class="informacion-periodo__lapsos__lapso__action"
-          disabled
-        >finalizar lapso</button>
-        @endif
+
+      
+          <form action="{{ route('lapso.update' , $lapso->id) }}" method="post">
+            @csrf
+            @method('put')
+              <input type="text" name="lapso"  value="{{ $lapso->id }}" hidden >
+              <button class="informacion-periodo__lapsos__lapso__action">
+                  @if($lapso->activar == true)
+                    finalizar lapso
+                  @else
+                    iniciar lapso
+                  @endif
+
+                  
+                 
+              </button>
+          </form>
+       
+      
+    
       </div>
       @endforeach
+      @endif
     </div>
+
+
     <div class="informacion-periodo__actions">
-      <button
+      <a
+        href="{{ route('periodo.create') }}"
         class="informacion-periodo__actions__action"
-        @if(!$data['siguiente_lapso'])
-        disabled="disabled"
-        @endif
-      >iniciar {{ $data['siguiente_lapso'] ? $data['siguiente_lapso'] : 'siguiente' }} lapso</button>
-      <button
+       
+      >
+        Iiniciar  Periodo
+      </a>
+      
+      @if($data->lapso ?? false  )
+        @if(count($data->lapso) == 3)
+        <p 
+          style="color:grey;" 
+          class="informacion-periodo__actions__action" 
+        >
+          Se han creado todos los lapsos del perodo
+        </p>
+
+        @else
+        <a
+        href="{{ route('lapso.index') }}"
         class="informacion-periodo__actions__action"
-        @if(!$data['finalizar_periodo'])
-        disabled="disabled"
+      
+        >
+        Crear Lapso
+        </a>
         @endif
-      >finalizar periodo</button>
-      <button
-        class="informacion-periodo__actions__action"
-        @if(!$data['iniciar_periodo'])
-        disabled="disabled"
-        @endif
-      >iniciar siguiente periodo</button>
+    @endif     
+
+
+      
+    
+   
     </div>
   </div>
 </x-app-layout>

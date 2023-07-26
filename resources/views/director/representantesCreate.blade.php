@@ -9,7 +9,18 @@
   ];
 @endphp
 
+
+
 <x-app-layout>
+  @if($errors->any())
+   <div class="alert alert-danger">
+      <ul>
+         @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+         @endforeach
+      </ul>
+   </div>
+@endif
   <p class="dashboard__main__content__section-title">
     Registrar Representante
   </p>
@@ -23,14 +34,14 @@
       Nombre:
       <input
         type="text"
-        name="nombre"
+        name="nombre_reprecentante"
         class="dashboard__main__content__form__label__input"
       />
     </label>
     <label class="dashboard__main__content__form__label">
       Apellido:
       <input
-        name="apellido"
+        name="apellido_reprecentante"
         type="text"
         class="dashboard__main__content__form__label__input"
       />
@@ -38,7 +49,7 @@
     <label class="dashboard__main__content__form__label">
       Fecha de nacimiento:
       <input
-        name="fecha_nacimiento"
+        name="fecha_nacimiento_reprecentante"
         type="date"
         class="dashboard__main__content__form__label__input"
       />
@@ -46,7 +57,7 @@
     <label class="dashboard__main__content__form__label">
       Cédula:
       <input
-      name="cedula"
+      name="cedula_reprecentante"
         type="text"
         class="dashboard__main__content__form__label__input"
       />
@@ -54,7 +65,7 @@
     <label class="dashboard__main__content__form__label">
       Email:
       <input
-      name="email"
+      name="email_reprecentante"
         type="text"
         class="dashboard__main__content__form__label__input"
       />
@@ -63,7 +74,7 @@
     <label class="dashboard__main__content__form__label">
       Contraseña:
       <input
-      name="password"
+      name="password_reprecentante"
         type="password"
         class="dashboard__main__content__form__label__input"
       />
@@ -72,7 +83,7 @@
     <label class="dashboard__main__content__form__label">
       Direccion:
       <input
-        name="direccion"
+        name="direccion_reprecentante"
         type="text"
         class="dashboard__main__content__form__label__input"
       />
@@ -136,11 +147,11 @@
 
         <label class="dashboard__main__content__form__label">
           Grado
-          <select name="representado[0][id_grado]">
+          <select name="representado[0][grado]">
             @foreach($grados as $grado)
-              <option value="{{ $grado['id'] }}">{{ $grado['label'] }}</option>
+              <option value="{{ $grado['label'] }}">{{ $grado['label'] }}</option>
             @endforeach
-          </select>
+          </select> 
         </label>
 
         <label class="dashboard__main__content__form__label">
@@ -163,3 +174,8 @@
     </button>
   </form>
 </x-app-layout>
+<style>
+  .d{
+    font-weight: ;
+  }
+</style>

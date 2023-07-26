@@ -3,6 +3,11 @@
   <p class="dashboard__main__content__section-title">
     Gestionar docentes
   </p>
+  @if(session('mensage'))
+    <h2 class="alert alert-success" >
+      session('mensage')
+    </h2>
+  @endif
   <div class="dashboard__main__content__search">
     <form action="{{ route('director.busqueda') }}">
     <input
@@ -56,12 +61,12 @@
             <td class="dashboard__main__content__users__row__data"> {{ $docente->nombre1 }} </td>
             <td class="dashboard__main__content__users__row__data">{{ $docente->usuario->cedula }}</td>
             <td class="dashboard__main__content__users__row__data">{{ $docente->usuario->fecha_nacimiento }}</td>
-            <td class="dashboard__main__content__users__row__data">1</td>
-            <td class="dashboard__main__content__users__row__data">{{ $docente->id  }}</td>
+            <td class="dashboard__main__content__users__row__data">{{ $docente->grado->grado }}</td>
+            <td class="dashboard__main__content__users__row__data">{{ $docente->seccion->seccion  }}</td>
             <td class="dashboard__main__content__users__row__data">
                 <form 
                   method="post" 
-                  action="{{ route('director_estudiante.destroy' , $docente) }}">
+                  action="{{ route('director_docente.destroy' , $docente->id ) }}">
                   @method('delete')
                   @csrf
 
@@ -72,7 +77,7 @@
     @endif
 
   </table>
-  <a  href="{{ route('director_estudiante.create') }}" class="dashboard__main__content__add-user-btn">
+  <a  href="{{ route('director_docente.create') }}" class="dashboard__main__content__add-user-btn">
     Agregar docente
   </a>
   <div class="dashboard__main__content__user-stats">

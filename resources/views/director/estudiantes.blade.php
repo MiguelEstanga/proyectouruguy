@@ -41,7 +41,7 @@
       </div>
     </form>
   </div>
-  <table class="dashboard__main__content__users">
+  <table class="table"  >
     <tr class="dashboard__main__content__users__headers">
       <th class="dashboard__main__content__users__headers__header">Nombre</th>
       <th class="dashboard__main__content__users__headers__header">Cedula</th>
@@ -52,12 +52,12 @@
     </tr>
     @if($estudiantes != 'null')
           @foreach($estudiantes as $estudiante)
-          <tr class="dashboard__main__content__users__row">
+          <tr class="dashboard__main__content__users__row"  >
             <td class="dashboard__main__content__users__row__data"> {{ $estudiante->nombre1 }} </td>
             <td class="dashboard__main__content__users__row__data">{{ $estudiante->usuario->cedula }}</td>
             <td class="dashboard__main__content__users__row__data">{{ $estudiante->usuario->fecha_nacimiento }}</td>
-            <td class="dashboard__main__content__users__row__data">1</td>
-            <td class="dashboard__main__content__users__row__data">{{ $estudiante->id  }}</td>
+            <td class="dashboard__main__content__users__row__data">{{ $estudiante->grado }}</td>
+            <td class="dashboard__main__content__users__row__data">{{ $estudiante->seccion  }}</td>
             <td class="dashboard__main__content__users__row__data">
                 <form 
                   method="post" 
@@ -89,5 +89,7 @@
     .menu{
       font-family: ;
     }
+
+ 
   </style>
 </x-app-layout>

@@ -8,8 +8,26 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use App\Models\Seccion;
 use App\Models\Profesor;
+use App\Models\grado;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Estudiante;
+use App\Models\Proyecto;
+use App\Models\Periodo;
 class ProfesorController extends Controller
-{
+{ 
+      public function index()
+    {
+       $profesores = Profesor::all();
+
+    
+       return view('director.docentes' , [
+        'docentes' => $profesores,
+        'secciones' => Seccion::all(),
+      
+        'grados' => self::grados
+      ]);
+    }
+
 
   const grados = [
     ['label' => 'Primero', 'id' => 1],
@@ -26,35 +44,43 @@ class ProfesorController extends Controller
     }
 
     public function proyectosList() {
-      return view('docente.proyectos');
+      Profesor::where( 'id_usuario' , Auth::user()->id)->first();
+       $proyectos = Proyecto::where('id_profesor' , Auth::user()->profesor[0]->id)->get();  
+      return view('docente.proyectos' ,['proyectos' => $proyectos]);
     }
 
     public function proyectoSingle() {
-      return view('docente.proyecto');
+      return view('docente.proyecto'  );
     }
 
-    public function evaluar() {
-      // $estudiante = buscar estudiante con el id recibido;
+    public function evaluar($id) {
+      
+      $estudiante = Estudiante::find($id);
+      
+      $periodo = Periodo::latest('created_at')->first();
 
-      $estudiante = [
-        'nombre' => 'Sergio Mauricio',
-        'apellido' => 'Perez Correa',
-        'fecha_nacimiento' => '1999-06-19',
-        'lugar_nacimiento' => 'Maturin',
-        'direccion' => 'La llovizna',
-        'cedula_escolar' => '1-99-24758632',
-        'grado' => ['label' => 'Cuarto', 'id' => 4],
-        'seccion' => ['seccion' => 'A', 'id' => 2],
-        'cedula_representante' => '24758632',
-        'nombre_representante' => 'Jacinta Correa'
-      ];
+      $ultimo_lapso = $periodo->lapso->where('activar' , '=' , true)->count();
+
+      if($ultimo_lapso != 0)
+      {
+        $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
+      }
+
       return view('docente.estudiante', [
-        'estudiante' => $estudiante
+        'estudiante' => $estudiante,
+        'lapso' => $lapso,
+        'ultimo_lapso' => $ultimo_lapso,
       ]);
     }
 
     public function inicio() {
-      return view('docente.index');
+       $profesor =  Profesor::where("id_usuario" ,  Auth::user()->id)->first();
+       $estudiantes = Estudiante::where('seccion' , $profesor->seccion->id)->get();
+       
+      return view('docente.index' , [
+            'profesor' =>$profesor,
+            'estudiantes'=> $estudiantes ,
+      ]);
     }
 
   /**
@@ -85,18 +111,7 @@ class ProfesorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-       $profesores = Profesor::all();
-
-    
-       return view('director.docentes' , [
-        'docentes' => $profesores,
-        'secciones' => Seccion::all(),
-        'grados' => self::grados
-      ]);
-    }
-
+  
     /**
      * Show the form for creating a new resource.
      */
@@ -117,30 +132,53 @@ class ProfesorController extends Controller
      */
     public function store(Request $request)
     {
+        $periodo = Periodo::latest('created_at')->first();
+      
+        $request->validate(
+            [
+                'email' => 'required',
+                'password' =>'required',
+                'fecha_nacimiento' => 'required',
+                'cedula' => 'required' ,
+                'nombre' => 'required',
+                'apellido' =>'required',
+                
+                'direccion' => 'required'
+            ]
+        );
+
+        $grado = grado::create([
+            'grado' => $request->grado,
+            'id_seccion' => $request->id_seccion,
+            'id_periodo' =>  $periodo->id
+        ]);
+
+
        
         $data = User::create(
             [
                 
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => bcrypt( $request->password),
                 'fecha_nacimiento' => $request->fecha_nacimiento,
                 'tipo' => 'Profesor',
                 'cedula' => $request->cedula
              ]
         )->assignRole('Profesor');
 
-        Profesor::create([
+       $profesor = Profesor::create([
             'nombre1' => $request->nombre,
             'nombre2'=> $request->nombre,
             'apellido2' => $request->apellido,
             'id_seccion' => $request->id_seccion,
-            'id_usuario' => $data->id
+            'id_usuario' => $data->id,
+            'id_grado' => $grado->id
 
         ]);
-      
 
 
-        return redirect()->route('director.index');
+        return redirect('director/docentes')
+                ->with('mensage', 'Se Ha Creado Un Nuevo Docente'.$profesor->nombre1.' '. $profesor->apellido2 );
     }
 
     /**
@@ -172,7 +210,13 @@ class ProfesorController extends Controller
      */
     public function destroy(string $id)
     {
-        $delete = User::find($id)->delete();
-        return redirect()->route('director.index');
+   
+        $delete = Profesor::find($id);
+
+        User::where('id' , $delete->id_usuario);
+
+        $delete->delete();
+
+        return redirect()->route('director_docente.index');
     }
 }

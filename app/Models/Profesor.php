@@ -14,7 +14,8 @@ class Profesor extends Model
         'nombre2',
         'apellido2',
         'id_usuario',
-        'id_seccion'
+        'id_seccion',
+        'id_grado'
     ];
 
    
@@ -24,9 +25,16 @@ class Profesor extends Model
         return $this->belongsTo(User::class , 'id_usuario');
     }
 
+
+
     public function  seccion()
     {
         return $this->belongsTo(Seccion::class , 'id_seccion');
     }
-   
+        
+
+     public function grado()
+     {
+        return $this->belongsTo(grado::class , 'id');
+     }   
 }

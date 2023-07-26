@@ -49,7 +49,7 @@ $links_docente = [
     'active' => false
   ],
   [
-    'url' => '/docente/reportes',
+    'url' => '/reportes',
     'title' => 'Reportes',
     'active' => false
   ],
@@ -103,6 +103,7 @@ $link_config = [
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -128,7 +129,15 @@ $link_config = [
                 <aside class="dashboard__sidebar">
                   <div class="dashboard__sidebar__user">
                     <span class="dashboard__sidebar__user__name">
-                      Felipe Hurtado
+                      @can('Director')
+                        {{ Auth::user()->director->nombre1 }}
+                      @endcan
+                       @can('Profesor')
+                        {{ Auth::user()->profesor[0]->nombre1 }}
+                      @endcan
+                       @can('Director')
+                        {{ Auth::user()->director->nombre1 }}
+                      @endcan
                     </span>
                     <span class="dashboard__sidebar__user__icon">
                       <img
@@ -137,12 +146,15 @@ $link_config = [
                       >
                     </span>
                     <span class="dashboard__sidebar__user__role">
-                      Director
+                      {{ Auth::user()->roles[0]->name }}
                     </span>
                   </div>
-                  <nav class="dashboard__sidebar__nav">
+                 
+                  @can('Director')
+                     <nav class="dashboard__sidebar__nav">
                     <ul class="dashboard__sidebar__nav__list">
                       @foreach($links_director as $link)
+
                       <li class="dashboard__sidebar__nav__list__item">
                         @if (isset($link['submenu']))
                           <div class="dashboard__sidebar__nav__list__item__link">
@@ -150,10 +162,12 @@ $link_config = [
                             <div class="dashboard__sidebar__nav__list__item__link__submenu">
                               @foreach($link['submenu'] as $submenu)
                               <a
+                                target="_black"
                                 class="
-                                  dashboard__sidebar__nav__list__item__link__submenu__link
+                                  dashboard__sidebar__nav__list__item__link__submenu__link 
                                   {{ $submenu['active'] ? 'dashboard__sidebar__nav__list__item__link__submenu__link--active' : '' }}"
                                 href="{{ $submenu['url'] }}"
+
                               >
                                 {{ $submenu['name'] }}
                               </a>
@@ -161,13 +175,14 @@ $link_config = [
                             </div>
                           </div>
                         @else
+
                           <a
                             class="
                               dashboard__sidebar__nav__list__item__link
                               {{ $link['active'] ? 'dashboard__sidebar__nav__list__item__link--active' : '' }}"
                             href="{{ $link['url'] }}"
                           >
-                            {{ $link['title'] }}
+                            {{ $link['title']    }}
                           </a>
                         @endif
                       </li>
@@ -191,6 +206,7 @@ $link_config = [
                       </form>
                     </div>
                   </nav>
+                  @endcan
                 </aside>
                 <section class="dashboard__main">
                   <header class="dashboard__main__header">
@@ -213,7 +229,12 @@ $link_config = [
                         Periodo escolar:
                       </span>
                       <span class="dashboard__main__footer__details__value">
-                        2023/2024
+                      
+                          {{ $periodo->añoescolar ?? 'no se ha cargado' }}
+
+                          
+                          <br>
+                          
                       </span>
                     </div>
                     <div class="dashboard__main__footer__details">
@@ -221,7 +242,7 @@ $link_config = [
                         Lapso:
                       </span>
                       <span class="dashboard__main__footer__details__value">
-                        1/3
+                        {{ $lapso }}/3
                       </span>
                     </div>
                   </footer>

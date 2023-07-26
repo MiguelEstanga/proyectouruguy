@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('fecha_nacimiento');
             $table->string('tipo');
           
-          
+         
             
             $table->rememberToken();
             $table->timestamps();

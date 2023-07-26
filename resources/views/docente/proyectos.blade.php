@@ -9,27 +9,52 @@
   <div class="dashboard__main__content__details">
     <div class="dashboard__main__content__details__content">
       <p class="dashboard__main__content__details__content__text">
-        4to grado - Sección: A
-      </p>
+       
+       {{ Auth::user()->profesor[0]->grado->grado}} Gado -
+       Seccion {{ Auth::user()->profesor[0]->seccion->seccion}} 
+         
+      </p> 
     </div>
   </div>
-  <div class="dashboard__main__content__current-project">
+
+@if(  count($proyectos) > 0 )
+
+  @foreach($proyectos as $proyecto)
+   <div class="dashboard__main__content__current-project">
     <div class="dashboard__main__content__current-project__details">
       <span class="dashboard__main__content__current-project__details__title">
         Proyecto actual
       </span>
       <span class="dashboard__main__content__current-project__details__value">
-        1er Lapso
+          {{ $proyecto->lapso->nombre }}
       </span>
     </div>
     <div class="dashboard__main__content__current-project__value">
       <span class="dashboard__main__content__current-project__value__text">
-        Reforzando valores de integridad y disciplina como mejora
+        {{ $proyecto->descripcion}}
       </span>
-      <a href="/docente/proyectos/proyecto" class="dashboard__main__content__current-project__value__button">Modificar</a>
+      <a href="{{ route('proyecto.edit' , $proyecto->id) }}" class="dashboard__main__content__current-project__value__button">Modificar</a>
+      
     </div>
   </div>
-  <div class="dashboard__main__content__other-projects">
+  @endforeach
+ 
+
+@endif
+
+@if( count($proyectos) < 3 )
+  <a href="{{ route('proyecto.create') }}">
+    Crear Siguiente Proyecto
+  </a>
+@else
+ <h2>
+     Todos Los Proyectos De Este Priodo 
+  </h2>
+@endif 
+
+  
+
+  <!--div class="dashboard__main__content__other-projects">
     <span class="dashboard__main__content__other-projects__title">
       Ver proyecto
     </span>
@@ -52,5 +77,5 @@
         3
       </a>
     </div>
-  </div>
+  </div-->
 </x-app-layout>

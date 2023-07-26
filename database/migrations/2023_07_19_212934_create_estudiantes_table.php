@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('nombre2');
             $table->string('apellido');
             $table->string('genero');
-
+            $table->string('seccion');
             $table->string('cedulaescolar');
-
+            $table->string('grado');
             $table->foreignId('id_reprecentante')
                 ->nullable()
                 ->constrained('reprecentntes')
@@ -31,14 +31,17 @@ return new class extends Migration
             ->nullable()
             ->constrained('users')
             ->cascadeOnUpdate()
-            ->nullOnDelete(); 
+            ->nullOnDelete();  
 
             $table->foreignId('id_seccion')
             ->nullable()
             ->constrained('seccions')
             
             ->nullOnDelete()
-            ->cascadeOnUpdate(); 
+            ->cascadeOnUpdate();
+;
+               
+          
 
             $table->timestamps();
         });

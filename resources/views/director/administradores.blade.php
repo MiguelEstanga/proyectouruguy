@@ -3,6 +3,9 @@
   <p class="dashboard__main__content__section-title">
     Gestionar administradores
   </p>
+  @if(session('mensage'))
+  <h2 class="alert alert-success" > {{ session('mensage') }} </h2>
+  @endif
   <div class="dashboard__main__content__search">
     <form action="{{ route('director.busqueda') }}">
     <input

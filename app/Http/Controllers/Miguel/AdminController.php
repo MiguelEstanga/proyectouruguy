@@ -9,6 +9,15 @@ use App\Models\Administrador;
 class AdminController extends Controller
 {
 
+    public function index()
+    {
+       $administradores = Administrador::all();
+    
+       return view('director.administradores' , [
+        'administradores' => $administradores
+      ]);
+    }
+
   public function menu()
   {
     return view('director.administradoresMenu');
@@ -39,14 +48,7 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-       $administradores = Administrador::all();
-    
-       return view('director.administradores' , [
-        'administradores' => $administradores
-      ]);
-    }
+ 
 
     /**
      * Show the form for creating a new resource.
@@ -61,7 +63,14 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-
+        $request->validate([
+             'nombre' => 'required',
+             'apellido' =>'required',
+             'password' => 'required',
+             'email' => 'required',
+             'fecha_nacimiento' => 'required',
+             'cedula' => 'required'   
+        ]);
              $user = User::create([
                 'email' =>  $request->email,
                 'password' => $request->password,
@@ -77,7 +86,6 @@ class AdminController extends Controller
                     'nombre1' => $request->nombre,
                     'nombre2' => $request->nombre,
                     'apellido'=> $request->apellido,
-                   
                     'id_usuario' => $user->id
                 ]
             );
@@ -85,7 +93,7 @@ class AdminController extends Controller
 
         
 
-        return redirect()->route('administradores.index');
+        return redirect('director/administradores')->with('mensage' , 'se ha creado un nuevo admnistrador');
     }
 
     /**

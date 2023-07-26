@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('inicio');
             $table->string('fin');
+            $table->boolean('activar')->default(false);
 
             $table->foreignId('id_periodo')
             ->nullable()
