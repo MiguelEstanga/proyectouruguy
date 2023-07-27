@@ -98,11 +98,15 @@ Route::group(['middleware' => 'auth'  , 'middleware'=>'can:Profesor'  ] , functi
 
     Route::get('literal/{id}' , [LiteralController::class , 'evaluar'] )->name('literal.evaluar');
      Route::post('literal' , [LiteralController::class , 'create'] )->name('literal.create');
+
+   
+
 });
 
  Route::resource('informe' , InformeController::class )->names('informe');
 
-
+      Route::get('boletin/{id}' , [LiteralController::class , 'Boletin'] )->name('literal.boletin');
+   Route::get('rasgos/{id}' , [LiteralController::class , 'rasgospersonales'] )->name('literal.rasgos');
 
   // vistas representante
   Route::get('representante' , [RepresentanteController::class , 'inicio'])->name('representante.inicio');

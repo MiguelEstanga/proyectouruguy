@@ -12,6 +12,7 @@ use App\Models\Seccion;
 use App\Models\Reprecentnte;
 use App\Models\Estudiante;
 use App\Models\Proyecto; 
+use App\Models\Periodo;
 class RepresentanteController extends Controller
 {
   
@@ -20,7 +21,7 @@ class RepresentanteController extends Controller
      public function index()
     {
        $representantes = Reprecentnte::all();
-    
+        
        return view('director.representantes' , [
         'representantes' => $representantes
       ]);
@@ -32,12 +33,15 @@ class RepresentanteController extends Controller
   }
 
   public function inicio() {
-  
+    $periodo = Periodo::latest('created_at')->first();
    
 
-    $proyecto = Proyecto::latest('created_at')->first();
+    $proyecto = Proyecto::all();
+
+    $lapsos =  $periodo->lapso->where('activar' , '=' , true)->count();
 
     $reprecentante = Reprecentnte::where('id_usuario' , Auth::user()->id )->first();
+
     $contandor =  $reprecentante->estudiante[0]->informe->count();
    
    $informe = $reprecentante->estudiante[0]->informe[$contandor-1];
@@ -50,7 +54,8 @@ class RepresentanteController extends Controller
       
       'proyecto' => $proyecto,
       'user' => $reprecentante ,
-      'lastInforme' => $informe
+      'lastInforme' => $informe,
+      'lapsos' => $lapsos
     ]);
   }
 
@@ -164,6 +169,7 @@ class RepresentanteController extends Controller
             'apellido' =>$estudiante['apellido'],
             'cedulaescolar' => $estudiante['cedula'],
             'genero' => 'masculino' ,
+            'id_seccion' =>  $estudiante['id_seccion'],
             'id_usuario' => $estudiante_data->id,
             'seccion' => $estudiante['id_seccion'],
             'id_reprecentante'=>  $reprecentante->id,

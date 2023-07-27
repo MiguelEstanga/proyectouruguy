@@ -1,14 +1,77 @@
 <x-app-layout>
-	<h2 class="alert alert-success">
-		Evaluacion Final Literal
-	</h2>
+
 
 	<form action="{{ route('literal.create') }}" method="post" >
 		@csrf
 
-		<label  class="form-label" for="">
-			Evaluar literal Nota Final
-		</label>
+		<table class="table">
+			<thead>
+			  <tr>
+			  	<td>
+			  		<h2 class="alert alert-success">
+			  			Carga Rasgos Personales
+			  		</h2>
+			  	</td>
+			  </tr>		
+			  <tr>
+					<td>
+						Buena Conduta
+					</td>
+					<td>
+							<select name="Conducta" id="">
+								<option value="si">Si</option>
+								<option value="no">No</option>
+							</select>
+				   </td>
+			   </tr>
+			   <tr>
+			   		<td>Difruta La Lectura</td>
+			   		<td>
+						<select name="Lectuta" id="">
+							<option value="si">Si</option>
+							<option value="no">No</option>
+						</select>
+					</td>
+			   </tr>
+
+			   <tr>
+			   	<td>Expresa Capacidad Creadora Al Converzar</td>
+			   		<td>
+						<select name="Expresion" id="">
+							<option value="si">Si</option>
+							<option value="no">No</option>
+						</select>
+					</td>
+			   </tr>
+
+			   <tr>
+			   		<td>Trabja En Grupo Y Mantiene Relaciones Interpersonales Abiertas Y Positivas</td>
+					<td>
+						<select name="Partisipacion" id="">
+							<option value="si">Si</option>
+							<option value="no">No</option>
+						</select>
+					</td>
+			   </tr>
+			   <tr>
+			   	   <td>
+			   	   	 Participacion Colavorativa
+			   	   </td>
+			   	  	<td>
+						<select name="Trabajo_En_Equipo" id="">
+							<option value="si">Si</option>
+							<option value="no">No</option>
+						</select>
+					</td>
+			   	  
+			   </tr>
+			</thead>
+		
+		</table>
+
+			<h2 class="alert alert-success">
+		Evaluacion Final Literal
+	</h2>
 		<select name="literal" class="form-control" >
 			<option value="A">A</option>
 			<option value="B">B</option>

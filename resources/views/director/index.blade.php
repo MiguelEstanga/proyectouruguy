@@ -27,9 +27,9 @@
       </a>
       <a class="dashboard-index__actions__action dashboard-index__actions__action--view-users">
         Administrador
-        <img
+          <img
           class="dashboard-index__actions__action__icon"
-          src="{{ asset('images/list.svg') }}"
+          src="{{ asset('images/user-minus.svg') }}"
           alt="usuario"
         >
       </a>
@@ -37,6 +37,16 @@
       href="{{route('docente.inicio') }}" 
       class="dashboard-index__actions__action dashboard-index__actions__action--delete-user">
         Docente
+        <img
+          class="dashboard-index__actions__action__icon"
+          src="{{ asset('images/user-minus.svg') }}"
+          alt="usuario"
+        >
+      </a>
+         <a 
+      href="{{route('representante.inicio') }}" 
+      class="dashboard-index__actions__action dashboard-index__actions__action--delete-user">
+        Reprecentante
         <img
           class="dashboard-index__actions__action__icon"
           src="{{ asset('images/user-minus.svg') }}"

@@ -60,7 +60,7 @@ class User extends Authenticatable
 
       public function un_profesor()
     {
-        return $this->belongsTo(Profesor::class , 'id');
+        return $this->belongsTo(Profesor::class , 'id_usuario');
     }
 
 

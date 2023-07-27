@@ -148,9 +148,25 @@
       href="{{ route('literal.evaluar' , $estudiante->id  ) }}"
       class="btn btn-primary"
     >
-      Cargar literal
+      Evaluar literal
     </a>
-    @endif      
+      @if($estudiante->rasgosPersonales ?? false)
+        <a 
+          class="btn btn-primary" 
+         href="{{ route('literal.rasgos' , $estudiante->id) }}" target="_black">
+          Ver Rasgos Personales
+        </a>
+
+        <a
+          class="btn btn-primary" 
+          href="{{ route('literal.boletin' , $estudiante->id) }}" target="_black">
+          Boletin
+        </a>
+      @endif
+    @endif  
+
+  
+    
    
   </div>
 </x-app-layout>

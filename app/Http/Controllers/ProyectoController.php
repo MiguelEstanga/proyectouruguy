@@ -27,14 +27,17 @@ class ProyectoController extends Controller
 
       $ultimo_lapso = $periodo->lapso->where('activar' , '=' , true)->count();
 
-      if($ultimo_lapso != 0)
-      {
-        $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
-      }else{
-        $lapso = [];
-      }
+      if($ultimo_lapso == 0){
+        return redirect()->route('docente.proyectos')
+        ->with('mensge' , 'Espere a que se creen los lapso');
+      } 
 
-       
+     
+    $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
+   
+      
+      
+      
         return view('proyecto.create' ,
             ['lapso' => $lapso]
         );

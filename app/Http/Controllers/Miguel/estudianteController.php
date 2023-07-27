@@ -83,7 +83,7 @@ class estudianteController extends Controller
     public function store(Request $request)
     {
 
-    // return $request;
+    return $request;
       //creando el reprecnetante
 
       $reprecentante_user = User::create([
@@ -126,6 +126,7 @@ class estudianteController extends Controller
             'cedulaescolar' => '202020',
             'genero' => 'masculino' ,
             'id_usuario' => $estudiante->id,
+            'seccion' => 'null',
             'id_seccion' => $request->id_seccion,
             'id_reprecentante'=>  $reprecentante->id
         ]);
@@ -164,7 +165,13 @@ class estudianteController extends Controller
      */
     public function destroy(string $id)
     {
-        User::find($id)->delete();
+
+        $user = User::find($id);
+        Estudiante::where("id_usuario" , $user->id)->first()->delete();
+        $user->delete();
+
+
+        return $user;
         return redirect()->route('director_estudiante.index');
     }
 

@@ -94,8 +94,8 @@
 	</div>
 
 	<div class="text_content" >
-		{{ $lapso->informe->descripcion }}
-	</div>
+		{{ $informe->descripcion }}
+	</div> 
 
 	<div class="footer">
 		<span>

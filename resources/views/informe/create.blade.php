@@ -26,7 +26,8 @@
 
   
       <input type="text" hidden value="{{ $lapso->id }}"  name="id_lapso" >
-      {{ $lapso->proyecto }}
+      <input type="text" value="{{ $lapso->proyecto->id }}" name="id_proyectos" >
+      
   
       <button class="dashboard__main__content__current-project__value__button">
         	Crear Informe

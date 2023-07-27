@@ -60,11 +60,11 @@ class InformeController extends Controller
             'descripcion' => $request->Descripcion,
             'desempeño_proyecto' => 'p',
             'evalucion_fisica'=>'p',
-            'rasgos_personales' => 'p' ,
+            'rasgos_personales' => 'p' , 
             'id_lapso' => $request->id_lapso,
             'id_periodo' => Periodo::latest('created_at')->first()->id,
-            'id_proyectos' => $request->id_lapso,
-            'id_profesor' => $lapso->proyecto->id
+            'id_proyectos' => $request->id_proyectos,
+            'id_profesor' => Auth::user()->profesor[0]->id
 
         ]);
         
@@ -76,15 +76,20 @@ class InformeController extends Controller
     /**
      * Display the specified resource.
      */
+    
     public function show(string $id)
     { 
         $periodo = Periodo::latest('created_at')->first();
         $ultimo_lapso = $periodo->lapso->where('activar' , '=' , true)->count();
         $estudiante = Estudiante::find($id);
+
+
         if($ultimo_lapso != 0){
            $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
         }
-         
+
+        $informe = Informe::where('id_lapso', $lapso->id)->first();
+  
 
         $options = [
             'enable_css_auto_load' => true,
@@ -98,7 +103,9 @@ class InformeController extends Controller
             [
                 'estudiante' => $estudiante,
                 'periodo' => Periodo::latest('created_at')->first(),
-                'lapso' => $lapso
+                'lapso' => $lapso,
+                'informe' => $lapso,
+                'informe' => $informe
             ]
 
         )->setPaper('letter', 'portrait')
@@ -135,13 +142,7 @@ class InformeController extends Controller
         return $pdf->stream( $estudiante->nombre1.'.pdf');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+   
 
     /**
      * Update the specified resource in storage.

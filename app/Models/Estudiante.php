@@ -15,6 +15,7 @@ class Estudiante extends Model
         'apellido',
         'id_reprecentante',
         'seccion',
+        'id_seccion',
         'id_usuario',
         'genero',
         'grado',
@@ -26,7 +27,7 @@ class Estudiante extends Model
         return $this->belongsTo(Reprecentnte::class , 'id_reprecentante');
     }
 
-    public function  seccion()
+    public function  seccion_id()
     {
         return $this->belongsTo(Seccion::class ,'id_seccion');
     }
@@ -55,5 +56,10 @@ class Estudiante extends Model
     public function reporteboletin ()
     {
           return $this->hasMany(Boletin::class , 'id_estudiante');   
+    }
+
+    public function rasgosPersonales()
+    {
+        return $this->belongsTo(RasgosPersonales::class , 'id');
     }
 }

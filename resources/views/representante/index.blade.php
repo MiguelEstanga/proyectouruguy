@@ -42,7 +42,23 @@
       
     </a>
 
-    <a href="#" class="dashboard__main__content__links__link">
+    
+    <a 
+       href="{{ route('constancia' ,   $user->estudiante[0]->id  ) }}" 
+      class="dashboard__main__content__links__link">
+      Ver constancia
+      <img
+       
+        class="dashboard__main__content__links__link__icon"
+        src="{{ asset('images/clipboard.svg') }}"
+        alt="usuario"
+      >
+    </a>
+
+    @if($lapsos == 3)
+        <a
+     href="{{ route('literal.boletin' ,   $user->estudiante[0]->id  ) }}"
+      class="dashboard__main__content__links__link">
       Ver boletín
       <img
         class="dashboard__main__content__links__link__icon"
@@ -51,15 +67,20 @@
       >
     </a>
 
-    <a href="#" class="dashboard__main__content__links__link">
-      Ver constancia
+    <a href="{{ route('literal.rasgos' ,   $user->estudiante[0]->id  ) }}" class="dashboard__main__content__links__link">
+      Ver Rasgos Personales
       <img
+        
         class="dashboard__main__content__links__link__icon"
         src="{{ asset('images/clipboard.svg') }}"
         alt="usuario"
       >
     </a>
+    @endif
+  
   </div>
+
+  @foreach($proyecto as $p)
 
   <div class="dashboard__main__content__current-project">
     <div class="dashboard__main__content__current-project__details">
@@ -72,8 +93,10 @@
     </div>
     <div class="dashboard__main__content__current-project__value">
       <span class="dashboard__main__content__current-project__value__text">
-        {{ $proyecto['descripcion'] }}
+        {{ $p['nombre'] }} 
       </span>
     </div>
   </div>
+  @endforeach
+
 </x-app-layout>

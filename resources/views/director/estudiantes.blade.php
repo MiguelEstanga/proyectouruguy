@@ -14,33 +14,7 @@
     <button class="dashboard__main__content__search__button">Buscar</button>
     </form>
   </div>
-  <div class="dashboard__main__content__filtros">
-    <form action="/filtrarlistado" class="filtros">
-      <label
-        class="dashboard__main__content__form__label filtros__label"
-      >
-        Grado
-        <select name="id_grado">
-          @foreach($grados as $grado)
-            <option value="{{ $grado['id'] }}">{{ $grado['label'] }}</option>
-          @endforeach
-        </select>
-      </label>
-      <label
-        class="dashboard__main__content__form__label filtros__label"
-      >
-        Sección
-        <select name="id_seccion">
-          @foreach($secciones as $seccion)
-            <option value="{{ $seccion['id'] }}">{{ $seccion['seccion'] }}</option>
-          @endforeach
-        </select>
-      </label>
-      <div class="filtros__submit-div">
-        <button class="dashboard__main__content__search__button">Filtrar por seccion</button>
-      </div>
-    </form>
-  </div>
+ 
   <table class="table"  >
     <tr class="dashboard__main__content__users__headers">
       <th class="dashboard__main__content__users__headers__header">Nombre</th>
@@ -57,11 +31,11 @@
             <td class="dashboard__main__content__users__row__data">{{ $estudiante->usuario->cedula }}</td>
             <td class="dashboard__main__content__users__row__data">{{ $estudiante->usuario->fecha_nacimiento }}</td>
             <td class="dashboard__main__content__users__row__data">{{ $estudiante->grado }}</td>
-            <td class="dashboard__main__content__users__row__data">{{ $estudiante->seccion  }}</td>
+            <td class="dashboard__main__content__users__row__data">{{ $estudiante->seccion_id->seccion  }}</td>
             <td class="dashboard__main__content__users__row__data">
                 <form 
                   method="post" 
-                  action="{{ route('director_estudiante.destroy' , $estudiante) }}">
+                  action="{{ route('director_estudiante.destroy' , $estudiante->id ) }}">
                   @method('delete')
                   @csrf
 

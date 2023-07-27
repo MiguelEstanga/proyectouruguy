@@ -149,9 +149,9 @@ $link_config = [
                       {{ Auth::user()->roles[0]->name }}
                     </span>
                   </div>
-                 
+                  <nav class="dashboard__sidebar__nav">
                   @can('Director')
-                     <nav class="dashboard__sidebar__nav">
+                    
                     <ul class="dashboard__sidebar__nav__list">
                       @foreach($links_director as $link)
 
@@ -188,7 +188,27 @@ $link_config = [
                       </li>
                       @endforeach
                     </ul>
-                    <div class="dashboard__sidebar__nav__footer-links">
+               
+                 
+                  @endcan
+                    @can('Profesor')
+                      <ul class="dashboard__sidebar__nav__list" >
+                        <li class="dashboard__sidebar__nav__list__item">
+                                <a
+                                target="_black"
+                                class="
+                                  dashboard__sidebar__nav__list__item__link__submenu__link }}"
+                                href="{{ route('docente.inicio') }}"
+
+                              >
+                                Inicio
+                              </a>
+                        </li>
+                      </ul>
+                    @endcan
+                   </nav>
+                
+                       <div class="dashboard__sidebar__nav__footer-links">
                       <a
                         class="dashboard__sidebar__nav__footer-links__config"
                         href="{{ $link_config['url'] }}"
@@ -205,8 +225,6 @@ $link_config = [
                         </a>
                       </form>
                     </div>
-                  </nav>
-                  @endcan
                 </aside>
                 <section class="dashboard__main">
                   <header class="dashboard__main__header">

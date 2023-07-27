@@ -18,6 +18,10 @@ class PeriodoController extends Controller
   { 
     $data = Periodo::latest('created_at')->first();
     //return  $data->lapso ;
+   
+
+   
+
     return view('director.configurarPeriodo', ['data' => $data]);
   }
 

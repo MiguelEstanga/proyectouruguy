@@ -136,6 +136,8 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+ 
+
     public function destroy(string $id)
     {
          $user = Administrador::find($id);

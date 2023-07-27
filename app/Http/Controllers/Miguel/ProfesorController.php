@@ -123,7 +123,8 @@ class ProfesorController extends Controller
 
       public function  busqueda(Request $request)
     {
-         $usuario = User::where('nombre' , $request->nombre)->first();
+
+     $usuario = User::where('cedula' , '=' ,$request->cedula)->first();
         return view('director.UsuarioBusqueda' , ['usuario' => $usuario]);
     }
 
@@ -133,7 +134,11 @@ class ProfesorController extends Controller
     public function store(Request $request)
     {
         $periodo = Periodo::latest('created_at')->first();
-      
+        
+        if(gettype($periodo) == 'null' ){
+           return redirect('director/docentes')
+                ->with('mensage', 'Cree Primero Un Periodo Escolar' );
+        }
         $request->validate(
             [
                 'email' => 'required',
@@ -146,7 +151,6 @@ class ProfesorController extends Controller
                 'direccion' => 'required'
             ]
         );
-
         $grado = grado::create([
             'grado' => $request->grado,
             'id_seccion' => $request->id_seccion,
@@ -213,7 +217,7 @@ class ProfesorController extends Controller
    
         $delete = Profesor::find($id);
 
-        User::where('id' , $delete->id_usuario);
+        User::where('id' , $delete->id_usuario)->first();
 
         $delete->delete();
 
