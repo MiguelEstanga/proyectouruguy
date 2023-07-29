@@ -42,12 +42,34 @@
 	.portada1{
 		width: 100vw;
 		height: 100vh;
-		border: solid 1px black;
+		
 	}
 	.hoja2{
 			width: 100vw;
 		height: 100vh;
-	
+		padding: 20px;
+	}
+
+	.firma{
+		text-align: center;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+	}
+
+	.fi{
+		border-bottom: solid 1px black;
+		margin: 0 60px;
+	}
+
+	.info{
+		font-size: 18px;
+		
+		line-height: 30px;
+	}
+
+	.sub{
+		border-bottom: solid 1px black;
 	}
 </style>
 <body class="portada1">
@@ -60,7 +82,13 @@
 
 	</div>
 	<div class="logo">
-		
+		 <img 
+		 	width="300px"
+		 	height="300px" 
+		 	src="data:image/jpeg;base64 , {{ asset('images/logo.jpg') }}" 
+		 	alt="logo"
+		 	>
+
 	</div>
 	<div class="informacion">
 		Nombre : <span class="data">{{ $estudiante->nombre1 }}</span> <br>
@@ -81,8 +109,28 @@
 		INFORMACION AL REPRESENTANTE
 	</h2>
 
-	<div>
-		Articulo 8: La Evalucion para la primaria y segunda estapa de educacion se consibe como un proceso inmerso
+	<div class="info" >
+		Artículo 8: La evaluación para la primera y segunda etapa de educación se concibe como un proceso inmerso en la enseñanza y el aprendizaje es cualitativo, integral, multidireccional, constructiva, flexible y sistemática, acumulativa, individualizada, informativa de carácter descriptiva, narrativo, de valoración continua de todos los factores del currículo y de todos los 
+		actores que interviene en los procesos de enseñanza de aprendizaje.
+		<br>
+		<br>
+
+		Artículo 16: Escala alfabética para la interpretación de los resultados del rendimiento estudiantil. A. El alumno alcanzó todas las competencias y en algunos casos superó las expectativas para el grado. B. El alumno alcanzó todas las competencias previstas para el grado. C. El alumno alcanzó la mayoría de las competencias del grado. D. El alumno alcanzó la mayoría de las competencias del grado, pero requiere de un proceso de nivelación al inicio del nuevo año escolar para alcanzar las restantes. E. El alumno no logro adquirir las competencias mínimas requeridas para ser promovido al grado supe-rior.
+
+		<br>
+		<br>
+
+		Informe Fianl Quienes suscriben , hacen constar que el (la) alumno (a) 
+		<span class="sub"> {{ $estudiante->nombre1 }} {{ $estudiante->nombre2 }} {{ $estudiante->apellido }} </span> Natural de <span class="sub" >{{ $estudiante->reprecentante->domicilio }}</span>  Cursante de <span class="sub">{{ $estudiante->grado }}</span> Educacion Basica
+				<br>
+		En Funcion de las competencias alcanzadas se determina que: ha sido Promovido
+		al _____ Reprobando el Grado ______ Con el literal _____ previo cumplimiento de los requesitos exigidos en el normativo de evalucion vigente
+
+		<div class="firma">
+			
+			<span class="fi">Doncete</span>  sello   <span class="fi">Director (a)</span>
+
+		</div>	
 	</div>
 </div>
 </html>

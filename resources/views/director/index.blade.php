@@ -3,6 +3,7 @@
 @endphp
 
 <x-app-layout>
+
   <div class="dashboard-index">
     <h1 class="dashboard-index__welcome-msg">
       <img class="dashboard-index__welcome-msg__icon" src="{{ asset('images/users-gear.svg') }}" alt="" />
@@ -19,6 +20,7 @@
        href="{{ route('director_docente.menu') }}"
         class="dashboard-index__actions__action dashboard-index__actions__action--add-user">
         Director
+       
         <img
           class="dashboard-index__actions__action__icon"
           src="{{ asset('images/user-plus.svg') }}"

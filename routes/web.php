@@ -13,7 +13,7 @@ use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\Miguel\gradoController;
 use App\Http\Controllers\Miguel\literalController;
 use App\Http\Controllers\Miguel\ReposrteController;
-/*
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -103,21 +103,24 @@ Route::group(['middleware' => 'auth'  , 'middleware'=>'can:Profesor'  ] , functi
 
 });
 
- Route::resource('informe' , InformeController::class )->names('informe');
+Route::resource('informe' , InformeController::class )->names('informe');
 
-      Route::get('boletin/{id}' , [LiteralController::class , 'Boletin'] )->name('literal.boletin');
-   Route::get('rasgos/{id}' , [LiteralController::class , 'rasgospersonales'] )->name('literal.rasgos');
+Route::get('boletin/{id}' , [LiteralController::class , 'Boletin'] )->name('literal.boletin');
+
+Route::get('rasgos/{id}' , [LiteralController::class , 'rasgospersonales'] )->name('literal.rasgos');
 
   // vistas representante
-  Route::get('representante' , [RepresentanteController::class , 'inicio'])->name('representante.inicio');
+Route::get('representante' , [RepresentanteController::class , 'inicio'])->name('representante.inicio');
 
-  Route::get('constancia/{id}' , [InformeController::class , 'constancia']  )->name('constancia');
+Route::get('constancia/{id}' , [InformeController::class , 'constancia']  )->name('constancia');
 
 //fin de las rutas del drector
 
 Route::get('/', function () {
   return view('welcome');
 });
+
+
 Route::get('/director', function () {
   return view('director.index');
 })->middleware(['auth', 'verified'])->name('director');
