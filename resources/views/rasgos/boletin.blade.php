@@ -124,7 +124,7 @@
 		<span class="sub"> {{ $estudiante->nombre1 }} {{ $estudiante->nombre2 }} {{ $estudiante->apellido }} </span> Natural de <span class="sub" >{{ $estudiante->reprecentante->domicilio }}</span>  Cursante de <span class="sub">{{ $estudiante->grado }}</span> Educacion Basica
 				<br>
 		En Funcion de las competencias alcanzadas se determina que: ha sido Promovido
-		al _____ Reprobando el Grado ______ Con el literal _____ previo cumplimiento de los requesitos exigidos en el normativo de evalucion vigente
+		al _____ Reprobando el Grado ______ Con el literal <span class="sub" >{{ $estudiante->boletin->literal }} </span>  previo cumplimiento de los requesitos exigidos en el normativo de evalucion vigente
 
 		<div class="firma">
 			
