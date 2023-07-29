@@ -50,9 +50,7 @@ class LiteralController extends Controller
 
         ]);
 
-     return  $RasgosPersonales;
-
-        return $literal;   
+     return redirect('docente')->with('mensage' , 'se ha carhado un literal');
     }
 
      public function rasgospersonales($id)
@@ -87,7 +85,7 @@ class LiteralController extends Controller
     {
         $estudiante = Estudiante::find($id);
 
-       
+        
          $options = [
             'enable_css_auto_load' => true,
             'defaultFont'=> 'Courier',

@@ -43,9 +43,17 @@
 @endif
 
 @if( count($proyectos) < 3 )
-  <a href="{{ route('proyecto.create') }}">
+ 
+  @if($validate ?? false)
+    <h2 class="btn btn-success" >
+      Ya se creo el proyecto de este lapso
+    </h2>
+  @else
+      <a href="{{ route('proyecto.create') }}">
     Crear Siguiente Proyecto
   </a>
+  @endif
+
 @else
  <h2>
      Todos Los Proyectos De Este Priodo 

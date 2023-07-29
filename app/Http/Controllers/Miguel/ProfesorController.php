@@ -45,8 +45,24 @@ class ProfesorController extends Controller
 
     public function proyectosList() {
       Profesor::where( 'id_usuario' , Auth::user()->id)->first();
+        $periodo = Periodo::latest('created_at')->first();
+        
+
        $proyectos = Proyecto::where('id_profesor' , Auth::user()->profesor[0]->id)->get();  
-      return view('docente.proyectos' ,['proyectos' => $proyectos]);
+     $ultimo_lapso = $periodo->lapso->where('activar' , '=' , true)->count();
+
+      if($ultimo_lapso != 0)
+      {
+        $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
+        $validate =  Proyecto::where('id_lapso' , $lapso->id)->first();
+
+      }
+
+      return view('docente.proyectos' ,[
+        'proyectos' => $proyectos , 
+        'lapso' => $lapso,
+        'validate' => $validate
+        ]);
     }
 
     public function proyectoSingle() {
@@ -64,12 +80,15 @@ class ProfesorController extends Controller
       if($ultimo_lapso != 0)
       {
         $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
+        $proyecto =  Proyecto::where('id_lapso' , $lapso->id)->first();
       }
+
 
       return view('docente.estudiante', [
         'estudiante' => $estudiante,
         'lapso' => $lapso,
         'ultimo_lapso' => $ultimo_lapso,
+        'proyecto' => $proyecto
       ]);
     }
 

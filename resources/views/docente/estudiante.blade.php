@@ -118,22 +118,34 @@
   <div class="dashboard__main__content__student-links student-links">
     
 
-   
-          <a
+          @if($proyecto ?? false)
+               <a
+            {{ $proyecto ?? 'hidden' }}
             target="_black"
             href="{{ route('informe.crear' , $estudiante->id ) }}"
             class="btn btn-primary"
           >
-            Hcer Informe
+           Cargar Informe
           </a>
-     
-          <a
+          @else
+            <h2>Debe cargar el proyecto del lapso actual</h2><br>
+            <a  style="color: blue" href="{{ route('docente.proyectos') }}">carguelo aqui</a>
+          @endif
+       
+          @if($lapso->informe ?? false)
+              <a
+
             href="{{ route('informe.show' ,  $estudiante->id ) }}"
             class="btn btn-primary"
             target="_black"
+           
           >
-            Cargar informe
+            ver informe
           </a>
+          @else
+            <h2>No se ha cargado el informe</h2>
+          @endif
+        
   
           <a
             href="{{ route( 'constancia' ,  $estudiante->id) }}"

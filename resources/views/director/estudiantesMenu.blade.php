@@ -5,16 +5,7 @@
     Gestionar estudiantes
   </p>
   <div class="dashboard__main__content__actions">
-    <a
-      href="{{ route('director_estudiante.create') }}" 
-      class="dashboard__main__content__actions__action dashboard__main__content__actions__action--add-user">
-      Agregar estudiante
-      <img
-        class="dashboard__main__content__actions__action__icon"
-        src="{{ asset('images/user-plus.svg') }}"
-        alt="usuario"
-      >
-    </a>
+  
     <a
       href="{{ route('director_estudiante.index') }}" 
       class="dashboard__main__content__actions__action dashboard__main__content__actions__action--view-users">

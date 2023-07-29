@@ -32,13 +32,15 @@ class InformeController extends Controller
 
         if($ultimo_lapso != 0){
            $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
+            $proyecto =  Proyecto::where('id_lapso' , $lapso->id)->first();
         }
        
         $estudiante = Estudiante::find($id);
          return view('informe.create' , [
             'periodo' => $periodo,
             'lapso' => $lapso,
-            'estudiante' => $estudiante
+            'estudiante' => $estudiante,
+            'proyecto' => $proyecto
 
          ]);
     }
