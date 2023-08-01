@@ -22,17 +22,31 @@
 		.body
 		{
 			text-align: justify;
-			
+			line-height: 35px;
 			padding: 20px;
+		}
+
+		.expirar{
+			padding: 20px;
+			margin-top: 100px;
+		}
+
+		.firma{
+			border-top: solid 1px black;
+			padding: 10px 0;
+			margin: auto;
+			position: absolute;
+			left: 40%;
+			bottom: 0;
 		}
 	</style>
 </head>
 <body>
 	<div class="encabezado">
-		Republica Bolivariana De Venezuela <br>
-		Ministerio Del Poder Popular Para La Educacion <br>
-		Escuela Basica "Republica Del Uruguay" <br>
-	    Maturin Estado Monagas <br>
+		República Bolivariana De Venezuela <br>
+		Ministerio del Poder Popular para la Educación <br>
+		Escuela Básica "República del Uruguay" <br>
+	    Maturín - Estado Monagas <br>
 	
 		<br>
 		<br>
@@ -44,9 +58,18 @@
 
 	<div class="body">
 		Quien suscribe,   {{ $director->nombre1 }} {{ $director->nombre2 }} 
-		{{ $director->apellido }} titular de la cedula de identidad N: v-{{ $director->usuario->cedula }}  
-		Director Academico de la Escuela Basica "Republica Del Uruguay"  Ubicada en el centro de la ciudad de Maturin Estado Monagas  Hace constar por medio de la presente que el (la) estudiante {{ $estudiante->nombre1 }} {{ $estudiante->nombre2 }} {{ $estudiante->apellido }} Cedula Escolar de identidad {{$estudiante->cedulaescolar }} Nacida(o)
-		en  {{ $estudiante->reprecentante->domicilio }}  Cursar en esta institucion {{ $estudiante->grado }} grado Seccion {{ $estudiante->seccion }} Educacion Primaria durante el Año Escolar {{ $periodo->añoescolar }}
+		{{ $director->apellido }}, titular de la cédula de identidad N: v-{{ $director->usuario->cedula }},  
+		director académico de la Escuela Básica "República del Uruguay"  ubicada en el centro de la ciudad de Maturín, Estado Monagas,  hace constar por medio de la presente que el (la) estudiante {{ $estudiante->nombre1 }} {{ $estudiante->nombre2 }} {{ $estudiante->apellido }} de cédula escolar de identidad N:{{$estudiante->cedulaescolar }} nacido  en ()
+		en  {{ $estudiante->reprecentante->domicilio }}, cursa en esta institución el {{ $estudiante->grado_id->grado }} grado de educación inicial durante el año escolar {{ $periodo->añoescolar }}
+	</div>
+
+	<div class="expirar">
+		Constancia que se expide a los {{ date('d') }} días del mes {{ date("m") }}
+		del año {{ date('Y') }}
+	</div>
+
+	<div class="firma">
+		Firma del director
 	</div>
 </body>
 </html>

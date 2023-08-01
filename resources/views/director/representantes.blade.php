@@ -14,10 +14,10 @@
     <button class="dashboard__main__content__search__button">Buscar</button>
     </form>
   </div>
-  <table class="dashboard__main__content__users">
+  <table class="table">
     <tr class="dashboard__main__content__users__headers">
       <th class="dashboard__main__content__users__headers__header">Nombre</th>
-      <th class="dashboard__main__content__users__headers__header">Cedula</th>
+      <th class="dashboard__main__content__users__headers__header">Cédula</th>
       <th class="dashboard__main__content__users__headers__header">Fecha de nacimiento</th>
       <th class="dashboard__main__content__users__headers__header">Acción</th>
     </tr>
@@ -46,7 +46,7 @@
   </a>
   <div class="dashboard__main__content__user-stats">
     <div class="dashboard__main__content__user-stats__total">
-      <span class="dashboard__main__content__user-stats__total__label">representantes actuales:</span>
+      <span class="dashboard__main__content__user-stats__total__label">Representantes actuales:</span>
       <span class="dashboard__main__content__user-stats__total__value">{{ count($representantes) }}</span>
     </div>
   </div>

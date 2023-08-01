@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
 
-            $table->string('cedula');
-            $table->string("email");
+            $table->string('cedula')->unique();
+            $table->string("email")->default('u@gmail.com');
             $table->string('password');
             $table->string('fecha_nacimiento');
             $table->string('tipo');

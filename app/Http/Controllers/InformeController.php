@@ -71,7 +71,7 @@ class InformeController extends Controller
         ]);
         
 
-        return redirect('/docente')->with('mensage' , 'se ha cargado el informe ');
+        return redirect('/docente')->with('mensage' , 'Se ha cargado el informe ');
 
     }
 

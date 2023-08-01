@@ -18,10 +18,10 @@
   <table class="table"  >
     <tr class="dashboard__main__content__users__headers">
       <th class="dashboard__main__content__users__headers__header">Nombre</th>
-      <th class="dashboard__main__content__users__headers__header">Cedula</th>
+      <th class="dashboard__main__content__users__headers__header">Cédula</th>
       <th class="dashboard__main__content__users__headers__header">Fecha de nacimiento</th>
       <th class="dashboard__main__content__users__headers__header">Grado</th>
-      <th class="dashboard__main__content__users__headers__header">Seccion</th>
+      <th class="dashboard__main__content__users__headers__header">Sección</th>
       <th class="dashboard__main__content__users__headers__header">Acción</th>
     </tr>
     @if($estudiantes != 'null')

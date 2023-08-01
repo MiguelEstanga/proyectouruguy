@@ -29,7 +29,7 @@ class Estudiante extends Model
 
     public function  seccion_id()
     {
-        return $this->belongsTo(Seccion::class ,'id_seccion');
+        return $this->belongsTo(Seccion::class ,'id');
     }
 
     public function usuario()
@@ -38,9 +38,10 @@ class Estudiante extends Model
     }
     
 
-    public function grado()
+    public function grado_id()
     {
-        return belongsTo(grado::class , 'id');
+        return $this->belongsTo(grado::class , 'id');
+        //agregar el id grado a la tabla etudiante en el controlador create estudiante
     }
 
     public function boletin()

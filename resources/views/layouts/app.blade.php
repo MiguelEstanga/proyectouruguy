@@ -131,13 +131,12 @@ $link_config = [
                     <span class="dashboard__sidebar__user__name">
                       @can('Director')
                         {{ Auth::user()->director->nombre1 }}
+                         {{ Auth::user()->director->apellido }}
                       @endcan
                        @can('Profesor')
                         {{ Auth::user()->profesor[0]->nombre1 }}
                       @endcan
-                       @can('Director')
-                        {{ Auth::user()->director->nombre1 }}
-                      @endcan
+                     
                     </span>
                     <span class="dashboard__sidebar__user__icon">
                       <img
@@ -179,14 +178,32 @@ $link_config = [
                           <a
                             class="
                               dashboard__sidebar__nav__list__item__link
-                              {{ $link['active'] ? 'dashboard__sidebar__nav__list__item__link--active' : '' }}"
+                              {{ 
+
+                                Str::contains(  request()->path()  , Str::slug( $link['title'])  ) == true ? 'dashboard__sidebar__nav__list__item__link--active' : ''
+
+                               }}
+                              " 
                             href="{{ $link['url'] }}"
                           >
-                            {{ $link['title']    }}
+                          
+
+                            
+                              {{ $link['title'] }}
+                             
                           </a>
                         @endif
                       </li>
                       @endforeach
+                      
+                      <li class="dashboard__sidebar__nav__list__item" >
+                          <a
+                        class="dashboard__sidebar__nav__footer-links__config"
+                        href="{{ $link_config['url'] }}"
+                      >
+                        {{ $link_config['title'] }}
+                      </a>
+                      </li>
                     </ul>
                
                  
@@ -209,12 +226,7 @@ $link_config = [
                    </nav>
                 
                        <div class="dashboard__sidebar__nav__footer-links">
-                      <a
-                        class="dashboard__sidebar__nav__footer-links__config"
-                        href="{{ $link_config['url'] }}"
-                      >
-                        {{ $link_config['title'] }}
-                      </a>
+                    
                       <form method="POST" action="{{ route('logout') }}">
                         @csrf
 

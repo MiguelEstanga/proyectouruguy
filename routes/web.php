@@ -23,7 +23,7 @@ use App\Http\Controllers\Miguel\ReposrteController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+   
 
 //rutas del drector
 Route::group(['middleware' => 'auth'  , 'middleware'=>'can:Director'  ] , function(){
@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'  , 'middleware'=>'can:Director'  ] , functi
   Route::get('director/docentes/menu' , [ProfesorController::class, 'menu'] )->middleware('auth')->name('director_docente.menu');
 
   Route::resource('director/docentes' , ProfesorController::class )->middleware('auth')->names('director_docente');
+
 
   Route::get('director/administradores/single' , [AdminController::class, 'single'] )->middleware('auth')->name('director_administrador.single');
 
@@ -66,6 +67,8 @@ Route::group(['middleware' => 'auth'  , 'middleware'=>'can:Director'  ] , functi
  Route::resource('lapsos', LapsoController::class)->names('lapso');
 
  Route::get("reportes" , [ReposrteController::class , 'index'])->name('reporte.index');
+
+
   
 } );
 

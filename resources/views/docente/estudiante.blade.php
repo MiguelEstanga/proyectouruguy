@@ -92,7 +92,7 @@
     </label>
 
     <label class="dashboard__main__content__form__label">
-      Cédula Representante:
+      Cédula del representante:
       <input
         id="cedula_representante_input"
         name="cedula_reprecentante"
@@ -104,7 +104,7 @@
     </label>
 
     <label class="dashboard__main__content__form__label">
-      Nombre del Representante:
+      Nombre del representante:
       <input
         name="nombre_reprecentante"
         type="text"
@@ -129,7 +129,7 @@
           </a>
           @else
             <h2>Debe cargar el proyecto del lapso actual</h2><br>
-            <a  style="color: blue" href="{{ route('docente.proyectos') }}">carguelo aqui</a>
+            <a  style="color: blue" href="{{ route('docente.proyectos') }}">Cárguelo aquí</a>
           @endif
        
           @if($lapso->informe ?? false)
@@ -140,7 +140,7 @@
             target="_black"
            
           >
-            ver informe
+            Ver informe
           </a>
           @else
             <h2>No se ha cargado el informe</h2>
@@ -151,7 +151,7 @@
             href="{{ route( 'constancia' ,  $estudiante->id) }}"
             class="btn btn-primary"
           >
-            imprimir constancia de estudio del periodo
+            Imprimir constancia de estudio del periodo
           </a>
 
     @if( $ultimo_lapso == 3)
@@ -166,13 +166,13 @@
         <a 
           class="btn btn-primary" 
          href="{{ route('literal.rasgos' , $estudiante->id) }}" target="_black">
-          Ver Rasgos Personales
+          Ver rasgos personales
         </a>
 
         <a
           class="btn btn-primary" 
           href="{{ route('literal.boletin' , $estudiante->id) }}" target="_black">
-          Boletin
+          Boletín
         </a>
       @endif
     @endif  

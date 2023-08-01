@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Administrador;
 class AdminController extends Controller
 {
-
+ 
     public function index()
     {
        $administradores = Administrador::all();
@@ -69,7 +69,7 @@ class AdminController extends Controller
              'password' => 'required',
              'email' => 'required',
              'fecha_nacimiento' => 'required',
-             'cedula' => 'required'   
+             'cedula' => 'required|unique:users,cedula'   
         ]);
              $user = User::create([
                 'email' =>  $request->email,
@@ -113,8 +113,20 @@ class AdminController extends Controller
 
     public function  busqueda(Request $request)
     {
-         $administrador = User::where('nombre' , $request->nombre)->first();
-        return view('director.adminBusqueda' , ['administrador' => $administrador]);
+        $usuario = User::where('cedula' , '=' ,$request->cedula)->first();
+
+        if($usuario){
+         $admin = Administrador::where( 'id_usuario' , $usuario->id )->first();
+
+        }else{
+          return redirect('director/administradores')->with('mensage','No se encontro resultado, porfavor asegurece de colacar de identidad una cedula valida');
+        }
+
+        return view('director.adminBusqueda'  , 
+            [
+                'administrador' => $usuario
+            ]
+        );
     }
 
     /**
@@ -122,7 +134,13 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $admin = User::find($id);
+        return view('director.administradoresEditar' , 
+            [
+                'administrador' => $admin
+            ]
+        );
+        return $id;
     }
 
     /**
@@ -130,7 +148,34 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //return $id;   
+        $admin =  Administrador::where( 'id_usuario' , $id)->first();
+     
+        $usuario= User::find($id);
+     
+       // return $usuario;
+       
+        //return $request->habilitar;
+
+        $admin->nombre1 = $request->nombre;
+        $admin->nombre2 = $request->nombre;
+        $admin->apellido = $request->apellido;
+        
+
+        $usuario->email = $request->email;
+        $usuario->fecha_nacimiento = $request->fecha_nacimiento;
+        $usuario->cedula = $request->cedula;
+        
+        $usuario->removeRole( $usuario->roles[0]->name);
+        $usuario->assignRole($request->habilitar);
+       
+        $usuario->save();
+        $admin->save();
+
+        
+
+
+        return redirect('director/administradores/'.$id.'/edit' )->with('mensage' , 'Actualizacion exitosa '); 
     }
 
     /**
@@ -140,10 +185,11 @@ class AdminController extends Controller
 
     public function destroy(string $id)
     {
-         $user = Administrador::find($id);
-         $user->usuario->delete();
-         $user->delete();
-         
+        $delete = Administrador::find($id);
+        
+        $usuario = User::where('id' , $delete->id_usuario)->first();
+        $usuario->removeRole($usuario->getRoleNames()[0]);
+        $usuario->assignRole('Desabilitado');
          return redirect()->route('director.ver');
     }
 }

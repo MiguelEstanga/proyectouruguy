@@ -4,22 +4,24 @@
 
 <x-app-layout>
   <h2 class="dashboard__main__content__welcome-msg">
-    Evaluar: ver o modificar proyecto
+    Evaluar: Ver o modificar proyecto
   </h2>
   <div class="dashboard__main__content__details">
     <div class="dashboard__main__content__details__content">
       <p class="dashboard__main__content__details__content__text">
         
-        {{  Auth::user()->profesor[0]->grado->grado }} Grado -
+      {{  Auth::user()->profesor[0]->grado->grado }} Grado -
 
-      Seccion  {{ Auth::user()->profesor[0]->seccion->seccion }} 
+      Sección  {{ Auth::user()->profesor[0]->seccion->seccion }} 
       
         
       </p>
     </div>
   </div>
   <div class="dashboard__main__content__current-project">
-    <div class="dashboard__main__content__current-project__details">
+    <div
+      
+      class="dashboard__main__content__current-project__details">
       <span class="dashboard__main__content__current-project__details__title">
         Proyecto actual
       </span>

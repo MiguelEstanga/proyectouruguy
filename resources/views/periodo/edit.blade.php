@@ -2,7 +2,7 @@
 	<form  method="POST" action="{{ route('periodo.store') }}" class="dashboard__main__content__form">
 		@csrf
 		<label class="dashboard__main__content__form__label">
-	     Fecha De Inicio:
+	     Fecha de inicio:
 	      <input
 	        type="date"
 	        name="Fecha_Inicio"
@@ -11,12 +11,12 @@
 
 	      @error('Fecha_Inicio')
 	      	<p style="color: red;" >
-	      		se necesita una fecha de inicio
+	      		Se necesita una fecha de inicio
 	      	</p>
 	      @enderror
 	    </label>
 		 <label class="dashboard__main__content__form__label">
-	      Fecha De Cierra:
+	      Fecha de cierre:
 	      <input
 	        type="date"
 	        name="Fecha_Cierre"
@@ -24,12 +24,12 @@
 	      />
 	         @error('Fecha_Cierre')
 	      	<p style="color: red;" >
-	      		se necesita una fecha de cierre
+	      		Se necesita una fecha de cierre
 	      	</p>
 	      @enderror
 	    </label>
 	    <label class="dashboard__main__content__form__label">
-	     	Ano Escolar:
+	     	Año escolar:
 	      <input
 	        type="text"
 	        name="Ano_Escolar"
@@ -38,14 +38,14 @@
 
 	         @error('Ano_Escolar')
 	      	<p style="color: red;" >
-	      		se necesita una Año Escolar
+	      		Se necesita un año escolar
 	      	</p>
 	      @enderror
 	    </label>
 	     <button
         class="informacion-periodo__actions__action"
        
-      >Registrar Periodo</button>
+      >Registrar periodo</button>
 	</form>
 
 </x-app-layout>

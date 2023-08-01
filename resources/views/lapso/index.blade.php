@@ -1,7 +1,7 @@
 <x-app-layout>
 	<h2>
 		
-		Creacion De  Lapsos
+		Creación de lapsos
 
 	</h2>
 	@if(session('error'))
@@ -12,25 +12,25 @@
 	<form  method="POST" action="{{ route('lapso.store') }}" class="dashboard__main__content__form">
 		@csrf
 		<label class="dashboard__main__content__form__label">
-	     Fecha De Inicio:
+	     Fecha de inicio:
 	      <input
 	        type="date"
 	        name="Fecha_Inicio"
 	        class="dashboard__main__content__form__label__input"
 	      />
 	      @error('Fecha_Cierre')
-	      	<p style="color:red" >Es Necesario que se coloque la fecha de Inicio</p>
+	      	<p style="color:red" >Es necesario que se coloque la fecha de inicio</p>
 	      @enderror
 	    </label>
 		 <label class="dashboard__main__content__form__label">
-	      Fecha De Fin:
+	      Fecha de cierre:
 	      <input
 	        type="date"
 	        name="Fecha_Cierre"
 	        class="dashboard__main__content__form__label__input"
 	      />
 	      @error('Fecha_Cierre')
-	      	<p style="color:red" >Es Necesario que se coloque la fecha de cierre</p>
+	      	<p style="color:red" >Es necesario que se coloque la fecha de cierre</p>
 	      @enderror
 	    </label>
 	    <label class="dashboard__main__content__form__label">
@@ -42,7 +42,7 @@
 	      />
 
 	      @error('Nombre')
-	      	<p style="color:red" >Es Necesario que coloque el nombre del semestre</p>
+	      	<p style="color:red" >Es necesario que coloque el nombre del lapso</p>
 	      @enderror
 	    </label>
 	   	<input hidden type="text" name="id_periodo" value="{{ $periodo->id }}">
@@ -52,7 +52,7 @@
 	     <button
 
        
-      >Registrar Periodo</button>
+      >Registrar periodo</button>
 	</form>
 
 </x-app-layout>

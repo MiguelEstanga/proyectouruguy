@@ -16,6 +16,19 @@ class InicializarSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $grados = [
+           
+
+             ['grado' => 'Primer'  ],
+             ['grado' => 'Segundo'  ],
+             ['grado' => 'Tercer'   ],
+             ['grado' => 'Cuarto'  ],
+             ['grado' => 'Quinto'  ],
+             ['grado' => 'Sexto' ]
+        ];
+
+        
         $estados = [
             ['habilitado' => 'si'   ],
             ['habilitado' => 'no'],
@@ -23,9 +36,13 @@ class InicializarSeeder extends Seeder
         ];
 
         $secciones = [
-            ['seccion' => '0' , 'id_habilitado' => '3' ], 
+           
             ['seccion' => 'A' ,  'id_habilitado' => '3'],
-            ['seccion' => 'B'  , 'id_habilitado'=> '3']
+            ['seccion' => 'B'  , 'id_habilitado'=> '3'],
+            ['seccion' => 'D'  , 'id_habilitado'=> '3'],
+            ['seccion' => 'E'  , 'id_habilitado'=> '3'], 
+            ['seccion' => 'C' , 'id_habilitado' => '3' ], 
+             
         ];
 
         
@@ -40,11 +57,16 @@ class InicializarSeeder extends Seeder
             Seccion::create($seccion);
         }
 
+        foreach($grados as  $grado )
+        {
+            Grado::create($grado);
+        }
+
      $user =   User::create(
             [
 
             
-                'email' => 'm@gmail.com',
+                'email' => 'director@gmail.com',
                 'cedula' => '26101877',
                 'password' => bcrypt('12345'),
                 'tipo' => 'Director',
@@ -55,9 +77,9 @@ class InicializarSeeder extends Seeder
 
         Director::create(
             [
-            'nombre1' => 'miguel',
+            'nombre1' => 'José',
             'nombre2' => 'alejandro',
-            'apellido' => 'estanga',
+            'apellido' => 'Hurtado',
             
             'id_usuario' => $user->id
             ]

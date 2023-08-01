@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function administradores()
     {
-        return $this->hasMany( Administrador::class , 'id');
+        return $this->hasMany( Administrador::class , 'id_usuario');
     }
 
     public function director()

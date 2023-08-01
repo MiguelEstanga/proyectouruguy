@@ -4,14 +4,14 @@
 
 <x-app-layout>
   <h2 class="dashboard__main__content__welcome-msg">
-    Evaluar: ver o modificar proyecto
+    Evaluar: Ver o modificar proyecto
   </h2>
   <div class="dashboard__main__content__details">
     <div class="dashboard__main__content__details__content">
       <p class="dashboard__main__content__details__content__text">
        
-       {{ Auth::user()->profesor[0]->grado->grado}} Gado -
-       Seccion {{ Auth::user()->profesor[0]->seccion->seccion}} 
+       {{ Auth::user()->profesor[0]->grado->grado}} Grado -
+       Sección {{ Auth::user()->profesor[0]->seccion->seccion}} 
          
       </p> 
     </div>
@@ -20,9 +20,15 @@
 @if(  count($proyectos) > 0 )
 
   @foreach($proyectos as $proyecto)
-   <div class="dashboard__main__content__current-project">
-    <div class="dashboard__main__content__current-project__details">
-      <span class="dashboard__main__content__current-project__details__title">
+   <div 
+
+    class="dashboard__main__content__current-project">
+    <div
+
+      class="dashboard__main__content__current-project__details">
+      <span 
+        style="background-color: #2471A3 ; color:#ffff;"
+        class="dashboard__main__content__current-project__details__title">
         Proyecto actual
       </span>
       <span class="dashboard__main__content__current-project__details__value">
@@ -46,17 +52,29 @@
  
   @if($validate ?? false)
     <h2 class="btn btn-success" >
-      Ya se creo el proyecto de este lapso
+      Ya se creó el proyecto de este lapso
     </h2>
   @else
-      <a href="{{ route('proyecto.create') }}">
-    Crear Siguiente Proyecto
-  </a>
+    <a
+      style="
+            color: #fff;
+          background-color:#2471A3;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 10px;
+          padding: 10px;
+          width: 50%;
+
+      " 
+      href="{{ route('proyecto.create') }}">
+       Crear proyecto del lapso
+   </a>
   @endif
 
 @else
  <h2>
-     Todos Los Proyectos De Este Priodo 
+     Todos los proyectos de este periodo han sido creados
   </h2>
 @endif 
 

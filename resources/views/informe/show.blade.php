@@ -49,7 +49,9 @@
 			position: absolute;
 			left: 0;
 			bottom: 0;
-
+			
+			width: 100%;
+			justify-content: space-between;
 		}
 		.footer span{
 			border-top : solid 1px black;
@@ -57,14 +59,18 @@
 			width: 30%;
 			padding-top: 10px;
 		}
+
+		.pw{
+			margin: 10px 0;
+		}
 	</style>
 </head>
 <body>
-	<div>
-		 <span class="bolt" > Nombre Del Proyecto </span> : {{ $lapso->proyecto->nombre }}
+	<div class="pw">
+		 <span class="bolt" > Nombre Del Proyecto </span> : {{ $lapso->proyecto->descripcion }}
 	</div>
 	
-	<div>
+	<div class="pw">
 		<span class="bolt">
 			Desde:
 		</span>
@@ -74,12 +80,12 @@
 		</span>
 		{{ $lapso->fin }}
 	</div>
-	<div class="bolt">
-		{{ $estudiante->grado }} Grado Seccion {{ $estudiante->seccion }}
+	<div class="bolt pw">
+		{{ $estudiante->grado_id->grado }} Grado, Sección {{ $estudiante->seccion_id->seccion }}
 	</div>
-	<div>
+	<div class="pw">
 		<span class="bolt">
-			Alumna:
+			Alumno (a):
 		</span>
 		{{ $estudiante->nombre1 }} {{ $estudiante->nombre2 }} {{ $estudiante->apellido }}
 	</div>
@@ -93,19 +99,20 @@
 		</h2>
 	</div>
 
-	<div class="text_content" >
+	<div class="text_content" 
+		style="padding: 25px;" >
 		{{ $informe->descripcion }}
 	</div> 
 
 	<div class="footer">
 		<span>
-			docente
+			Docente
 		</span>
 		<span>
 			Director
 		</span>
 		<span>
-			Reprecentante
+			Representante
 		</span>
 	</div>
 </body>

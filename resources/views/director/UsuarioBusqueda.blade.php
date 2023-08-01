@@ -23,7 +23,11 @@
         <th class="dashboard__data__content__users__headers__header">Email</th>
 
         <th class="dashboard__data__content__users__headers__header">Cedula</th>
-   
+           <th class="dashboard__data__content__users__headers__header">Fecha de nacimiento</th>
+        <th>
+          Acciones
+        </th>   
+
   
       
       </tr>
@@ -43,8 +47,29 @@
 
 
         <td class="dashboard__data__content__users__row__data">{{ $usuario->cedula}}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $usuario->fecha_nacimiento }}</td>
-        
+        <td class="dashboard__data__content__users__row__data">
+          {{ $usuario->fecha_nacimiento }}
+        </td>
+       
+          <td class="dashboard__main__content__users__row__data">
+                <form 
+                  method="post" 
+                  action="{{ route('director_docente.destroy' , $usuario->profesor[0]->id ) }}">
+                  @method('delete')
+                  @csrf
+
+                <button class="dashboard__main__content__users__row__data__delete">   Eliminar
+                </button>
+              </form>
+            </td>  
+            <td>
+              <a
+                class="dashboard__main__content__users__row__data__delete" 
+                href="{{ route('director_docente.edit' ,  $usuario->profesor[0]->id ) }}">
+                Editar
+              </a>
+            </td>
+      
        
      
       </tr>

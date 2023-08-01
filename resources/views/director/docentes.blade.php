@@ -31,11 +31,23 @@
     </tr>
     @if($docentes != 'null')
           @foreach($docentes as $docente)
-          <tr class="dashboard__main__content__users__row">
+          <tr 
+
+             style="
+                padding: 10px;
+                border: solid 1px  {{ $docente->usuario->roles[0]->name == "Profesor" ? 
+              '#1D8348' : ' #C0392B' }};"
+              class="dashboard__main__content__users__row">
             <td class="dashboard__main__content__users__row__data"> {{ $docente->nombre1 }} </td>
-            <td class="dashboard__main__content__users__row__data">{{ $docente->usuario->cedula }}</td>
+            <td class="dashboard__main__content__users__row__data">
+              {{ $docente->usuario->cedula }} 
+              
+            </td>
             <td class="dashboard__main__content__users__row__data">{{ $docente->usuario->fecha_nacimiento }}</td>
-            <td class="dashboard__main__content__users__row__data">{{ $docente->grado->grado }}</td>
+            <td class="dashboard__main__content__users__row__data">
+              {{ $docente->grado->grado }}
+            </td>
+        
             <td class="dashboard__main__content__users__row__data">{{ $docente->seccion->seccion  }}</td>
             <td class="dashboard__main__content__users__row__data">
                 <form 
@@ -46,6 +58,14 @@
 
                 <button class="dashboard__main__content__users__row__data__delete">Eliminar</button>
               </form>
+            </td>  
+            <td>
+              <a
+                class="dashboard__main__content__users__row__data__delete" 
+                href="{{ route('director_docente.edit' , $docente->id ) }}">
+                Editar
+              </a>
+            </td>
           </tr>
         @endforeach
     @endif

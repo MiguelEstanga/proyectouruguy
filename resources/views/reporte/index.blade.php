@@ -1,32 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<x-app-layout>
+   
 
-</head>
-<body>  
+
 	<div class="container-sm">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-
-                    <h1>{{ $chart1->options['chart_title'] }}</h1>
-                    {!! $chart1->renderHtml() !!}
-
+        
+            <h2 class="alert alert-success" >
+               Usuarios registrados
+            </h2>
+            <div>
+                <div>
+                    Estudiantes: {{ $Estudiante }}
                 </div>
+                   <div class="progress">
+              
+
+              <div class="progress-bar bg-info" role="progressbar" style="width: {{ $Estudiante }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            </div>
+         
+            <div>
+                <div>
+                    Profesores: {{ $profesores }}
+                </div>
+                <div class="progress">
+             
+              <div class="progress-bar bg-warning" role="progressbar" style="width:{{ $profesores }}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
 
             </div>
-        </div>
+        
+            <div>
+                <div>
+                    Administradores: {{ $administradores }}
+                </div>
+                       <div class="progress">
+                
+            <div class="progress-bar bg-danger" role="progressbar" 
+                    style=" width: {{ $administradores }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            </div>
+         
+
+            <h2 
+                style="margin: 10px 0;" 
+                class="alert alert-success" 
+            >
+                Notas de los estudiantes
+            </h2>
+
+            <div class="progress">
+               Literal A
+            <div class="progress-bar bg-danger" role="progressbar" 
+                    style=" width: {{ $literalA }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+            <div class="progress">
+                Literal B
+                <div class="progress-bar bg-danger" role="progressbar" 
+                        style=" width: {{ $literalB }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+            <div class="progress">
+                
+                    Literal C
+               
+                <div class="progress-bar bg-danger" role="progressbar" 
+                        style=" width: {{ $literalC }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+                  <div class="progress">
+                
+                    Literal D
+                
+                <div class="progress-bar bg-danger" role="progressbar" 
+                        style=" width: {{ $literalD }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+            <div class="progress">
+              
+                    Literal E
+          
+                <div class="progress-bar bg-danger" role="progressbar" 
+                        style=" width: {{ $literalE }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            
+
+                        </div>
+            </div>
     </div>
 </div>
 
-{!! $chart1->renderChartJsLibrary() !!}
-{!! $chart1->renderJs() !!}
-</body>
-</html>
+<style>
+    .progress{
+        margin: 10px 20px;
+        height: 30px;
+    }
+</style>
+</x-app-layout> 
+
+
+

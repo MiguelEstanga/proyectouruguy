@@ -27,7 +27,7 @@
         <span>Fecha de fin: {{ $lapso['fin'] }}</span>
         @endif
         
-        <span>lapso actual</span>
+        <span>Lapso actual</span>
 
       
           <form action="{{ route('lapso.update' , $lapso->id) }}" method="post">
@@ -36,9 +36,9 @@
               <input type="text" name="lapso"  value="{{ $lapso->id }}" hidden >
               <button class="informacion-periodo__lapsos__lapso__action">
                   @if($lapso->activar == true)
-                    finalizar lapso
+                    Finalizar lapso
                   @else
-                    iniciar lapso
+                    Iniciar lapso
                   @endif
 
                   
@@ -57,10 +57,18 @@
     <div class="informacion-periodo__actions">
       <a
         href="{{ route('periodo.create') }}"
-        class="informacion-periodo__actions__action"
-       
+        style="
+          color: #fff;
+          background-color:#2471A3;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 10px;
+          padding: 10px;
+          width: 50%;
+        "
       >
-        Iiniciar  Periodo
+        Iniciar periodo
       </a>
       
       @if($data->lapso ?? false  )
@@ -69,16 +77,25 @@
           style="color:grey;" 
           class="informacion-periodo__actions__action" 
         >
-          Se han creado todos los lapsos del perodo
+          Se han creado todos los lapsos del periodo
         </p>
 
         @else
         <a
         href="{{ route('lapso.index') }}"
-        class="informacion-periodo__actions__action"
+         style="
+          color: #fff;
+          background-color:#2471A3;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 10px;
+          padding: 10px;
+          width: 50%;
+        "
       
         >
-        Crear Lapso
+        Crear lapso
         </a>
         @endif
     @endif     

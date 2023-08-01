@@ -1,6 +1,6 @@
 
 
-<x-app-layout>
+<x-app-layout> 
   <div class="dashboard__data__content">
     <p class="dashboard__data__content__section-title">
       Resultado Administrador
@@ -16,38 +16,56 @@
       <button class="dashboard__data__content__search__button">Buscar</button>
       </form>
     </div>
-    <table class="dashboard__data__content__users">
+    <table class="table">
+      <thead>
       <tr class="dashboard__data__content__users__headers">
         <th class="dashboard__data__content__users__headers__header">Nombre</th>
-        <th class="dashboard__data__content__users__headers__header">Apellido</th>
-        <th class="dashboard__data__content__users__headers__header">Email</th>
+        <th class="dashboard__data__content__users__headers__header">
+          Apellido
+        </th>
+        <th class="dashboard__data__content__users__headers__header">
+          Email
+        </th>
 
-        <th class="dashboard__data__content__users__headers__header">Cedula</th>
-        <th class="dashboard__data__content__users__headers__header">Fecha de nacimiento</th>
-                <th class="dashboard__data__content__users__headers__header">Action</th>
+        <th class="dashboard__data__content__users__headers__header">
+          Cedula
+        </th>
+        <th class="dashboard__data__content__users__headers__header">
+          Fecha de nacimiento
+        </th>
+        <th class="dashboard__data__content__users__headers__header">Action</th>
   
       
       </tr>
-      @if($administrador != 'null')
+      </thead>
+    
+      
 
-
-
-     
+      <tbody>
       <tr class="dashboard__data__content__users__row">
-        <td class="dashboard__data__content__users__row__data">{{ $administrador->nombre }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $administrador->apellido }}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $administrador->email }}</td>
+        <td class="dashboard__data__content__users__row__data">
+          {{ $administrador->administradores[0]->nombre1 }}
+        </td>
+        <td class="dashboard__data__content__users__row__data">
+           {{ $administrador->administradores[0]->nombre1 }}
+        </td>
+        <td class="dashboard__data__content__users__row__data">
+          {{ $administrador->email }}
+        </td>
 
 
-        <td class="dashboard__data__content__users__row__data">{{ $administrador->cedula}}</td>
-        <td class="dashboard__data__content__users__row__data">{{ $administrador->fecha_nacimiento }}</td>
+        <td class="dashboard__data__content__users__row__data">
+          {{ $administrador->cedula}}
+        </td>
+        <td class="dashboard__data__content__users__row__data">
+          {{ $administrador->fecha_nacimiento }}
+        </td>
         
        
        
         <td class="dashboard__data__content__users__row__data">
           <form 
             method="post" 
-            action="{{ route('director.destroy' , $administrador->id) }}">
             @method('delete')
             @csrf
 
@@ -55,12 +73,12 @@
           </form>
         </td>
       </tr>
+      </tbody>
      
-      @endif
+    
+     
+     
     </table>
-    <a  href="{{ route('administradores.create') }}" class="dashboard__data__content__add-user-btn">
-      Agregar Aministrador
-    </a>
    
   </div>
 </x-app-layout>

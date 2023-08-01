@@ -3,15 +3,16 @@
   <p class="dashboard__main__content__section-title">
     Editar Administrador
   </p>
-  <form  action="{{ route('director_administrador.store') }}"  method="post" class="dashboard__main__content__form">
+  <form  action="{{ route('director_administrador.update' , $administrador->id) }}"  method="post" class="dashboard__main__content__form">
     @csrf
+    @method('put')
     <label class="dashboard__main__content__form__label">
       Nombre:
-      <input
+      <input 
         type="text"
         name="nombre"
         class="dashboard__main__content__form__label__input"
-        value="{{ $administrador['nombre'] }}"
+        value="{{ $administrador->administradores[0]->nombre1 }}"
       />
     </label>
     <label class="dashboard__main__content__form__label">
@@ -20,7 +21,7 @@
         name="apellido"
         type="text"
         class="dashboard__main__content__form__label__input"
-        value="{{ $administrador['apellido'] }}"
+        value="{{ $administrador->administradores[0]->apellido  }}"
       />
     </label>
     <label class="dashboard__main__content__form__label">
@@ -29,7 +30,7 @@
         name="email"
         type="email"
         class="dashboard__main__content__form__label__input"
-        value="{{ $administrador['email'] }}"
+        value="{{ $administrador->email  }}"
       />
     </label>
     <label class="dashboard__main__content__form__label">
@@ -39,64 +40,45 @@
         id="fecha_nacimiento_input"
         type="date"
         class="dashboard__main__content__form__label__input"
-        value="{{ $administrador['fecha_nacimiento'] }}"
+        value="{{ $administrador->fecha_nacimiento  }}"
       />
     </label>
-    <label class="dashboard__main__content__form__label">
-      Dirección:
-      <input
-        name="direccion"
-        type="text"
-        class="dashboard__main__content__form__label__input"
-        value="{{ $administrador['direccion'] }}"
-      />
-    </label>
+ 
     <label class="dashboard__main__content__form__label">
       Cédula:
       <input
         name="cedula"
         type="text"
         class="dashboard__main__content__form__label__input"
-        value="{{ $administrador['cedula'] }}"
+        value="{{ $administrador->cedula  }}"
       />
     </label>
+     <label class="dashboard__main__content__form__label">
+        Habilitar
+        <select name="habilitar">
+                <option  
 
-    <label class="dashboard__main__content__form__label">
-      Contraseña:
-      <input
-        name="password"
-        type="text"
-        class="dashboard__main__content__form__label__input"
-        value="{{ $administrador['password'] }}"
-      />
+                {{ $administrador->roles[0] == 'Desabilitado' ? 'selected' : ''  }}
+                 value="Desabilitado">
+                   Deshabilitar
+                </option>
+                <option  
+                  {{ $administrador->roles[0]->name == "Administrador" ? 'selected' : '' }}
+                   value="Administrador">
+                  Habilitar
+                </option>
+        
+      </select>
     </label>
 
-    <div class="switch-block">
-      <span>Habilitado: {{ $administrador['habilitado'] ? 'Si' : 'No' }}</span>
-      <label class="switch">
-        <input
-          type="checkbox"
-          disabled
-          @if ($administrador['habilitado'])
-          checked="checked"
-          @endif
-        >
-        <span class="slider round"></span>
-      </label>
-    </div>
+
+   
+
+  
     <button class="dashboard__main__content__form__btn">
       Actualizar administrador
     </button>
   </form>
 
-  <div class="dashboard__main__content__student-links student-links">
-    <!-- eliminar administrador -->
-    <form action="{{ route('director.busqueda') }}">
-      <button class="dashboard__main__content__search__button">Eliminar administrador</button>
-    </form>
-    <!-- eliminar administrador -->
-    <form action="{{ route('director.busqueda') }}">
-      <button class="dashboard__main__content__search__button">Inhabilitar administrador</button>
-    </form>
-  </div>
+  
 </x-app-layout>

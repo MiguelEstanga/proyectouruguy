@@ -6,29 +6,36 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use App\Models\Estudiante;
+use App\Models\Profesor;
+use App\Models\Administrador;
+use App\Models\Boletin;
+
 class ReposrteController extends Controller
 {
    public function index()
    { 
-        return Estudiante::all();
-        $chart_options = [
-            'chart_title' => 'Notas del estudiantes',
-            'chart_type' => 'bar',
-            'report_type' => 'group_by_relationship',
-            'model' => 'App\Models\Estudiante',
+        $estudiante = Estudiante::all();
+        $profesores = count(Profesor::all());
+        $administradores = count(Administrador::all());
+        $literalA = Boletin::where('literal'  , 'A')->count();
+        $literalB = Boletin::where('literal'  , 'B')->count();
+        $literalC = Boletin::where('literal'  , 'C')->count();
+        $literalD = Boletin::where('literal'  , 'D')->count();
+                $literalE = Boletin::where('literal'  , 'E')->count();
 
-            'relationship_name' => 'reporteboletin',// represents function user() on Transaction model
-            'group_by_field' => 'literal1', // users.name
+       
+        return view('reporte.index',
 
-            
-            
-            'filter_field' => 'created_at',
-            'filter_days' => 30, // show only transactions for last 30 days
-            'filter_period' => 'week', // show only transactions for this week
-        ];
-
-
-        $chart1 = new LaravelChart($chart_options);
-        return view('reporte.index', ['chart1' => $chart1]);
+            [
+                'Estudiante' => count($estudiante),
+                'profesores' => $profesores,
+                'administradores' => $administradores,
+                'literalA' => $literalA,
+                'literalB' => $literalB,
+                'literalC' => $literalC,
+                'literalD' => $literalD,
+                'literalE' => $literalE,
+            ]
+        );
    }
 }

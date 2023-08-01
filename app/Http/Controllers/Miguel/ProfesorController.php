@@ -13,34 +13,32 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Estudiante;
 use App\Models\Proyecto;
 use App\Models\Periodo;
+
 class ProfesorController extends Controller
 { 
       public function index()
     {
        $profesores = Profesor::all();
 
-    
+     
        return view('director.docentes' , [
         'docentes' => $profesores,
         'secciones' => Seccion::all(),
       
-        'grados' => self::grados
+      
       ]);
     }
 
 
-  const grados = [
-    ['label' => 'Primero', 'id' => 1],
-    ['label' => 'Segundo', 'id' => 2],
-    ['label' => 'Tercero', 'id' => 3],
-    ['label' => 'Cuarto', 'id' => 4],
-    ['label' => 'Quinto', 'id' => 5],
-    ['label' => 'Sexto', 'id' => 6]
-  ];
+
 
     public function menu()
     {
-      return view('director.docentesMenu');
+
+        $profesores =  User::where('Tipo' , 'Profesor')->count();  
+      return view('director.docentesMenu' , 
+            ['profesores' => $profesores]
+       );
     }
 
     public function proyectosList() {
@@ -105,9 +103,9 @@ class ProfesorController extends Controller
   /**
      * Display profesor data example.
      */
-    public function single()
+    public function single($id)
     {
-        // $docente = buscar docente con el id recibido;
+        
 
       $docente = [
         'nombre' => 'Sergio Mauricio',
@@ -123,28 +121,29 @@ class ProfesorController extends Controller
       return view('director.docenteEditar', [
         'docente' => $docente,
         'secciones' => Seccion::all(),
-        'grados' => self::grados
       ] );
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-  
-    /**
-     * Show the form for creating a new resource.
-     */
+ 
     public function create(Request $request)
     {
-
-       return view('director.docentesCrear' , ['secciones' => Seccion::all(), 'grados' => self::grados ]);
+      $grados = grado::all();
+       return view('director.docentesCrear' , ['secciones' => Seccion::all(), 'grados' => $grados ]);
     }
 
       public function  busqueda(Request $request)
     {
 
      $usuario = User::where('cedula' , '=' ,$request->cedula)->first();
-        return view('director.UsuarioBusqueda' , ['usuario' => $usuario]);
+
+     if($usuario){
+        $profesor = Profesor::where( 'id_usuario' , $usuario->id )->first();
+     }else{
+        return redirect('director/docentes')->with('mensage','No se encontro resultado, porfavor asegurece de colacar de identidad una cedula valida');
+     }
+
+   
+     return view('director.UsuarioBusqueda' , ['usuario' => $usuario]);
     }
 
     /**
@@ -152,11 +151,13 @@ class ProfesorController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request;
+
         $periodo = Periodo::latest('created_at')->first();
         
         if(gettype($periodo) == 'null' ){
            return redirect('director/docentes')
-                ->with('mensage', 'Cree Primero Un Periodo Escolar' );
+                ->with('mensage', 'Cree primero un periodo escolar' );
         }
         $request->validate(
             [
@@ -165,22 +166,16 @@ class ProfesorController extends Controller
                 'fecha_nacimiento' => 'required',
                 'cedula' => 'required' ,
                 'nombre' => 'required',
-                'apellido' =>'required',
-                
+                'apellido' =>'required',  
                 'direccion' => 'required'
             ]
         );
-        $grado = grado::create([
-            'grado' => $request->grado,
-            'id_seccion' => $request->id_seccion,
-            'id_periodo' =>  $periodo->id
-        ]);
+     
 
 
        
         $data = User::create(
-            [
-                
+            [ 
                 'email' => $request->email,
                 'password' => bcrypt( $request->password),
                 'fecha_nacimiento' => $request->fecha_nacimiento,
@@ -195,13 +190,13 @@ class ProfesorController extends Controller
             'apellido2' => $request->apellido,
             'id_seccion' => $request->id_seccion,
             'id_usuario' => $data->id,
-            'id_grado' => $grado->id
+            'id_grado' => $request->grado
 
         ]);
 
 
         return redirect('director/docentes')
-                ->with('mensage', 'Se Ha Creado Un Nuevo Docente'.$profesor->nombre1.' '. $profesor->apellido2 );
+                ->with('mensage', 'Se ha creado un nuevo docente'.$profesor->nombre1.' '. $profesor->apellido2 );
     }
 
     /**
@@ -217,7 +212,15 @@ class ProfesorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $profesor =  Profesor::find($id);
+        $secciones = Seccion::all()  ;
+
+      
+        return view('director.docenteEditar' , [
+            'docente' => $profesor,
+            'secciones' => $secciones,
+         
+        ]);
     }
 
     /**
@@ -226,20 +229,47 @@ class ProfesorController extends Controller
     public function update(Request $request, string $id)
     {
         
-    }
+
+        $profesor =  Profesor::find($id);
+        $usuario= User::find($profesor->id_usuario);
+     
+      
+       
+        //return $request->habilitar;
+
+        $profesor->nombre1 = $request->nombre1;
+        $profesor->nombre2 = $request->nombre2;
+        $profesor->apellido2 = $request->apellido;
+        $profesor->id_seccion = $request->id_seccion;
+
+        $usuario->email = $request->email;
+        $usuario->fecha_nacimiento = $request->fecha_nacimiento;
+        $usuario->cedula = $request->cedula;
+        
+        $usuario->removeRole( $usuario->roles[0]->name);
+        $usuario->assignRole($request->habilitar);
+       
+        $usuario->save();
+        $profesor->save();
+
+        $usuario->roles;
+
+
+        return redirect('director/docentes/'.$id.'/edit' );  
+    }       
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-   
+        
         $delete = Profesor::find($id);
-
-        User::where('id' , $delete->id_usuario)->first();
-
-        $delete->delete();
-
-        return redirect()->route('director_docente.index');
+        return $delete;
+        $usuario = User::where('id' , $delete->id_usuario)->first();
+        $usuario->removeRole($usuario->getRoleNames()[0]);
+        $usuario->assignRole('Desabilitado');
+        return $usuario;
+       
     }
 }

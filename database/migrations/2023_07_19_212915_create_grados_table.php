@@ -15,23 +15,6 @@ return new class extends Migration
             $table->id();
 
             $table->string('grado');
-            
-            
-             $table->foreignId('id_periodo')
-            ->nullable()
-            ->constrained('periodos')
-            ->cascadeOnUpdate()
-            ->nullOnDelete(); 
-
-
-             $table->foreignId('id_seccion')
-            ->nullable()
-            ->constrained('seccions')
-            ->cascadeOnUpdate()
-            ->nullOnDelete(); 
-
-
-        
 
             $table->timestamps();
         });

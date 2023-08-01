@@ -97,7 +97,7 @@
       @enderror
       <select name="grado">  
         @foreach($grados as $grado)
-          <option value="{{ $grado['label'] }}">{{ $grado['label'] }}</option>
+          <option value="{{ $grado['id'] }}">{{ $grado['grado'] }}</option>
         @endforeach
       </select>
     </label>

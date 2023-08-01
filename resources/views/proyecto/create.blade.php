@@ -12,7 +12,7 @@
     </label>
     <label  
        class="dashboard__main__content__form__label">
-      descripcion
+      Descripción:
     <input
 
         type="text"
@@ -23,7 +23,7 @@
     <label  
     class="dashboard__main__content__form__label__input"
      for="">
-      lapso
+      Lapso:
     </label> 
     <select name="id_lapso" id="">
      

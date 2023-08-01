@@ -39,7 +39,14 @@ return new class extends Migration
             
             ->nullOnDelete()
             ->cascadeOnUpdate();
-;
+
+
+            $table->foreignId('id_grado')
+            ->nullable()
+            ->constrained('grados')
+            
+            ->nullOnDelete()
+            ->cascadeOnUpdate();
                
           
 

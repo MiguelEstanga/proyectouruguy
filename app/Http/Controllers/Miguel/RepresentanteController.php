@@ -155,7 +155,7 @@ class RepresentanteController extends Controller
           $estudiante_data = User::create(
             [
                 
-                'email' => $request->email_reprecentante,
+                
                 'password' => 'R_CLAVE',
                 'fecha_nacimiento' => $estudiante['fecha_nacimiento'],
                 'tipo' => 'Estudiante',
