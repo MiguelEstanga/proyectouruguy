@@ -1,36 +1,60 @@
-<x-app-layout>
-   
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	.progress{
+		border: solid 1px black;
+		width: 100%;
+		border-radius: 5px;
+		height: 40px;
+		margin: 10px 0;
+		position: relative;
+	}
+	.bar{
+		
+		width: 100%;
+		border-radius: 0  5px 5px 0;
+		height: 40px;
+		background-color: #C0392B;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+</style>
+<body>
 	<div class="container-sm">
         
             <h2 class="alert alert-success" >
-               Usuarios registrados  
+               Usuarios registrados
             </h2>
             <div>
-                <div style="
-                    display: flex ;
-                    align-items: space-beteewn;
-                "    >
-                    Estudiantes: {{ $estudiante_capasidad }}%  
-                    <span class="porcentage">
-                        {{ count($estudiante_count) }}/800 
-                     </span>   
+                <div>
+                    Estudiantes: {{ $Estudiante }}% 
                 </div>
-                   <div class="progress">
+            <div class="progress">
               
 
-              <div class="progress-bar bg-info" role="progressbar" style="width: {{ $estudiante_capasidad }}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="bar bg-info" role="progressbar" 
+              		style="
+              			width: {{ $estudiante_capasidad }}%;	
+					" 
+					aria-valuenow="50" 
+					aria-valuemin="0" 
+					aria-valuemax="100"></div>
             </div>
             </div>
          
             <div>
                 <div>
-                    Profesores: {{ $profesores_capasidad }}% {{ $profesores }}/30
+                    Profesores: {{ $profesores }}
                 </div>
                 <div class="progress">
              
-              <div class="progress-bar bg-warning" role="progressbar" style="width:{{ $profesores_capasidad }}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="bar bg-warning" role="progressbar" style="width:{{ $profesores_capasidad }}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
 
             </div>
@@ -41,7 +65,7 @@
                 </div>
                        <div class="progress">
                 
-            <div class="progress-bar bg-danger" role="progressbar" 
+            <div class="bar bg-danger" role="progressbar" 
                     style=" width: {{ $admin_capasidad }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             </div>
@@ -53,40 +77,50 @@
             >
                 Notas de los estudiantes
             </h2>
-
+              <div>
+                    Literal A
+                </div>
             <div class="progress">
-               Literal A
+             
             <div class="progress-bar bg-danger" role="progressbar" 
                     style=" width: {{ $literalA }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-
-            <div class="progress">
-                Literal B
-                <div class="progress-bar bg-danger" role="progressbar" 
-                        style=" width: {{ $literalB }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-
-            <div class="progress">
-                
-                    Literal C
-               
-                <div class="progress-bar bg-danger" role="progressbar" 
-                        style=" width: {{ $literalC }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-
-                  <div class="progress">
-                
-                    Literal D
-                
-                <div class="progress-bar bg-danger" role="progressbar" 
-                        style=" width: {{ $literalD }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-
+             <div>
+                    Literal B
+                </div>
             <div class="progress">
               
-                    Literal E
+                <div class="bar bg-danger" role="progressbar" 
+                        style=" width: {{ $literalB }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+             <div>
+                    Literal C
+                </div>
+            <div class="progress">
+                
+                    
+               
+                <div class="bar bg-danger" role="progressbar" 
+                        style=" width: {{ $literalC }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            	 <div>
+                    Literal D
+                </div>
+                  <div class="progress">
+                
+                   
+                
+                <div class="bar bg-danger" role="progressbar" 
+                        style=" width: {{ $literalD }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+             <div>
+                    Literal D
+                </div>
+            <div class="progress">
+              
+                    
           
-                <div class="progress-bar bg-danger" role="progressbar" 
+                <div class="bar bg-danger" role="progressbar" 
                         style=" width: {{ $literalE }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                             
 
@@ -94,21 +128,7 @@
             </div>
 
 
-            <div>
-                <a href="{{ route('reporte.show') }}">
-                    GENERAR PDF 
-                </a>
-            </div>
+           
     </div>
-</div>
-
-<style>
-    .progress{
-        margin: 10px 20px;
-        height: 30px;
-    }
-</style>
-</x-app-layout> 
-
-
-
+</body>
+</html>

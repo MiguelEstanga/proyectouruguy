@@ -19,6 +19,7 @@ class Estudiante extends Model
         'id_usuario',
         'genero',
         'grado',
+        'id_grado',
         'cedulaescolar'
     ];
 
@@ -29,7 +30,7 @@ class Estudiante extends Model
 
     public function  seccion_id()
     {
-        return $this->belongsTo(Seccion::class ,'id');
+        return $this->belongsTo(Seccion::class ,'id_seccion');
     }
 
     public function usuario()
@@ -40,7 +41,7 @@ class Estudiante extends Model
 
     public function grado_id()
     {
-        return $this->belongsTo(grado::class , 'id');
+        return $this->belongsTo(grado::class , 'id_grado');
         //agregar el id grado a la tabla etudiante en el controlador create estudiante
     }
 
@@ -51,9 +52,13 @@ class Estudiante extends Model
 
     public function informe()
     {
-        return $this->hasMany(Informe::class , 'id');
+        return $this->belongsTo(Informe::class , 'id');
     }
 
+     public function todos_los_informes()
+    {
+        return $this->hasMany(Informe::class , 'id_estudiante');
+    }
     public function reporteboletin ()
     {
           return $this->hasMany(Boletin::class , 'id_estudiante');   

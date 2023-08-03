@@ -24,8 +24,6 @@ class ProfesorController extends Controller
        return view('director.docentes' , [
         'docentes' => $profesores,
         'secciones' => Seccion::all(),
-      
-      
       ]);
     }
 
@@ -54,6 +52,8 @@ class ProfesorController extends Controller
         $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
         $validate =  Proyecto::where('id_lapso' , $lapso->id)->first();
 
+      }else{
+        return redirect('docente')->with('mensage' , 'Espere a que se cree un lapso ');
       }
 
       return view('docente.proyectos' ,[
@@ -79,20 +79,28 @@ class ProfesorController extends Controller
       {
         $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
         $proyecto =  Proyecto::where('id_lapso' , $lapso->id)->first();
+
+
+       
+
+      }else{
+        return redirect('docente')->with('mensage' , 'Espere la creación del lapso');
       }
 
-
+      //return $ultimo_informe;
       return view('docente.estudiante', [
         'estudiante' => $estudiante,
         'lapso' => $lapso,
         'ultimo_lapso' => $ultimo_lapso,
-        'proyecto' => $proyecto
+        'proyecto' => $proyecto,
+        
       ]);
     }
 
     public function inicio() {
        $profesor =  Profesor::where("id_usuario" ,  Auth::user()->id)->first();
-       $estudiantes = Estudiante::where('seccion' , $profesor->seccion->id)->get();
+      
+       $estudiantes = Estudiante::where('id_grado' , $profesor->id_grado  )->get();
        
       return view('docente.index' , [
             'profesor' =>$profesor,
@@ -136,13 +144,17 @@ class ProfesorController extends Controller
 
      $usuario = User::where('cedula' , '=' ,$request->cedula)->first();
 
+   
+
      if($usuario){
         $profesor = Profesor::where( 'id_usuario' , $usuario->id )->first();
+          if($usuario->roles[0]->name != 'Profesor') return redirect('director/docentes')->with('mensage','Esta cedula no pertenece a un profesor'); 
+             
      }else{
-        return redirect('director/docentes')->with('mensage','No se encontro resultado, porfavor asegurece de colacar de identidad una cedula valida');
+        return redirect('director/docentes')->with('mensage','No se encontró resultado, por favor asegúrese de colocar una cédula de identidad válida ');
      }
 
-   
+        
      return view('director.UsuarioBusqueda' , ['usuario' => $usuario]);
     }
 
@@ -151,17 +163,26 @@ class ProfesorController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
-
+        
+     $request->validate(
+            [
+            'email' => 'required|unique:users,cedula',
+            'cedula' => 'required|unique:users,cedula',
+            'fecha_nacimiento' => 'required',
+            'nombre'=> 'required',
+            'apellido' => 'required'
+            ]
+       );
         $periodo = Periodo::latest('created_at')->first();
         
         if(gettype($periodo) == 'null' ){
            return redirect('director/docentes')
                 ->with('mensage', 'Cree primero un periodo escolar' );
         }
+
         $request->validate(
             [
-                'email' => 'required',
+                'email' => 'required|unique:users,email',
                 'password' =>'required',
                 'fecha_nacimiento' => 'required',
                 'cedula' => 'required' ,
@@ -170,10 +191,7 @@ class ProfesorController extends Controller
                 'direccion' => 'required'
             ]
         );
-     
-
-
-       
+            
         $data = User::create(
             [ 
                 'email' => $request->email,
@@ -214,12 +232,12 @@ class ProfesorController extends Controller
     {
         $profesor =  Profesor::find($id);
         $secciones = Seccion::all()  ;
-
+        $grados = grado::all();
       
         return view('director.docenteEditar' , [
             'docente' => $profesor,
             'secciones' => $secciones,
-         
+            'grados' => $grados
         ]);
     }
 
@@ -244,8 +262,11 @@ class ProfesorController extends Controller
 
         $usuario->email = $request->email;
         $usuario->fecha_nacimiento = $request->fecha_nacimiento;
-        $usuario->cedula = $request->cedula;
         
+        $usuario->cedula = $request->cedula;
+
+        $profesor->id_grado = $request->grado; 
+
         $usuario->removeRole( $usuario->roles[0]->name);
         $usuario->assignRole($request->habilitar);
        
@@ -265,11 +286,12 @@ class ProfesorController extends Controller
     {
         
         $delete = Profesor::find($id);
-        return $delete;
+       // return $delete;
         $usuario = User::where('id' , $delete->id_usuario)->first();
         $usuario->removeRole($usuario->getRoleNames()[0]);
         $usuario->assignRole('Desabilitado');
-        return $usuario;
+        return redirect('director/docentes' );  
+
        
     }
 }

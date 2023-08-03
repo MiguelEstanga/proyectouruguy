@@ -101,6 +101,22 @@
       </select>
     </label>
 
+     <label class="dashboard__main__content__form__label">
+      Grado {{ $docente->grado_id->id }}
+      <select name="grado">
+
+        @foreach($grados as $grado)
+          <option
+          
+            {{ $docente->grado_id->id == $grado->id ? 'selected' : '' }}
+            value="{{ $grado['id'] }}"
+            
+          >
+            {{ $grado['grado'] }}
+        </option>
+        @endforeach
+      </select>
+    </label>
     
 
     <button class="dashboard__main__content__form__btn">

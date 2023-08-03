@@ -71,16 +71,16 @@
       Grado
       <select name="id_grado">
         @foreach($grados as $grado)
-          <option value="{{ $grado['id'] }}">{{ $grado['label'] }}</option>
+          <option value="{{ $grado['id'] }}">{{ $grado['grado'] }}</option>
         @endforeach
       </select>
     </label>
 
     <label class="dashboard__main__content__form__label">
       Sección
-      <select name="id_seccion"m>
+      <select name="id_seccion" >
         @foreach($secciones as $seccion)
-          <option value="{{ $seccion['id'] }}">{{ $seccion['seccion'] }}</option>
+          <option value="{{ $seccion->id }}">{{ $seccion['seccion'] }}</option>
         @endforeach
       </select>
     </label>

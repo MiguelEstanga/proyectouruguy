@@ -59,8 +59,9 @@
 	<div class="body">
 		Quien suscribe,   {{ $director->nombre1 }} {{ $director->nombre2 }} 
 		{{ $director->apellido }}, titular de la cédula de identidad N: v-{{ $director->usuario->cedula }},  
-		director académico de la Escuela Básica "República del Uruguay"  ubicada en el centro de la ciudad de Maturín, Estado Monagas,  hace constar por medio de la presente que el (la) estudiante {{ $estudiante->nombre1 }} {{ $estudiante->nombre2 }} {{ $estudiante->apellido }} de cédula escolar de identidad N:{{$estudiante->cedulaescolar }} nacido  en ()
-		en  {{ $estudiante->reprecentante->domicilio }}, cursa en esta institución el {{ $estudiante->grado_id->grado }} grado de educación inicial durante el año escolar {{ $periodo->añoescolar }}
+		director académico de la Escuela Básica "República del Uruguay"  ubicada en el centro de la ciudad de Maturín, Estado Monagas,  hace constar por medio de la presente que el (la) estudiante {{ $estudiante->nombre1 }} {{ $estudiante->apellido }} de cédula escolar de identidad N:{{$estudiante->cedulaescolar }} nacido  en {{ 
+		$estudiante->reprecentante->domicilio }}
+		, cursa en esta institución el {{ $estudiante->grado_id->grado }} grado de educación inicial durante el año escolar {{ $periodo->añoescolar }}
 	</div>
 
 	<div class="expirar">

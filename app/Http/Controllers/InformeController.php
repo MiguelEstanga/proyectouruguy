@@ -27,22 +27,41 @@ class InformeController extends Controller
    
     public function crear( $id )
     {
+
         $periodo = Periodo::latest('created_at')->first();
         $ultimo_lapso = $periodo->lapso->where('activar' , '=' , true)->count();
+        $estudiante = Estudiante::find($id);
 
         if($ultimo_lapso != 0){
            $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
             $proyecto =  Proyecto::where('id_lapso' , $lapso->id)->first();
         }
-       
-        $estudiante = Estudiante::find($id);
-         return view('informe.create' , [
+
+
+        $ultimo_informe =$estudiante->todos_los_informes[$ultimo_lapso - 1] ?? false;
+
+        //return $ultimo_informe;
+
+
+        if($ultimo_informe  == false ){
+               return view('informe.create' , [
             'periodo' => $periodo,
             'lapso' => $lapso,
             'estudiante' => $estudiante,
             'proyecto' => $proyecto
 
          ]);
+           
+        }else{
+             return redirect('docente/estudiante/'.$estudiante->id)->with('mensage' , 'Ya hay un informe cargado para este lapso');
+        }
+
+        
+
+       
+
+
+      
     }
 
     /**
@@ -66,12 +85,14 @@ class InformeController extends Controller
             'id_lapso' => $request->id_lapso,
             'id_periodo' => Periodo::latest('created_at')->first()->id,
             'id_proyectos' => $request->id_proyectos,
-            'id_profesor' => Auth::user()->profesor[0]->id
+            'id_profesor' => Auth::user()->profesor[0]->id,
+            'id_estudiante' => $request->id_estudiante
+
 
         ]);
         
 
-        return redirect('/docente')->with('mensage' , 'Se ha cargado el informe ');
+        return redirect('/docente/estudiante/'.$request->id_estudiante)->with('mensage' , 'Se ha cargado el informe ');
 
     }
 
@@ -81,17 +102,23 @@ class InformeController extends Controller
     
     public function show(string $id)
     { 
+
         $periodo = Periodo::latest('created_at')->first();
         $ultimo_lapso = $periodo->lapso->where('activar' , '=' , true)->count();
         $estudiante = Estudiante::find($id);
-
+        //return $estudiante;
 
         if($ultimo_lapso != 0){
            $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
         }
 
-        $informe = Informe::where('id_lapso', $lapso->id)->first();
-  
+     
+         $estudiante->todos_los_informes[$ultimo_lapso - 1] ?? redirect('/docente/estudiante/'.$id)->with('mensage' , 'No se ha cargado informe para este estudiante');
+
+
+        $informe = $estudiante->todos_los_informes[$ultimo_lapso-1] ?? redirect('/docente')->with('mensage' , 'No se ha cargado informe para este estudiante');
+
+        //return $informe;
 
         $options = [
             'enable_css_auto_load' => true,

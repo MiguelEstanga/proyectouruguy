@@ -61,7 +61,7 @@
       />
 
       @error('direccion')
-        <p style="color:red" >La direccion es requerido</p>
+        <p style="color:red" >La dirección es requerida</p>
       @enderror
     </label>
     <label class="dashboard__main__content__form__label">
@@ -73,7 +73,7 @@
         class="dashboard__main__content__form__label__input"
       />
       @error('cedula')
-        <p style="color:red" >El cedula es requerido</p>
+        <p style="color:red" >La cédula debe ser única</p>
       @enderror
     </label>
 

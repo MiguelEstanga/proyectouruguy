@@ -3,16 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Boletin</title>
 </head>
 <style>
 	.portada{
 		text-align: center;
 		line-height: 20px;
-	}
+
+	} 
 
 	.logo{
-		border: solid 1px; black;
+		
 		width: 300px;
 		height: 300px;
 		margin: auto;
@@ -20,22 +21,26 @@
 	}
 
 	.informacion{
-		line-height: 40px;
+		line-height: 60px;
 		position: relative;
+		
+		padding: 30px;
+
 	}
 
 	.informacion span{
 		
-		width: 80%;
+		width: 70%;
 		text-align: center;
 		position: absolute;
 		border-bottom: solid 1px black;
-		right: 1px;
+		right: 50px;
 	}
 
 	.footer{
 		text-align: center;
 		position: absolute;
+		width: 100%;
 		left: 0;
 		bottom: 0;
 	}
@@ -55,11 +60,14 @@
 		position: absolute;
 		left: 0;
 		bottom: 0;
+		
+		width: 100%;
 	}
 
 	.fi{
-		border-bottom: solid 1px black;
+		border-top: solid 1px black;
 		margin: 0 60px;
+		padding: 10px 0;
 	}
 
 	.info{
@@ -74,18 +82,18 @@
 </style>
 <body class="portada1">
 	<div class="portada">
-		Republica Bolivariana <br>
-		Ministerio del Poder Pupular para la Educacion <br>
-		E.B "REPUBLICA DEL URUGUAY" <br>
-		Maturin-EDO Monagas <br>
-		Boletin INFORMATIVO <br>
+		República Bolivariana de Venezuela <br>
+		Ministerio del Poder Popular para la Educación <br>
+		E.B. "República del Uruguay" <br>
+		Maturín - Edo. Monagas <br>
+		Boletín informativo <br>
 
 	</div>
 	<div class="logo">
 		 <img 
-		 	width="300px"
-		 	height="300px" 
-		 	src="data:image/jpeg;base64 , {{ asset('images/logo.jpg') }}" 
+		 	width="100%"   
+		 	height="100%" 
+		 	src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/images/logo.jpg'))) }}"
 		 	alt="logo"
 		 	>
 
@@ -93,12 +101,9 @@
 	<div class="informacion">
 		Nombre : <span class="data">{{ $estudiante->nombre1 }}</span> <br>
 		Apellidos : <span class="data"> {{ $estudiante->apellido }}</span><br>
-		Lugar y Fecha De Nacimiento : <span class="data"> {{ $estudiante->reprecentante->domicilio }}</span><br>
-		Reprecentante : <span class="data"> {{ $estudiante->reprecentante->nombre1 }}{{ $estudiante->reprecentante->apellido2 }}</span><br>
-		Cedula:<span class="data"> {{ $estudiante->usuario->cedula }}</span><br>
-
-
-
+		Lugar y fecha de nacimiento : <span class="data"> {{ $estudiante->reprecentante->domicilio  }} /{{ $estudiante->usuario->fecha_nacimiento}} </span><br>
+		Representante : <span class="data"> {{ $estudiante->reprecentante->nombre1 }} {{ $estudiante->reprecentante->apellido }}</span><br>
+		Cédula escolar:<span class="data"> {{ $estudiante->usuario->cedula }}</span><br>
 	</div>
 	<div class="footer">
 		Año Escolar {{ $periodo->fecha_inicio }}
@@ -106,7 +111,7 @@
 </body>
 <div class="hoja2">
 	<h2 style="text-align:center;">
-		INFORMACION AL REPRESENTANTE
+		INFORMACIÓN AL REPRESENTANTE
 	</h2>
 
 	<div class="info" >
@@ -115,20 +120,19 @@
 		<br>
 		<br>
 
-		Artículo 16: Escala alfabética para la interpretación de los resultados del rendimiento estudiantil. A. El alumno alcanzó todas las competencias y en algunos casos superó las expectativas para el grado. B. El alumno alcanzó todas las competencias previstas para el grado. C. El alumno alcanzó la mayoría de las competencias del grado. D. El alumno alcanzó la mayoría de las competencias del grado, pero requiere de un proceso de nivelación al inicio del nuevo año escolar para alcanzar las restantes. E. El alumno no logro adquirir las competencias mínimas requeridas para ser promovido al grado supe-rior.
+		Artículo 16: Escala alfabética para la interpretación de los resultados del rendimiento estudiantil. A. El alumno alcanzó todas las competencias y en algunos casos superó las expectativas para el grado. B. El alumno alcanzó todas las competencias previstas para el grado. C. El alumno alcanzó la mayoría de las competencias del grado. D. El alumno alcanzó la mayoría de las competencias del grado, pero requiere de un proceso de nivelación al inicio del nuevo año escolar para alcanzar las restantes. E. El alumno no logró adquirir las competencias mínimas requeridas para ser promovido al grado superior.
 
 		<br>
 		<br>
 
-		Informe Fianl Quienes suscriben , hacen constar que el (la) alumno (a) 
-		<span class="sub"> {{ $estudiante->nombre1 }} {{ $estudiante->nombre2 }} {{ $estudiante->apellido }} </span> Natural de <span class="sub" >{{ $estudiante->reprecentante->domicilio }}</span>  Cursante de <span class="sub">{{ $estudiante->grado }}</span> Educacion Basica
+		Informe Final: Quienes suscriben, hacen constar que el (la) alumno (a) 
+		<span class="sub"> {{ $estudiante->nombre1 }} {{ $estudiante->apellido }} </span>, natural de <span class="sub" >{{ $estudiante->reprecentante->domicilio }}</span>,  cursante de <span class="sub">{{ $estudiante->grado }}</span> Educación Básica
 				<br>
-		En Funcion de las competencias alcanzadas se determina que: ha sido Promovido
-		al _____ Reprobando el Grado ______ Con el literal <span class="sub" >{{ $estudiante->boletin->literal }} </span>  previo cumplimiento de los requesitos exigidos en el normativo de evalucion vigente
+		En función de las competencias alcanzadas se determina que al alumno(a) se le ha sido otorgado el literal: <span class="sub" >{{ $estudiante->boletin->literal }} </span>  previo al cumplimiento de los requisitos exigidos en el normativo de evaluación vigente.
 
 		<div class="firma">
 			
-			<span class="fi">Doncete</span>  sello   <span class="fi">Director (a)</span>
+			<span class="fi">Docente</span>  Sello   <span class="fi">Director (a)</span>
 
 		</div>	
 	</div>

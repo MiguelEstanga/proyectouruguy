@@ -8,43 +8,30 @@ use App\Models\User;
 use App\Models\Seccion;
 use App\Models\Estudiante;
 use App\Models\Reprecentnte;
-
+use App\Models\grado;
 class estudianteController extends Controller
-{
-  const grados = [
-    ['label' => 'Primero', 'id' => 1],
-    ['label' => 'Segundo', 'id' => 2],
-    ['label' => 'Tercero', 'id' => 3],
-    ['label' => 'Cuarto', 'id' => 4],
-    ['label' => 'Quinto', 'id' => 5],
-    ['label' => 'Sexto', 'id' => 6]
-  ];
+{  
 
 
     /**
      * Display student data example.
      */
-    public function single()
+    public function single(Request $request)
     {
-        // $estudiante = buscar estudiante con el id recibido;
-
-      $estudiante = [
-        'nombre' => 'Sergio Mauricio',
-        'apellido' => 'Perez Correa',
-        'fecha_nacimiento' => '1999-06-19',
-        'lugar_nacimiento' => 'Maturin',
-        'direccion' => 'La llovizna',
-        'cedula_escolar' => '1-99-24758632',
-        'grado' => ['label' => 'Cuarto', 'id' => 4],
-        'seccion' => ['seccion' => 'A', 'id' => 2],
-        'cedula_representante' => '24758632',
-        'nombre_representante' => 'Jacinta Correa'
-      ];
-      return view('director.estudianteEditar', [
-        'estudiante' => $estudiante,
-        'secciones' => Seccion::all(),
-        'grados' => self::grados
-      ] );
+       $filtro = Estudiante::where('id_seccion' , $request->seccion)
+            ->where('id_grado', $request->grado)->get();
+           
+        $secciones = Seccion::all();
+        $grados = grado::all();     
+        return view(  'estudiante.filtro' , 
+                [
+                    'estudiantes' => $filtro,
+                    'grados' => $grados,
+                    'secciones' =>$secciones,
+                    'seccion_r' => $request->seccion,
+                    'grado_r' => $request->grado
+                ]);
+    
     }
 
     /**
@@ -53,7 +40,13 @@ class estudianteController extends Controller
     public function menu()
     {
         $estudiante = Estudiante::all();
-      return view('director.estudiantesMenu', ['estudiantes' => $estudiante] );
+        $numero_de_estudiante = Estudiante::all()->count();
+
+      return view('director.estudiantesMenu', 
+            [
+                'estudiantes' => $estudiante,
+                'numero_de_estudiante' => $numero_de_estudiante
+            ] );
     }
 
     /**
@@ -65,7 +58,7 @@ class estudianteController extends Controller
        return view('director.estudiantes' , [
         'estudiantes' => $estudiante,
         'secciones' => Seccion::all(),
-        'grados' => self::grados
+        'grados' => grado::all()
       ] );
     }
 
@@ -149,7 +142,18 @@ class estudianteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $grado = grado::all();
+        $seccion = Seccion::all();
+        $estudiante = User::find($id);
+
+       // return $estudiante->estudiante;
+
+         return view('director.estudianteEditar' , 
+            [
+                'estudiante' => $estudiante,
+                'secciones' => $seccion,
+                'grados' => $grado
+             ] );
     }
 
     /**
@@ -157,7 +161,17 @@ class estudianteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $usuario = User::find($id);
+        $estudiante = Estudiante::where('id_usuario' , $usuario->id )->first();
+        $estudiante->id_grado = $request->id_grado;
+        $estudiante->id_seccion = $request->id_seccion;
+        $estudiante->nombre1 = $request->nombre;
+        $usuario->fecha_nacimiento = $request->fecha_nacimiento;
+        $estudiante->apellido = $request->apellido;
+
+        $estudiante->save();
+        $usuario->save();
+        return redirect('director/estudiantes/'.$usuario->id.'/edit'); 
     }
 
     /**

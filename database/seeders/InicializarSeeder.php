@@ -39,9 +39,10 @@ class InicializarSeeder extends Seeder
            
             ['seccion' => 'A' ,  'id_habilitado' => '3'],
             ['seccion' => 'B'  , 'id_habilitado'=> '3'],
+            ['seccion' => 'C' , 'id_habilitado' => '3' ], 
             ['seccion' => 'D'  , 'id_habilitado'=> '3'],
             ['seccion' => 'E'  , 'id_habilitado'=> '3'], 
-            ['seccion' => 'C' , 'id_habilitado' => '3' ], 
+           
              
         ];
 

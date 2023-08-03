@@ -45,7 +45,7 @@ class ExampleTest extends TestCase
         $this->assertTrue(true);
     }
   
-      public function test_infome_registro(): void
+      public function test_informe_registro(): void
     {
         $informe =$this->get('informe');
         $informe->assertStatus(200);
@@ -60,4 +60,5 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
 }

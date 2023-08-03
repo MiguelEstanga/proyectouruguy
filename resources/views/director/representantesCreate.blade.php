@@ -147,9 +147,10 @@
 
         <label class="dashboard__main__content__form__label">
           Grado
+
           <select name="representado[0][grado]">
-            @foreach($grados as $grado)
-              <option value="{{ $grado['label'] }}">{{ $grado['label'] }}</option>
+            @foreach( $grado as $g)
+              <option value="{{ $g->id }}" >{{ $g->grado }}</option>
             @endforeach
           </select> 
         </label>

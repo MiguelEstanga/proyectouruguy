@@ -9,13 +9,13 @@
 			  <tr>
 			  	<td>
 			  		<h2 class="alert alert-success">
-			  			Carga Rasgos Personales
+			  			Cargar rasgos personales
 			  		</h2>
 			  	</td>
 			  </tr>		
 			  <tr>
 					<td>
-						Buena Conduta
+						Buena conduta
 					</td>
 					<td>
 							<select name="Conducta" id="">
@@ -25,7 +25,7 @@
 				   </td>
 			   </tr>
 			   <tr>
-			   		<td>Difruta La Lectura</td>
+			   		<td>Disfruta la lectura</td>
 			   		<td>
 						<select name="Lectuta" id="">
 							<option value="si">Si</option>
@@ -35,7 +35,7 @@
 			   </tr>
 
 			   <tr>
-			   	<td>Expresa Capacidad Creadora Al Converzar</td>
+			   	<td>Expresa capacidad creadora al conversar</td>
 			   		<td>
 						<select name="Expresion" id="">
 							<option value="si">Si</option>
@@ -45,7 +45,7 @@
 			   </tr>
 
 			   <tr>
-			   		<td>Trabja En Grupo Y Mantiene Relaciones Interpersonales Abiertas Y Positivas</td>
+			   		<td>Trabaja en grupo y mantiene relaciones interpersonales abiertas y positivas</td>
 					<td>
 						<select name="Partisipacion" id="">
 							<option value="si">Si</option>
@@ -55,7 +55,7 @@
 			   </tr>
 			   <tr>
 			   	   <td>
-			   	   	 Participacion Colavorativa
+			   	   	 Participación colaborativa
 			   	   </td>
 			   	  	<td>
 						<select name="Trabajo_En_Equipo" id="">
@@ -70,7 +70,7 @@
 		</table>
 
 			<h2 class="alert alert-success">
-		Evaluacion Final Literal
+		Evaluación final: Literal calificativo
 	</h2>
 		<select name="literal" class="form-control" >
 			<option value="A">A</option>
@@ -80,7 +80,7 @@
 			<option value="E">E</option>
 		</select>
 
-		<input type="text" hidden value="{{ $informe->id }}" name="id_informe" >
+		<input type="text"  value=" {{ $informe->id }}" hidden name="id_informe" >
 		<input type="text"  hidden value="{{ $estudiante->id }}" name="id_estudiante" >
 		<button class="btn btn-primary" >
 			Cargar Literal

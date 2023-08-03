@@ -4,7 +4,7 @@
     Ver desempeño estudiantil
   </h2>
   @if(session('mensage'))
-    <h2 class="alert alert-success" >
+    <h2  style="font-size:30px; color: red;" class="alert alert-danger" >
         {{ session('mensage') }}
     </h2>
   @endif
@@ -12,7 +12,7 @@
     <div class="dashboard__main__content__details__content">
       <p class="dashboard__main__content__details__content__text">
 
-        {{ $profesor->grado->grado }} grado -
+        {{ $profesor->grado_id->grado }} grado -
          Sección: {{ $profesor->seccion->seccion }} 
         
         

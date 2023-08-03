@@ -11,6 +11,10 @@
       @can('Director')
          {{ Auth::user()->director->nombre1 }}!
       @endcan
+
+       @can('Profesor')
+         {{ Auth::user()->profesor[0]->nombre1 }}!
+      @endcan
      
     </h1>
    

@@ -10,7 +10,7 @@
     <div class="dashboard__main__content__details__content">
       <p class="dashboard__main__content__details__content__text">
        
-       {{ Auth::user()->profesor[0]->grado->grado}} Grado -
+       {{ Auth::user()->profesor[0]->grado_id->grado}} Grado -
        Sección {{ Auth::user()->profesor[0]->seccion->seccion}} 
          
       </p> 

@@ -12,7 +12,7 @@ use App\Http\Controllers\InformeController ;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\Miguel\gradoController;
 use App\Http\Controllers\Miguel\literalController;
-use App\Http\Controllers\Miguel\ReposrteController;
+use App\Http\Controllers\Miguel\ReposrteController; 
 /* 
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'  , 'middleware'=>'can:Director'  ] , functi
 
   Route::get('director/estudiantes/menu' , [estudianteController::class , 'menu'])->name('director_estudiante.menu');
 
-  Route::get('director/estudiantes/single' , [estudianteController::class , 'single'])->name('director_estudiante.single');
+  Route::get('director/estudiantes/filtro' , [estudianteController::class , 'single'])->name('director_estudiante_single');
   
   Route::resource('director/estudiantes' , estudianteController::class )->names('director_estudiante');
 
@@ -66,7 +66,9 @@ Route::group(['middleware' => 'auth'  , 'middleware'=>'can:Director'  ] , functi
 
  Route::resource('lapsos', LapsoController::class)->names('lapso');
 
- Route::get("reportes" , [ReposrteController::class , 'index'])->name('reporte.index');
+ Route::get("director/reportes" , [ReposrteController::class , 'index'])->name('reporte.index');
+
+  Route::get("director/reportes/pdf" , [ReposrteController::class , 'show'])->name('reporte.show');
 
 
   
@@ -124,7 +126,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/director', function () {
+Route::get('/inicio', function () {
   return view('director.index');
 })->middleware(['auth', 'verified'])->name('director');
 

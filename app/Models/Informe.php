@@ -27,6 +27,6 @@ class Informe extends Model
 
      public function profesor()
     {
-        return $this->belongsTo(Profesor::class , 'id');
+        return $this->belongsTo(Profesor::class , 'id_profesor');
     }
 }

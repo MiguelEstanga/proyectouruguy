@@ -19,14 +19,17 @@
       
       <select name="seccion" id="">
          @foreach($secciones as $seccion) 
-              <option value="{{ $seccion->id }}">
+              <option {{ $seccion->id == $seccion_r ? 'selected' :'' }}  value="{{ $seccion->id }}">
                 {{ $seccion->seccion }}
               </option>
          @endforeach
       </select>
       <select name="grado" >
         @foreach($grados as $grado)
-          <option value="{{ $grado->id }}">{{ $grado->grado }}</option>
+          <option 
+            {{ $grado->id == $grado_r ? 'selected' : '' }}
+            value="{{ $grado->id }}">{{ $grado->grado }}</option>
+            }
         @endforeach
       </select>
       <button class="dashboard__main__content__search__button">Buscar</button>

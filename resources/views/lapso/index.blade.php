@@ -52,7 +52,7 @@
 	     <button
 
        
-      >Registrar periodo</button>
+      >Registrar lapso</button>
 	</form>
 
 </x-app-layout>

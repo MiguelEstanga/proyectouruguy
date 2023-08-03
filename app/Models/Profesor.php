@@ -33,8 +33,8 @@ class Profesor extends Model
     }
         
 
-     public function grado()
+     public function grado_id()
      {
-        return $this->belongsTo(grado::class , 'id');
+        return $this->belongsTo(grado::class , 'id_grado');
      }   
 }

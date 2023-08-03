@@ -11,7 +11,7 @@
 			align-items: center;
 			font-family: Arial;
 			font-size: 20px;
-		}
+		} 
 		.encabezado{
 		
 			text-align: center;
@@ -87,7 +87,7 @@
 		<span class="bolt">
 			Alumno (a):
 		</span>
-		{{ $estudiante->nombre1 }} {{ $estudiante->nombre2 }} {{ $estudiante->apellido }}
+		{{ $estudiante->nombre1 }}  {{ $estudiante->apellido }}
 	</div>
 	<br>
 	<br>

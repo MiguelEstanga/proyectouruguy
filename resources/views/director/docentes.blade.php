@@ -14,7 +14,7 @@
       type="search"
       name="cedula"
       class="dashboard__main__content__search__input"
-      placeholder="Buscar por nombre"
+      placeholder="Buscar por cedula"
     />
     <button class="dashboard__main__content__search__button">Buscar</button>
     </form>
@@ -24,6 +24,8 @@
     <tr class="dashboard__main__content__users__headers">
       <th class="dashboard__main__content__users__headers__header">Nombre</th>
       <th class="dashboard__main__content__users__headers__header">Cedula</th>
+      <th class="dashboard__main__content__users__headers__header">Email</th>
+
       <th class="dashboard__main__content__users__headers__header">Fecha de nacimiento</th>
       <th class="dashboard__main__content__users__headers__header">Grado</th>
       <th class="dashboard__main__content__users__headers__header">Seccion</th>
@@ -38,14 +40,24 @@
                 border: solid 1px  {{ $docente->usuario->roles[0]->name == "Profesor" ? 
               '#1D8348' : ' #C0392B' }};"
               class="dashboard__main__content__users__row">
-            <td class="dashboard__main__content__users__row__data"> {{ $docente->nombre1 }} </td>
+
+            <td class="dashboard__main__content__users__row__data"> 
+              {{ $docente->nombre1 }} 
+            </td>
+
             <td class="dashboard__main__content__users__row__data">
               {{ $docente->usuario->cedula }} 
               
             </td>
-            <td class="dashboard__main__content__users__row__data">{{ $docente->usuario->fecha_nacimiento }}</td>
             <td class="dashboard__main__content__users__row__data">
-              {{ $docente->grado->grado }}
+              {{ $docente->usuario->email }} 
+              
+            </td>
+            <td class="dashboard__main__content__users__row__data">
+              {{ $docente->usuario->fecha_nacimiento }}
+            </td>
+            <td class="dashboard__main__content__users__row__data">
+              {{ $docente->grado_id->grado }}
             </td>
         
             <td class="dashboard__main__content__users__row__data">{{ $docente->seccion->seccion  }}</td>

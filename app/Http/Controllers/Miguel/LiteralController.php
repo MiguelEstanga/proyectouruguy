@@ -17,9 +17,15 @@ class LiteralController extends Controller
     public  function evaluar($id)
     {
         $estudiante = Estudiante::find($id);
-        $ultimo_informe =  $estudiante->informe->count();
-
-        $informe = $estudiante->informe[$ultimo_informe - 1];
+        $ultimo_informe = $estudiante->todos_los_informes->count();
+       
+        if(  gettype($estudiante->boletin) == 'object'  ){
+            redirect('docente/estudiante/'.$estudiante->id)->with('mensage' , 'Este estudiante ya tiene literal');
+        }
+        //return $estudiante->boletin ?? 'no tiene';
+         
+       // return ;
+        $informe = $estudiante->todos_los_informes[$ultimo_informe - 1];
         return view( 'literal.index' , [
                 'informe' => $informe,
                 'estudiante' => $estudiante
@@ -28,7 +34,8 @@ class LiteralController extends Controller
 
     public function create(Request $request)
     {
-          //  return Periodo::latest('created_at')->first()->id;
+          
+        //return $request;
 
         $literal = Boletin::create([
             'literal' => $request->literal,
@@ -50,14 +57,19 @@ class LiteralController extends Controller
 
         ]);
 
-     return redirect('docente')->with('mensage' , 'se ha carhado un literal');
+     return redirect('docente/estudiante/'.$request->id_estudiante)->with('mensage' , 'Se ha cargado un literal');
     }
 
      public function rasgospersonales($id)
     {
+       
         $rasgos = RasgosPersonales::where('id_estudiante' , $id)->first();
         $literal = Boletin::where('id_estudiante'  , $id)->first();
-       
+        $estudiante = Estudiante::find($id);
+
+        $estudiante->rasgosPersonales ?? ''  ('docente/estudiante/'.$estudiante->id)->with('mensage' , 'No se ha cargdo rasgos personales')  ; 
+       // return $estudiante->rasgosPersonales;
+
          $options = [
             'enable_css_auto_load' => true,
             'defaultFont'=> 'Courier',

@@ -1,5 +1,10 @@
 
 <x-app-layout>
+    @if(session('mensage'))
+      <h2 class="alert alert-success" >
+        {{ session('mensage') }}
+      </h2>
+    @endif
     <p class="dashboard__main__content__section-title">
       Evaluar Estudiante
     </p>
@@ -116,17 +121,20 @@
   </div>
 
   <div class="dashboard__main__content__student-links student-links">
-    
+     
 
           @if($proyecto ?? false)
-               <a
-            {{ $proyecto ?? 'hidden' }}
+
+
+          <a
+           
             target="_black"
             href="{{ route('informe.crear' , $estudiante->id ) }}"
             class="btn btn-primary"
           >
            Cargar Informe
           </a>
+
           @else
             <h2>Debe cargar el proyecto del lapso actual</h2><br>
             <a  style="color: blue" href="{{ route('docente.proyectos') }}">Cárguelo aquí</a>
@@ -165,8 +173,8 @@
       @if($estudiante->rasgosPersonales ?? false)
         <a 
           class="btn btn-primary" 
-         href="{{ route('literal.rasgos' , $estudiante->id) }}" target="_black">
-          Ver rasgos personales
+         href="{{ route('literal.rasgos' , $estudiante->id ) }}" target="_black">
+          Ver rasgos personales 
         </a>
 
         <a

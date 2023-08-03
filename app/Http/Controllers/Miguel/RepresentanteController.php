@@ -13,6 +13,7 @@ use App\Models\Reprecentnte;
 use App\Models\Estudiante;
 use App\Models\Proyecto; 
 use App\Models\Periodo;
+use App\Models\grado;
 class RepresentanteController extends Controller
 {
   
@@ -44,10 +45,7 @@ class RepresentanteController extends Controller
 
     $contandor =  $reprecentante->estudiante[0]->informe->count();
    
-   $informe = $reprecentante->estudiante[0]->informe[$contandor-1];
-
-   
-    
+    $informe = $reprecentante->estudiante[0]->informe[$contandor-1];
 
     return view('representante.index', [
       'representado' => $reprecentante,
@@ -104,9 +102,10 @@ class RepresentanteController extends Controller
      */
     public function create()
     {
+     // return grado::all();
         return view('director.representantesCreate', [
           'secciones' => Seccion::all(),
-          
+          'grado' => grado::all()
         ]);
     }
 
@@ -115,26 +114,28 @@ class RepresentanteController extends Controller
      */
     public function store(Request $request)
     {
-     // return $request;
-
+      //return $request;
+      
       $request->validate([
-        'email_reprecentante' => 'required',
+        'email_reprecentante' => 'required|unique:users,email',
         'fecha_nacimiento_reprecentante' => 'required',
         'apellido_reprecentante' => 'required',
         'direccion_reprecentante' => 'required',
-
-       
-       
+        'cedula_reprecentante' => 'required|unique:users,cedula|min:6|max:8',
+        
 
       ]);
+
+     // return  $request;
+
       $reprecentante_user = User::create([
             'email' => $request->email_reprecentante,
             'password' => 'R_CLAVE',
             'fecha_nacimiento' => $request->fecha_nacimiento_reprecentante,
             'cedula' => $request->cedula_reprecentante,
-            'tipo' => 'Reprecentnte'      
+            'tipo' => 'Representnte'      
 
-      ])->assignRole('Reprecentante');
+      ])->assignRole('Representante');
 
      $reprecentante = Reprecentnte::create(
         [
@@ -155,11 +156,12 @@ class RepresentanteController extends Controller
           $estudiante_data = User::create(
             [
                 
-                
+                'email' => date('h:d:m').$request->email_reprecentante,
                 'password' => 'R_CLAVE',
                 'fecha_nacimiento' => $estudiante['fecha_nacimiento'],
                 'tipo' => 'Estudiante',
-                'cedula' => $estudiante['cedula']
+                'cedula' => $estudiante['cedula'],
+
              ]
           )->assignRole('Estudiante');
 
@@ -173,7 +175,9 @@ class RepresentanteController extends Controller
             'id_usuario' => $estudiante_data->id,
             'seccion' => $estudiante['id_seccion'],
             'id_reprecentante'=>  $reprecentante->id,
-            'grado' => $estudiante['grado'] 
+            'grado' => $estudiante['grado'] ,
+            'id_grado' => $estudiante['grado'] ,
+
         ]);
 
       }

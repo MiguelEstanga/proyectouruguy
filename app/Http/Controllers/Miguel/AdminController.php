@@ -67,7 +67,7 @@ class AdminController extends Controller
              'nombre' => 'required',
              'apellido' =>'required',
              'password' => 'required',
-             'email' => 'required',
+             'email' => 'required|unique:users,email',
              'fecha_nacimiento' => 'required',
              'cedula' => 'required|unique:users,cedula'   
         ]);

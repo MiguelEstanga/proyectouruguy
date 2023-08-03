@@ -17,13 +17,13 @@
       </p>
       <div class="dashboard__main__content__details__content__info">
         <p class="dashboard__main__content__details__content__info__text">
-          Grado: {{ $user->estudiante[0]->grado }}
+          Grado: {{ $user->estudiante[0]->grado_id->grado }} grado
         </p>
         <p class="dashboard__main__content__details__content__info__text">
-          Seccion:{{ $user->estudiante[0]->seccion }}
+          Seccion: {{ $user->estudiante[0]->seccion_id->seccion }}
         </p>
         <p class="dashboard__main__content__details__content__info__text">
-          Maestro: {{ $lastInforme->profesor->nombre1 }} {{ $lastInforme->profesor->apellido2 }} 
+          Maestro: {{ $lastInforme->profesor }} {{ $lastInforme }} 
                   </p>
       </div>
     </div>
@@ -93,7 +93,7 @@
     </div>
     <div class="dashboard__main__content__current-project__value">
       <span class="dashboard__main__content__current-project__value__text">
-        {{ $p['nombre'] }} 
+        {{ $p['descripcion'] }} 
       </span>
     </div>
   </div>

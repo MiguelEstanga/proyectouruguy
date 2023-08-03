@@ -1,8 +1,8 @@
 @php
 $links_director = [
   [
-    'url' => '/director',
-    'title' => 'Inicio',
+    'url' => '/inicio',
+    'title' => 'INICIO',
     'active' => true
   ],
   [
@@ -86,13 +86,13 @@ $links_representante = [
   ],
   [
     'url' => '/representante/configuracion',
-    'title' => 'Configuración',
+    'title' => 'COFIGURACIÓN',
     'active' => false
   ]
 ];
 
 $link_config = [
-  'title' =>  'Configuración',
+  'title' =>  'COFIGURACIÓN',
   'url' => '/director/informacion-lapso'
 ];
 @endphp
@@ -135,7 +135,12 @@ $link_config = [
                       @endcan
                        @can('Profesor')
                         {{ Auth::user()->profesor[0]->nombre1 }}
+                        {{ Auth::user()->profesor[0]->apellido2 }}
                       @endcan
+                       @can('Representante')
+                        
+                      @endcan
+
                      
                     </span>
                     <span class="dashboard__sidebar__user__icon">
@@ -149,7 +154,7 @@ $link_config = [
                     </span>
                   </div>
                   <nav class="dashboard__sidebar__nav">
-                  @can('Director')
+                  @can('admin')
                     
                     <ul class="dashboard__sidebar__nav__list">
                       @foreach($links_director as $link)
@@ -212,13 +217,40 @@ $link_config = [
                       <ul class="dashboard__sidebar__nav__list" >
                         <li class="dashboard__sidebar__nav__list__item">
                                 <a
-                                target="_black"
+                                
                                 class="
+                                
                                   dashboard__sidebar__nav__list__item__link__submenu__link }}"
                                 href="{{ route('docente.inicio') }}"
 
                               >
-                                Inicio
+                                INICIO
+                              </a>
+                               
+                        </li>
+                        
+                        <li class="dashboard__sidebar__nav__list__item" >
+                            <a
+                                
+                                class="
+                                  {{ request()->path() == 'docente' ? 'dashboard__sidebar__nav__list__item__link--active' :'' }}
+                                  dashboard__sidebar__nav__list__item__link__submenu__link "
+                                href="/docente"
+
+                              >
+                                DESEMPEÑO
+                              </a>
+                        </li>
+                         <li class="dashboard__sidebar__nav__list__item" >
+                            <a
+                                
+                                class="
+                                    {{ request()->path() == 'docente/proyectos' ? 'dashboard__sidebar__nav__list__item__link--active' : '' }}
+                                  dashboard__sidebar__nav__list__item__link__submenu__link "
+                                href="/docente/proyectos"
+
+                              >
+                                PROYECTOS
                               </a>
                         </li>
                       </ul>

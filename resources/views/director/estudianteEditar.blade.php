@@ -1,17 +1,20 @@
 
 <x-app-layout>
   <p class="dashboard__main__content__section-title">
-    Editar ficha de Estudiante
+    Editar ficha de Estudiante 
   </p>
-  <form  action="{{ route('director_estudiante.store') }}"  method="post" class="dashboard__main__content__form">
+  <form  action="{{ route('director_estudiante.update' , $estudiante->id  ) }}"  method="post" class="dashboard__main__content__form">
+
     @csrf
+    @method('put')
+  
     <label class="dashboard__main__content__form__label">
       Nombre:
       <input
         type="text"
         name="nombre"
         class="dashboard__main__content__form__label__input"
-        value="{{ $estudiante['nombre'] }}"
+        value="{{ $estudiante->estudiante[0]->nombre1 }}"
       />
     </label>
     <label class="dashboard__main__content__form__label">
@@ -20,7 +23,7 @@
         name="apellido"
         type="text"
         class="dashboard__main__content__form__label__input"
-        value="{{ $estudiante['apellido'] }}"
+        value="{{ $estudiante->estudiante[0]->apellido }}"
       />
     </label>
     <label class="dashboard__main__content__form__label">
@@ -28,27 +31,19 @@
       <input
         name="fecha_nacimiento"
         id="fecha_nacimiento_input"
-        type="date"
+       
         class="dashboard__main__content__form__label__input"
-        value="{{ $estudiante['fecha_nacimiento'] }}"
+        value="{{ $estudiante->fecha_nacimiento}}"
       />
     </label>
-    <label class="dashboard__main__content__form__label">
-      Lugar de nacimiento:
-      <input
-        name="lugar_nacimiento"
-        type="text"
-        class="dashboard__main__content__form__label__input"
-        value="{{ $estudiante['lugar_nacimiento'] }}"
-      />
-    </label>
+   
     <label class="dashboard__main__content__form__label">
       Dirección:
       <input
         name="direccion"
         type="text"
         class="dashboard__main__content__form__label__input"
-        value="{{ $estudiante['direccion'] }}"
+        value="{{ $estudiante->estudiante[0]->reprecentante->domicilio }}"
       />
     </label>
     <label class="dashboard__main__content__form__label">
@@ -58,60 +53,41 @@
         type="text"
         id="cedula_escolar_input"
         class="dashboard__main__content__form__label__input"
-        value="{{ $estudiante['cedula_escolar'] }}"
+        value="{{ $estudiante->estudiante[0]->cedulaescolar }}"
         disabled
       />
     </label>
 
     <label class="dashboard__main__content__form__label">
       Grado
-      <select name="id_grado" value="">
+      <select name="id_grado">
         @foreach($grados as $grado)
           <option
-            value="{{ $grado['id'] }}"
-            @if ($grado['id'] == $estudiante['grado']['id'])
-            selected="selected"
-            @endif
-          >{{ $grado['label'] }}</option>
+            value="{{ $grado->id }}"
+            {{ $grado->id == $estudiante->estudiante[0]->id_grado ? 'selected' : '' }}
+
+          >{{ $grado['grado'] }}</option>
         @endforeach
       </select>
     </label>
 
     <label class="dashboard__main__content__form__label">
       Sección
-      <select name="id_seccion"m>
+      <select name="id_seccion">
         @foreach($secciones as $seccion)
           <option
             value="{{ $seccion['id'] }}"
-            @if ($seccion['id'] == $estudiante['seccion']['id'])
-            selected="selected"
-            @endif
-          >{{ $seccion['seccion'] }}</option>
+            {{ $seccion->id == $estudiante->estudiante[0]->id_seccion ? 'selected' : '' }}
+          >
+          {{ $seccion['seccion'] }}
+
+        </option>
         @endforeach
       </select>
     </label>
 
-    <label class="dashboard__main__content__form__label">
-      Cédula Representante:
-      <input
-        id="cedula_representante_input"
-        name="cedula_reprecentante"
-        type="text"
-        class="dashboard__main__content__form__label__input"
-        value="{{ $estudiante['cedula_representante'] }}"
-      />
-    </label>
 
-    <label class="dashboard__main__content__form__label">
-      Nombre del Representante:
-      <input
-        name="nombre_reprecentante"
-        type="text"
-        class="dashboard__main__content__form__label__input"
-        value="{{ $estudiante['nombre_representante'] }}"
-        disabled
-      />
-    </label>
+    
     <button class="dashboard__main__content__form__btn">
       Actualizar estudiante
     </button>

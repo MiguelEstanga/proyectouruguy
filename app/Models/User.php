@@ -66,13 +66,13 @@ class User extends Authenticatable
 
     public function reprecentante()
     {
-        return $this->hasMany(Reprecentnte::class , 'id');
+        return $this->hasMany(Reprecentnte::class , 'id_usuario');
     }
 
 
     public function estudiante()
     {
-        return $this->hasMany(Estudiante::class , 'id');
+        return $this->hasMany(Estudiante::class , 'id_usuario');
     }
     /**
      * The attributes that should be cast.
