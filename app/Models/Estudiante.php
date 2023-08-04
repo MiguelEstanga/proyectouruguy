@@ -20,7 +20,8 @@ class Estudiante extends Model
         'genero',
         'grado',
         'id_grado',
-        'cedulaescolar'
+        'cedulaescolar',
+        'lugar_nacimiento'
     ];
 
     function reprecentante()

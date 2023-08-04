@@ -71,7 +71,21 @@
        Crear proyecto del lapso
    </a>
   @endif
+   <a
+      style="
+          color: #fff;
+          background-color:#2471A3;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 10px;
+          padding: 10px;
+          width: 50%;
 
+      " 
+      href="{{ route('proyecto.create') }}">
+       Crear proyecto del lapso
+   </a>
 @else
  <h2>
      Todos los proyectos de este periodo han sido creados

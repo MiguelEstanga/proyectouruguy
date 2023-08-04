@@ -15,15 +15,7 @@
         value="{{ $docente['nombre1'] }}"
       />
     </label>
-       <label class="dashboard__main__content__form__label">
-      Nombre 2:
-      <input
-        type="text"
-        name="nombre2"
-        class="dashboard__main__content__form__label__input"
-        value="{{ $docente['nombre1'] }}"
-      />
-    </label>
+  
     <label 
         class="dashboard__main__content__form__label"
       >

@@ -2,7 +2,7 @@
 
 @endphp
 
-<x-app-layout>
+<x-app-layout> 
   <h2 class="dashboard__main__content__welcome-msg">
     Evaluar: Ver o modificar proyecto
   </h2>

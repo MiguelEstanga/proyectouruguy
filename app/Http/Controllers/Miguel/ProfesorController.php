@@ -256,7 +256,7 @@ class ProfesorController extends Controller
         //return $request->habilitar;
 
         $profesor->nombre1 = $request->nombre1;
-        $profesor->nombre2 = $request->nombre2;
+       
         $profesor->apellido2 = $request->apellido;
         $profesor->id_seccion = $request->id_seccion;
 

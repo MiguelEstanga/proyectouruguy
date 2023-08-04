@@ -129,7 +129,7 @@ class RepresentanteController extends Controller
             'fecha_nacimiento' => $request->fecha_nacimiento_reprecentante,
             'cedula' => $request->cedula_reprecentante,
             'tipo' => 'Representnte'      
-
+            
       ])->assignRole('Representante');
 
      $reprecentante = Reprecentnte::create(

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('apellido');
             $table->string('genero');
             $table->string('seccion');
+            $table->string('lugar_nacimiento');
             $table->string('cedulaescolar');
             $table->string('grado');
             $table->foreignId('id_reprecentante')
