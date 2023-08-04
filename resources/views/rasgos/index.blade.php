@@ -71,9 +71,7 @@
 				<li class="lista">
 					Trabajo en equipo  <span class="res"> {{ $rasgos->Trabajo_En_Equipo }} </span>
 				</li>
-				<li class="lista">
-					Conducta  <span class="res">{{ $rasgos->Conducta }} </span>
-				</li>
+			
 			</ul>
 	</div>
 	

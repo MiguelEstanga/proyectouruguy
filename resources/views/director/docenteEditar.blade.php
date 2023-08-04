@@ -15,7 +15,7 @@
         value="{{ $docente['nombre1'] }}"
       />
     </label>
-  
+    
     <label 
         class="dashboard__main__content__form__label"
       >
