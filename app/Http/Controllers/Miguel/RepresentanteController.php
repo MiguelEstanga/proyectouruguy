@@ -30,7 +30,8 @@ class RepresentanteController extends Controller
 
   public function menu()
   {
-    return view('director.representantesMenu');
+     $representantes = Reprecentnte::all();
+    return view('director.representantesMenu' , ['representantes' => $representantes]);
   }
 
   public function inicio() {
@@ -115,13 +116,13 @@ class RepresentanteController extends Controller
     public function store(Request $request)
     {
        
-      
+      //return  $request;
       $request->validate([
         'email_reprecentante' => 'required|unique:users,email',
         'cedula_reprecentante' => 'required|unique:users,cedula|min:6|max:8',
       ]);
 
-     // return  $request;
+   
 
       $reprecentante_user = User::create([
             'email' => $request->email_reprecentante,
@@ -172,7 +173,7 @@ class RepresentanteController extends Controller
             'id_reprecentante'=>  $reprecentante->id,
             'grado' => $estudiante['grado'] ,
             'id_grado' => $estudiante['grado'] ,
-            'lugar_nacimiento' => $estudiante->lugar_nacimiento
+            'lugar_nacimiento' => $estudiante['lugar_nacimiento']
         ]);
 
       }

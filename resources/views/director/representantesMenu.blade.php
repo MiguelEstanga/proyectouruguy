@@ -31,11 +31,7 @@
   <div class="dashboard__main__content__user-stats">
     <div class="dashboard__main__content__user-stats__total">
       <span class="dashboard__main__content__user-stats__total__label">administradores actuales:</span>
-      <span class="dashboard__main__content__user-stats__total__value">27</span>
+      <span class="dashboard__main__content__user-stats__total__value">{{ count($representantes) }}</span>
     </div>
-    <div class="dashboard__main__content__user-stats__total">
-      <span class="dashboard__main__content__user-stats__total__label">administradores inhabilitados:</span>
-      <span class="dashboard__main__content__user-stats__total__value">3</span>
-    </div>
-  </div>
+     </div>
 </x-app-layout>
