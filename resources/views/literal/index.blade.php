@@ -15,7 +15,7 @@
 			  </tr>		
 			  <tr>
 					<td>
-						Buena conduta
+						Buena conducta
 					</td>
 					<td>
 							<select name="Conducta" id="">

@@ -8,14 +8,15 @@
                Usuarios registrados  
             </h2>
             <div>
-                <div style="
-                    display: flex ;
-                    align-items: space-beteewn;
-                "    >
-                    Estudiantes: {{ $estudiante_capasidad }}%  
-                    <span class="porcentage">
-                        {{ count($estudiante_count) }}/800 
-                     </span>   
+                <div    >
+                    <div>
+                        Estudiantes: {{ $estudiante_capasidad }}%  
+
+                    </div>
+
+                    <div class="porcentage">
+                       Cantidad {{ count($estudiante_count) }}/800 
+                     </div>   
                 </div>
                    <div class="progress">
               
@@ -26,7 +27,13 @@
          
             <div>
                 <div>
-                    Profesores: {{ $profesores_capasidad }}% {{ $profesores }}/30
+                    <div>
+                         Profesores: {{ $profesores_capasidad }}% 
+                    </div>
+                    <div>
+                        Cantidad: {{ $profesores }}/30
+                    </div>
+                   
                 </div>
                 <div class="progress">
              
@@ -37,8 +44,14 @@
         
             <div>
                 <div>
-                    Administradores: {{ $administradores }}/7
+                    <div>
+                        Administradores: {{ $administradores }}/7
+                    </div>
+                    <div>
+                        
+                    </div>
                 </div>
+              
                        <div class="progress">
                 
             <div class="progress-bar bg-danger" role="progressbar" 
@@ -53,49 +66,110 @@
             >
                 Notas de los estudiantes
             </h2>
-
-            <div class="progress">
-               Literal A
-            <div class="progress-bar bg-danger" role="progressbar" 
-                    style=" width: {{ $literalA }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-
-            <div class="progress">
-                Literal B
+            <div>
+                <div>
+                   <div>
+                       Literal A
+                   </div>
+                   <div>
+                     Cantidad:  {{ $contadorA }}/800
+                   </div>
+               </div>
+                <div class="progress">
+                   
+                 
                 <div class="progress-bar bg-danger" role="progressbar" 
-                        style=" width: {{ $literalB }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+                        style=" width: {{ $literalA }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            
+                </div>
+                </div>
 
-            <div class="progress">
-                
-                    Literal C
-               
+            </div>
+              <div>
+                <div>
+                   <div>
+                       Literal A
+                   </div>
+                   <div>
+                     Cantidad:  {{ $contadorA }}/800
+                   </div>
+               </div>
+                <div class="progress">
+                   
+                 
                 <div class="progress-bar bg-danger" role="progressbar" 
-                        style=" width: {{ $literalC }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+                        style=" width: {{ $literalA }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            
+                </div>
+                </div>
 
-                  <div class="progress">
-                
-                    Literal D
-                
+            </div>
+              <div>
+                <div>
+                   <div>
+                       Literal B
+                   </div>
+                   <div>
+                     Cantidad:  {{ $contadorB }}/800
+                   </div>
+               </div>
+                <div class="progress">
+                   
+                 
                 <div class="progress-bar bg-danger" role="progressbar" 
-                        style=" width: {{ $literalD }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+                        style=" width: {{ $literalB }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            
+                </div>
+                </div>
 
-            <div class="progress">
-              
-                    Literal E
-          
+            </div>
+              <div>
+                <div>
+                   <div>
+                       Literal C
+                   </div>
+                   <div>
+                     Cantidad:  {{ $contadorC }}/800
+                   </div>
+               </div>
+                <div class="progress">
+                   
+                 
+                <div class="progress-bar bg-danger" role="progressbar" 
+                        style=" width: {{ $literalC }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            
+                </div>
+                </div>
+
+            </div>
+              <div>
+                <div>
+                   <div>
+                       Literal E
+                   </div>
+                   <div>
+                     Cantidad:  {{ $contadorE }}/800
+                   </div>
+               </div>
+                <div class="progress">
+                   
+                 
                 <div class="progress-bar bg-danger" role="progressbar" 
                         style=" width: {{ $literalE }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                             
+                </div>
+                </div>
 
-                        </div>
             </div>
-
+            
+            <div style="margin:10px 0;" >
+                Periodo:{{ $periodo->fecha_inicio }}
+            </div>
+            
+           
 
             <div>
-                <a href="{{ route('reporte.show') }}">
+                <a class="btn btn-success" href="{{ route('reporte.show') }}">
                     GENERAR PDF 
                 </a>
             </div>

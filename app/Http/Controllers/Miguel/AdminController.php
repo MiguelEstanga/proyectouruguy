@@ -20,7 +20,8 @@ class AdminController extends Controller
 
   public function menu()
   {
-    return view('director.administradoresMenu');
+
+    return view('director.administradoresMenu'   , ['administrador' => Administrador::all()]);
   }
 
 /**

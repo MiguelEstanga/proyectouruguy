@@ -93,30 +93,5 @@
     </button>
   </form>
 
-  <div class="dashboard__main__content__student-links student-links">
-    <a
-      href="/archivopdf-informe-descriptivo"
-      class="student-links__link"
-    >
-      Informe descriptivo
-    </a>
-    <a
-      href="/archivopdf-rasgos-personales"
-      class="student-links__link"
-    >
-      Rasgos personales
-    </a>
-    <a
-      href="/archivopdf-boletin"
-      class="student-links__link"
-    >
-      Boletin
-    </a>
-    <a
-      href="/archivopdf-constancia-de-estudios"
-      class="student-links__link"
-    >
-      Constancia de estudios
-    </a>
-  </div>
+ 
 </x-app-layout>

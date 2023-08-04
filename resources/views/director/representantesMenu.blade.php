@@ -30,7 +30,7 @@
     
   <div class="dashboard__main__content__user-stats">
     <div class="dashboard__main__content__user-stats__total">
-      <span class="dashboard__main__content__user-stats__total__label">administradores actuales:</span>
+      <span class="dashboard__main__content__user-stats__total__label">Representante actuales:</span>
       <span class="dashboard__main__content__user-stats__total__value">{{ count($representantes) }}</span>
     </div>
      </div>

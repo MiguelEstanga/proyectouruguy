@@ -87,13 +87,13 @@ class ProfesorController extends Controller
         return redirect('docente')->with('mensage' , 'Espere la creación del lapso');
       }
 
-      //return $ultimo_informe;
+     $boton = $estudiante->todos_los_informes[$ultimo_lapso -1 ] ?? false;
       return view('docente.estudiante', [
         'estudiante' => $estudiante,
         'lapso' => $lapso,
         'ultimo_lapso' => $ultimo_lapso,
         'proyecto' => $proyecto,
-        
+        'boton' => $boton 
       ]);
     }
 

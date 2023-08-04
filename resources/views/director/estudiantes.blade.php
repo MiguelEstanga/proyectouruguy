@@ -65,19 +65,12 @@
               {{ $estudiante->seccion_id->seccion  }}
 
             </td>
-            <td class="dashboard__main__content__users__row__data">
-                <form 
-                  method="post" 
-                  action="{{ route('director_estudiante.destroy' , $estudiante->usuario->id ) }}">
-                  @method('delete')
-                  @csrf
-
-                <button class="dashboard__main__content__users__row__data__delete">Eliminar</button>
-              </form>
-             </td>
-             <td>
-               <a href="{{ route('director_estudiante.edit' , $estudiante->usuario->id ) }}">
-                 Editar {{ $estudiante->usuario->id }}
+          
+             <td class="dashboard__main__content__users__row__data" >
+               <a 
+               class="btn btn-success" 
+               href="{{ route('director_estudiante.edit' , $estudiante->usuario->id ) }}">
+                 Editar 
                </a>
 
              </td> 

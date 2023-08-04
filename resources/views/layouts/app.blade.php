@@ -92,7 +92,7 @@ $links_representante = [
 ];
 
 $link_config = [
-  'title' =>  'COFIGURACIÓN',
+  'title' =>  'CONFIGURACIÓN',
   'url' => '/director/informacion-lapso'
 ];
 @endphp

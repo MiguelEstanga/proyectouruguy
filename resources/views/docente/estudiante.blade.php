@@ -123,7 +123,7 @@
   <div class="dashboard__main__content__student-links student-links">
      
 
-          @if($proyecto ?? false)
+      @if($proyecto ?? false)
 
 
           <a
@@ -135,12 +135,12 @@
            Cargar Informe
           </a>
 
-          @else
+        @else
             <h2>Debe cargar el proyecto del lapso actual</h2><br>
             <a  style="color: blue" href="{{ route('docente.proyectos') }}">Cárguelo aquí</a>
           @endif
        
-          @if($lapso->informe ?? false)
+       
               <a
 
             href="{{ route('informe.show' ,  $estudiante->id ) }}"
@@ -150,9 +150,7 @@
           >
             Ver informe
           </a>
-          @else
-            <h2>No se ha cargado el informe</h2>
-          @endif
+         
         
   
           <a
