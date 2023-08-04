@@ -24,27 +24,8 @@
         alt="usuario"
       >
     </a>
-    <a
-      href="{{ route('director_representante.index') }}" 
-      class="dashboard__main__content__actions__action dashboard__main__content__actions__action--delete-user">
-      Eliminar representante
-      <img
-        class="dashboard__main__content__actions__action__icon"
-        src="{{ asset('images/user-minus.svg') }}"
-        alt="usuario"
-      >
-    </a>
-    <a
-      class="dashboard__main__content__actions__action dashboard__main__content__actions__action--enable-user"
-      href="{{ route('director_representante.index') }}" 
-    >
-      Editar representant
-      <img
-        class="dashboard__main__content__actions__action__icon"
-        src="{{ asset('images/wand-magic-sparkles.svg') }}"
-        alt="usuario"
-      >
-    </a>
+   
+  
   </div>
     
   <div class="dashboard__main__content__user-stats">

@@ -13,9 +13,26 @@ class estudianteController extends Controller
 {  
 
 
-    /**
-     * Display student data example.
-     */
+    public function busqueda(Request $request)
+    {
+          $usuario = User::where('cedula' , '=' ,$request->cedula)->first();
+
+
+         if($usuario)
+         {
+            $estudiante = Estudiante::where( 'id_usuario' , $usuario->id )->first();
+
+              if($usuario->roles[0]->name != 'Estudiante'){
+                 return redirect('director/estudiantes')
+                        ->with('mensage','Esta cedula no pertenece a un estudiante'); 
+              }
+                 
+         }else{
+            return redirect('director/estudiantes')
+                    ->with('mensage','No se encontró resultado, por favor asegúrese de colocar una cédula de identidad válida ');
+         }
+        return view('director.estudiante_single'  , ['estudiante' => $estudiante  ] );
+    }
     public function single(Request $request)
     {
        $filtro = Estudiante::where('id_seccion' , $request->seccion)
@@ -84,8 +101,7 @@ class estudianteController extends Controller
             'password' => bcrypt('R_CLAVE'),
             'fecha_nacimiento' => $request->fecha_nacimiento_Reprecentante,
             'cedula' => $request->cedula,
-              'tipo' => 'Reprecentnte'      
-
+            'tipo' => 'Reprecentnte'      
       ])->assignRole('Reprecentante');
 
      $reprecentante = Reprecentnte::create(
@@ -180,12 +196,19 @@ class estudianteController extends Controller
     public function destroy(string $id)
     {
 
-        $user = User::find($id);
-        Estudiante::where("id_usuario" , $user->id)->first()->delete();
+        $user = Reprecentnte::find($id);
+        //return $user->estudiante;
+        
+
+        foreach($user->estudiante as $estudiante){
+          $estudiante =  Estudiante::find($estudiante->id);
+          $estudiante->delete();
+        }
+        
         $user->delete();
 
 
-        return $user;
+        
         return redirect()->route('director_estudiante.index');
     }
 

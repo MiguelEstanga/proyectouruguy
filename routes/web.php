@@ -40,12 +40,16 @@ Route::group(['middleware' => 'auth'  , 'middleware'=>'can:Director'  ] , functi
 
   Route::get('director/administradores/menu' , [AdminController::class, 'menu'] )->middleware('auth')->name('director_administrador.menu');
 
-  Route::resource('director/administradores' , AdminController::class )->middleware('auth')->names('director_administrador');
+  Route::resource('director/administradores' , AdminController::class )->middleware('auth')->names('director_administrador'); 
 
   Route::get('director/estudiantes/menu' , [estudianteController::class , 'menu'])->name('director_estudiante.menu');
 
   Route::get('director/estudiantes/filtro' , [estudianteController::class , 'single'])->name('director_estudiante_single');
   
+
+  Route::get('director/estudiantes/cedula' , [estudianteController::class , 'busqueda'])->name('director_estudiante_busqueda');
+  
+
   Route::resource('director/estudiantes' , estudianteController::class )->names('director_estudiante');
 
   Route::get('director/representantes/menu' , [RepresentanteController::class , 'menu'])->name('director_representante.menu');

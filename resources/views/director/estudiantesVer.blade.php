@@ -61,6 +61,12 @@
 
                 <button class="dashboard__main__content__users__row__data__delete">Eliminar</button>
               </form>
+            </td>
+            <td>
+               <a href="{{ route('director_estudiante.edit' , $estudiante->usuario->id ) }}">
+                 Editar {{ $estudiante->usuario->id }}
+               </a>
+            </td>  
           </tr>
         @endforeach
     @endif

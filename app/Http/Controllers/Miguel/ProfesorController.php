@@ -50,7 +50,7 @@ class ProfesorController extends Controller
       if($ultimo_lapso != 0)
       {
         $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
-        $validate =  Proyecto::where('id_lapso' , $lapso->id)->first();
+        $validate =   Proyecto::where('id_lapso' , $lapso->id)->first();
 
       }else{
         return redirect('docente')->with('mensage' , 'Espere a que se cree un lapso ');
@@ -63,7 +63,7 @@ class ProfesorController extends Controller
         ]);
     }
 
-    public function proyectoSingle() {
+    public function proyectoSingle() { 
       return view('docente.proyecto'  );
     }
 

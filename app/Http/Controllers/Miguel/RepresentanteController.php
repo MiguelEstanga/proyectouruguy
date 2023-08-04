@@ -114,16 +114,11 @@ class RepresentanteController extends Controller
      */
     public function store(Request $request)
     {
-      //return $request;
+       
       
       $request->validate([
         'email_reprecentante' => 'required|unique:users,email',
-        'fecha_nacimiento_reprecentante' => 'required',
-        'apellido_reprecentante' => 'required',
-        'direccion_reprecentante' => 'required',
         'cedula_reprecentante' => 'required|unique:users,cedula|min:6|max:8',
-        
-
       ]);
 
      // return  $request;
@@ -160,7 +155,7 @@ class RepresentanteController extends Controller
                 'password' => 'R_CLAVE',
                 'fecha_nacimiento' => $estudiante['fecha_nacimiento'],
                 'tipo' => 'Estudiante',
-                'cedula' => $estudiante['cedula'],
+                'cedula' => $estudiante['cedula'].date('h:m:s'),
 
              ]
           )->assignRole('Estudiante');
@@ -169,7 +164,7 @@ class RepresentanteController extends Controller
             'nombre1' =>$estudiante['name'],
             'nombre2' =>$estudiante['name'], 
             'apellido' =>$estudiante['apellido'],
-            'cedulaescolar' => $estudiante['cedula'],
+            'cedulaescolar' => $estudiante['cedula'].date('h:m:s'),
             'genero' => 'masculino' ,
             'id_seccion' =>  $estudiante['id_seccion'],
             'id_usuario' => $estudiante_data->id,
@@ -211,7 +206,9 @@ class RepresentanteController extends Controller
      */
     public function destroy(string $id)
     {
-        User::find($id)->delete();
+        $user = User::find($id);
+
+        return $user; 
         return redirect()->route('director_estudiante.index');
     }
 }

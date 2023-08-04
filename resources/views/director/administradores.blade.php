@@ -12,7 +12,7 @@
       type="search"
       name="cedula"
       class="dashboard__main__content__search__input"
-      placeholder="Buscar por nombre"
+      placeholder="Buscar por cédula"
     />
     <button class="dashboard__main__content__search__button">Buscar</button>
     </form>
@@ -56,7 +56,7 @@
     @endif
 
   </table>
-  <a  href="{{ route('director_estudiante.create') }}" class="dashboard__main__content__add-user-btn">
+  <a  href="{{ route('director_administrador.create') }}" class="dashboard__main__content__add-user-btn">
     Agregar administrador
   </a>
   <div class="dashboard__main__content__user-stats">

@@ -18,8 +18,8 @@
   </div>
 
 @if(  count($proyectos) > 0 )
-
-  @foreach($proyectos as $proyecto)
+ 
+  @foreach(Auth::user()->profesor[0]->proyectos  as $proyecto)
    <div 
 
     class="dashboard__main__content__current-project">
@@ -57,7 +57,7 @@
   @else
     <a
       style="
-            color: #fff;
+          color: #fff;
           background-color:#2471A3;
           display: flex;
           justify-content: center;
@@ -77,7 +77,7 @@
      Todos los proyectos de este periodo han sido creados
   </h2>
 @endif 
-
+ 
   
 
   <!--div class="dashboard__main__content__other-projects">

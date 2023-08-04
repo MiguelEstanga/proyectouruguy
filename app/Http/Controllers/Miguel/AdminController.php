@@ -114,6 +114,14 @@ class AdminController extends Controller
     public function  busqueda(Request $request)
     {
         $usuario = User::where('cedula' , '=' ,$request->cedula)->first();
+        
+        if($usuario){
+        $profesor = Administrador::where( 'id_usuario' , $usuario->id )->first();
+          if($usuario->roles[0]->name != 'Administrador') return redirect('director/administradores')->with('mensage','Esta cedula no pertenece a un administrador'); 
+             
+         }else{
+            return redirect('director/administradores')->with('mensage','No se encontró resultado, por favor asegúrese de colocar una cédula de identidad válida ');
+         }
 
         if($usuario){
          $admin = Administrador::where( 'id_usuario' , $usuario->id )->first();
@@ -190,6 +198,6 @@ class AdminController extends Controller
         $usuario = User::where('id' , $delete->id_usuario)->first();
         $usuario->removeRole($usuario->getRoleNames()[0]);
         $usuario->assignRole('Desabilitado');
-         return redirect()->route('director.ver');
+         return redirect('director/administradores')->with('Se ha deshabilitado a un administrador');
     }
 }

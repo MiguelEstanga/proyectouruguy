@@ -1,15 +1,20 @@
 
 <x-app-layout>
+  @if(session('mensage'))
+    <h2 class="alert alert-success" >
+        {{ session('mensage') }}
+    </h2>
+  @endif
   <p class="dashboard__main__content__section-title">
     Gestionar estudiantes
   </p>
   <div class="dashboard__main__content__search">
-    <form action="{{ route('director.busqueda') }}">
+    <form action="{{ route('director_estudiante_busqueda') }}">
     <input
       type="search"
-      name="nombre"
+      name="cedula" 
       class="dashboard__main__content__search__input"
-      placeholder="Buscar por cedula"
+      placeholder="Buscar por cédula escolar"
     />
     <button class="dashboard__main__content__search__button">Buscar</button>
     </form>
@@ -35,7 +40,7 @@
   <table class="table"  >
     <tr class="dashboard__main__content__users__headers">
       <th class="dashboard__main__content__users__headers__header">Nombre</th>
-      <th class="dashboard__main__content__users__headers__header">Cédula</th>
+      <th class="dashboard__main__content__users__headers__header">Cédula escolar</th>
       <th class="dashboard__main__content__users__headers__header">Fecha de nacimiento</th>
       <th class="dashboard__main__content__users__headers__header">Grado</th>
       <th class="dashboard__main__content__users__headers__header">Sección</th>

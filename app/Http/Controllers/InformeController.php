@@ -106,7 +106,9 @@ class InformeController extends Controller
         $periodo = Periodo::latest('created_at')->first();
         $ultimo_lapso = $periodo->lapso->where('activar' , '=' , true)->count();
         $estudiante = Estudiante::find($id);
-        //return $estudiante;
+
+
+        //return $estudiante->todos_los_informes[0]->profesor;
 
         if($ultimo_lapso != 0){
            $lapso =  $periodo->lapso->where('activar' , '=' , true)[$ultimo_lapso - 1];
@@ -118,8 +120,8 @@ class InformeController extends Controller
 
         $informe = $estudiante->todos_los_informes[$ultimo_lapso-1] ?? redirect('/docente')->with('mensage' , 'No se ha cargado informe para este estudiante');
 
-        //return $informe;
-
+        $nombre_proyecto = $informe->profesor->proyectos[$ultimo_lapso - 1];
+       
         $options = [
             'enable_css_auto_load' => true,
             'defaultFont'=> 'Courier',
@@ -134,7 +136,8 @@ class InformeController extends Controller
                 'periodo' => Periodo::latest('created_at')->first(),
                 'lapso' => $lapso,
                 'informe' => $lapso,
-                'informe' => $informe
+                'informe' => $informe,
+                'nombre_proyecto' => $nombre_proyecto
             ]
 
         )->setPaper('letter', 'portrait')

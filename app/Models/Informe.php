@@ -29,4 +29,9 @@ class Informe extends Model
     {
         return $this->belongsTo(Profesor::class , 'id_profesor');
     }
+
+    public function proyecto()
+    {
+         return $this->belongsTo(Proyecto::class , 'id_proyectos');
+    }
 }

@@ -37,4 +37,9 @@ class Profesor extends Model
      {
         return $this->belongsTo(grado::class , 'id_grado');
      }   
+
+     public function proyectos()
+     {
+        return $this->hasMany(Proyecto::class , 'id_profesor');
+     }
 }

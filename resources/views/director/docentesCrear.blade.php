@@ -9,6 +9,7 @@
       Nombre: 
       
       <input
+      required
         type="text"
         name="nombre"
         class="dashboard__main__content__form__label__input"
@@ -20,6 +21,7 @@
     <label class="dashboard__main__content__form__label">
       Apellido:
       <input
+      required
         name="apellido"
         type="text"
         class="dashboard__main__content__form__label__input"
@@ -32,6 +34,7 @@
     <label class="dashboard__main__content__form__label">
       Email:
       <input
+      required
         name="email"
         type="email"
         class="dashboard__main__content__form__label__input"
@@ -43,6 +46,7 @@
     <label class="dashboard__main__content__form__label">
       Fecha de nacimiento:
       <input
+      required
         name="fecha_nacimiento"
         id="fecha_nacimiento_input"
         type="date"
@@ -55,6 +59,7 @@
     <label class="dashboard__main__content__form__label">
       Dirección:
       <input
+      required
         name="direccion"
         type="text"
         class="dashboard__main__content__form__label__input"
@@ -67,6 +72,7 @@
     <label class="dashboard__main__content__form__label">
       Cédula:
       <input
+      required
         name="cedula"
         type="text"
         id="cedula"
@@ -80,6 +86,7 @@
     <label class="dashboard__main__content__form__label">
       Contraseña:
       <input
+        required
         name="password"
         type="text"
         id="password"

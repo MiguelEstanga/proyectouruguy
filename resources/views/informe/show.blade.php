@@ -67,7 +67,7 @@
 </head>
 <body>
 	<div class="pw">
-		 <span class="bolt" > Nombre Del Proyecto </span> : {{ $lapso->proyecto->descripcion }}
+		 <span class="bolt" > Nombre Del Proyecto </span> : {{ $nombre_proyecto->descripcion}}   
 	</div>
 	
 	<div class="pw">
